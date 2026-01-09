@@ -310,60 +310,118 @@
         }
         .close-btn:hover { transform: rotate(90deg); }
         
-        /* Contact Modal Specifics */
+        /* Contact Modal Specifics - REDESIGNED */
         .modal-contact-window { 
-            max-width: 450px; 
+            max-width: 480px; 
             height: auto; 
             background: #fff; 
             color: var(--text-dark); 
-            border: 3px solid var(--accent-color); 
-            border-radius: 24px;
-            text-align: center; 
+            border-radius: 32px;
             padding: 0; 
-            box-shadow: 0 20px 60px rgba(5, 150, 105, 0.2);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.15);
+            border: none;
         }
-        .contact-header {
-            background: linear-gradient(135deg, #059669, #047857);
-            padding: 30px;
-            color: #fff;
-        }
-        .contact-header h2 { 
-            color: #fff; 
-            margin: 0; 
-            font-size: 1.8rem;
-            font-weight: 800;
-        }
-        .contact-content { padding: 40px; }
-        .contact-list { list-style: none; padding: 0; margin: 0; }
-        .contact-item { 
-            margin-bottom: 20px; 
+
+        .contact-wrapper {
+            padding: 50px 40px;
             display: flex;
             flex-direction: column;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #1d1d1f 0%, #4b5563 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-desc {
+            color: var(--text-grey);
+            margin-bottom: 35px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .contact-links-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .contact-link-card {
+            display: flex;
             align-items: center;
+            background: #f5f5f7;
+            padding: 16px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid transparent;
         }
-        .contact-item:last-child { margin-bottom: 0; }
-        .contact-item-title { 
-            display: flex; 
-            align-items: center; 
+
+        .contact-link-card:hover {
+            background: #fff;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            border-color: rgba(0,0,0,0.05);
+        }
+
+        .contact-icon-box {
+            width: 48px;
+            height: 48px;
+            background: #fff;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            font-size: 1.1rem; 
-            font-weight: 700; 
-            color: var(--accent-color); 
-            margin-bottom: 5px;
+            font-size: 1.5rem;
+            margin-right: 18px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            flex-shrink: 0;
         }
-        .contact-item-title span { font-size: 1.8rem; margin-right: 10px; } 
-        .contact-info-link { 
-            font-size: 1.2rem; 
-            color: var(--text-dark); 
-            text-decoration: none; 
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: #86868b;
+            margin-bottom: 2px;
+        }
+
+        .contact-value {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* HH Specific Style */
+        .hh-card .contact-icon-box {
+            color: #D6001C;
+            font-weight: 900;
+            font-family: sans-serif;
+            letter-spacing: -1px;
+        }
+        .hh-card:hover .contact-value {
+            color: #D6001C;
+        }
+
+        .contact-footer-note {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #f0f0f0;
+            font-size: 0.85rem;
+            color: #a1a1aa;
             font-weight: 600;
-            border-bottom: 2px solid rgba(5, 150, 105, 0.1);
-            transition: all 0.2s;
-            display: inline-block;
-        }
-        .contact-info-link:hover { 
-            color: var(--accent-color);
-            border-bottom: 2px solid var(--accent-color);
         }
         
         /* --- PROJECT BODY --- */
@@ -688,7 +746,7 @@
 
     <div class="content-wrapper">
         <div id="portfolio" class="container">
-            <h2 class="section-title">Мои работы</h2>
+            <h2 class="section-title">Готовые кейсы</h2>
             
             <div class="bento-grid">
                 <article class="card card-scuba" onclick="openModal('modal-scuba')">
@@ -783,25 +841,49 @@
 
     <div id="modal-contact" class="modal-overlay" onclick="closeModal(event, 'modal-contact')">
         <div class="modal-window modal-contact-window">
-            <span class="close-btn" onclick="closeModalBtn('modal-contact')" style="color: #fff;">&times;</span>
-            <div class="contact-header">
-                <h2>Мои контакты</h2>
-            </div>
-            <div class="contact-content">
-                <ul class="contact-list">
-                    <li class="contact-item">
-                        <div class="contact-item-title"><span>💬</span> VK</div>
-                        <a href="https://vk.com/nmlnkv" target="_blank" class="contact-info-link">@nmlnkv</a>
-                    </li>
-                    <li class="contact-item">
-                        <div class="contact-item-title"><span>📱</span> Номер телефона</div>
-                        <a href="tel:+79374765600" class="contact-info-link">+7 (937) 476 56-00</a>
-                    </li>
-                    <li class="contact-item">
-                        <div class="contact-item-title"><span>📨</span> Почта</div>
-                        <a href="mailto:nikitamelnikoff@mail.ru" class="contact-info-link">nikitamelnikoff@mail.ru</a>
-                    </li>
-                </ul>
+            <span class="close-btn" onclick="closeModalBtn('modal-contact')" style="color: #1d1d1f; top: 20px; right: 25px; text-shadow: none;">&times;</span>
+            
+            <div class="contact-wrapper">
+                <h2 class="contact-title">Свяжитесь со мной</h2>
+                <p class="contact-desc">Открыт к предложениям и сотрудничеству</p>
+                
+                <div class="contact-links-grid">
+                    <a href="https://vk.com/nmlnkv" target="_blank" class="contact-link-card">
+                        <div class="contact-icon-box">💬</div>
+                        <div class="contact-info">
+                            <span class="contact-label">ВКонтакте</span>
+                            <span class="contact-value">@nmlnkv</span>
+                        </div>
+                    </a>
+
+                    <a href="tel:+79374765600" class="contact-link-card">
+                        <div class="contact-icon-box">📱</div>
+                        <div class="contact-info">
+                            <span class="contact-label">Телефон</span>
+                            <span class="contact-value">+7 (937) 476 56-00</span>
+                        </div>
+                    </a>
+
+                    <a href="mailto:nikitamelnikoff@mail.ru" class="contact-link-card">
+                        <div class="contact-icon-box">📨</div>
+                        <div class="contact-info">
+                            <span class="contact-label">Почта</span>
+                            <span class="contact-value">nikitamelnikoff@mail.ru</span>
+                        </div>
+                    </a>
+
+                    <a href="https://ufa.hh.ru/resume/31d3d7fdff0f2ef8200039ed1f773465564339" target="_blank" class="contact-link-card hh-card">
+                        <div class="contact-icon-box">hh</div>
+                        <div class="contact-info">
+                            <span class="contact-label">Резюме</span>
+                            <span class="contact-value">Посмотреть на HeadHunter</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="contact-footer-note">
+                    Возможна удаленная работа
+                </div>
             </div>
         </div>
     </div>
@@ -1072,8 +1154,83 @@
                         <div class="chart-container"><h5>Сегментация Аудитории</h5><div class="bar-group"><div class="bar-label"><span>Ядро ЦА (30-45 лет, достаток выше среднего)</span><span>70%</span></div><div class="bar-bg"><div class="bar-fill core" style="background: #2563eb;"></div></div></div><div class="bar-group"><div class="bar-label"><span>Семьи с детьми (30-50 лет)</span><span>35%</span></div><div class="bar-bg"><div class="bar-fill families"></div></div></div><div class="bar-group"><div class="bar-label"><span>Тревел-блогеры (20-35 лет)</span><span>20%</span></div><div class="bar-bg"><div class="bar-fill bloggers"></div></div></div></div>
                     </div>
                 </div>
+
+                <!-- NEW BLOCK: COMPETITIVE ANALYSIS (UPDATED) -->
                 <div class="project-section">
-                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">4. SWOT-анализ</h4>
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">4. Конкурентный анализ</h4>
+                    <p style="margin-bottom: 30px; color: var(--text-grey);">Сравнительный анализ ключевых конкурентов в сегменте рыбных ресторанов Екатеринбурга. Оценка проводилась по стоимости мероприятий, форматам взаимодействия и digital-активности.</p>
+                    
+                    <div class="table-wrapper">
+                        <table class="brief-table" style="min-width: 700px;">
+                            <thead>
+                                <tr style="border-bottom: 2px solid #e5e7eb;">
+                                    <th style="padding: 15px; text-align: left; color: #2563eb;">Параметр</th>
+                                    <th style="padding: 15px; text-align: left; font-weight: 800;">SCUBA (Мы)</th>
+                                    <th style="padding: 15px; text-align: left; color: var(--text-grey);">Гады, крабы и вино</th>
+                                    <th style="padding: 15px; text-align: left; color: var(--text-grey);">Морская/10</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb; width: 20%;">Концепция</td>
+                                    <td class="brief-content">Иммерсивное бистро. Атмосфера "погружения".</td>
+                                    <td class="brief-content">Средиземноморская кухня. Акцент на вино и деликатесы.</td>
+                                    <td class="brief-content">Бистро авторской кухни. Casual dining & bar.</td>
+                                </tr>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb;">Цена ивента</td>
+                                    <td class="brief-content"><strong>3 900₽ - 4 500₽</strong> (Демократично)</td>
+                                    <td class="brief-content">5 000₽ - 7 000₽ (Выше среднего)</td>
+                                    <td class="brief-content">8 000₽ - 20 000₽ (Премиум)</td>
+                                </tr>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb;">Форматы</td>
+                                    <td class="brief-content">Интерактивные ужины, шоу-подача.</td>
+                                    <td class="brief-content">Винные дегустации, гастро-ужины.</td>
+                                    <td class="brief-content">Закрытые лектории, мастер-классы.</td>
+                                </tr>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb;">Digital-активность</td>
+                                    <td class="brief-content">VK, Telegram (охват 5-7 тыс./мес).</td>
+                                    <td class="brief-content">Активная группа ВК (~2 тыс. подп).</td>
+                                    <td class="brief-content">Минималистичный сайт, имиджевый контент.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h5 style="margin-top: 40px;">Карта позиционирования (Цена / Атмосфера)</h5>
+                    <div style="position: relative; height: 300px; background: #f8fafc; border-radius: 16px; border: 1px dashed #cbd5e1; margin-top: 20px;">
+                        <!-- Axis Labels -->
+                        <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); font-size: 0.8rem; font-weight: 700; color: var(--text-grey);">Высокий чек</div>
+                        <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 0.8rem; font-weight: 700; color: var(--text-grey);">Низкий чек</div>
+                        <div style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%) rotate(-90deg); font-size: 0.8rem; font-weight: 700; color: var(--text-grey);">Спокойно/Лекции</div>
+                        <div style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%) rotate(90deg); font-size: 0.8rem; font-weight: 700; color: var(--text-grey);">Драйв/Интерактив</div>
+                        
+                        <!-- Axis Lines -->
+                        <div style="position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: #e2e8f0;"></div>
+                        <div style="position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: #e2e8f0;"></div>
+
+                        <!-- Competitors -->
+                        <div style="position: absolute; top: 35%; left: 25%; width: 140px; text-align: center;">
+                            <div style="width: 15px; height: 15px; background: #94a3b8; border-radius: 50%; margin: 0 auto;"></div>
+                            <span style="font-size: 0.75rem; font-weight: 600; color: #64748b;">Гады, крабы и вино</span>
+                        </div>
+                        <div style="position: absolute; top: 15%; left: 45%; width: 120px; text-align: center;">
+                            <div style="width: 15px; height: 15px; background: #94a3b8; border-radius: 50%; margin: 0 auto;"></div>
+                            <span style="font-size: 0.75rem; font-weight: 600; color: #64748b;">Морская/10</span>
+                        </div>
+
+                        <!-- US -->
+                        <div style="position: absolute; bottom: 30%; right: 25%; width: 140px; text-align: center; animation: float 6s infinite ease-in-out;">
+                            <div style="width: 25px; height: 25px; background: #2563eb; border: 4px solid #bfdbfe; border-radius: 50%; margin: 0 auto; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);"></div>
+                            <span style="font-size: 0.9rem; font-weight: 800; color: #2563eb; background: rgba(255,255,255,0.8); padding: 2px 8px; border-radius: 10px;">SCUBA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">5. SWOT-анализ</h4>
                     <div class="swot-grid">
                         <div class="swot-card swot-s"><h5>STRENGTHS (Сильные стороны)</h5><ul><li>Уникальная концепция ивентов.</li><li>Локационная привязка к ЖК «Тихвинъ».</li><li>Интерактивный формат мероприятий.</li></ul></div>
                         <div class="swot-card swot-w"><h5>WEAKNESSES (Слабые стороны)</h5><ul><li>Недостаточное цифровое присутствие.</li><li>Несистематизированный фирменный стиль.</li><li>Слабый контент в соцсетях.</li></ul></div>
@@ -1082,7 +1239,7 @@
                     </div>
                 </div>
                 <div class="project-section">
-                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">5. Стратегия CJM</h4>
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">6. Стратегия CJM</h4>
                     <div class="events-grid">
                         <div class="event-card"><h5>Огни Латинской Америки</h5><div class="event-list"><ul><li><strong>Формат:</strong> вечер с севиче, фахитос и шоу-фламенко.</li><li><strong>Вовлеченность:</strong> дегустация специй, интерактивная карта вкусов.</li><li><strong>ЦА:</strong> молодые пары, креативный класс.</li><li><strong>Метрика:</strong> рост UGC, ER, повторные брони.</li></ul></div></div>
                         <div class="event-card"><h5>Глубины Вкуса</h5><div class="event-list"><ul><li><strong>Формат:</strong> визуальное шоу, подача в аквариумах, озвучка воды.</li><li><strong>Фишка:</strong> NFT-меню и цифровая фотогалерея.</li><li><strong>ЦА:</strong> медиа, лидеры мнений, элита.</li><li><strong>Цель:</strong> создание флагмана PR-коммуникации.</li></ul></div></div>
@@ -1092,7 +1249,7 @@
                     <div class="table-wrapper"><table class="cjm-table"><thead><tr><th>Этап CJM</th><th>Пример точки контакта</th><th>Метрики успеха</th></tr></thead><tbody><tr><td>Внимание</td><td>Реклама в Telegram, блогеры</td><td>Охват, переходы</td></tr><tr><td>Вовлечение</td><td>Stories, тизеры, опросы</td><td>ER, вовлечённость</td></tr><tr><td>Покупка</td><td>Telegram-бот, лендинг с афишей</td><td>Конверсия</td></tr><tr><td>Поддержка</td><td>Интерактивные зоны, фотостенды</td><td>Кол-во публикаций, отзывы</td></tr><tr><td>Лояльность</td><td>Email-благодарность, опрос</td><td>LTV, возвратность, подписки</td></tr></tbody></table></div>
                 </div>
                 <div class="project-section flagship-block">
-                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">6. Флагман: «Зов Азии»</h4>
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">7. Флагман: «Зов Азии»</h4>
                     <div class="flagship-intro"><p style="margin-bottom: 10px;"><strong>Актуальность:</strong> в условиях кризиса доверия к рекламе, гастрономические ивенты становятся инструментом формирования эмоциональной лояльности.</p><p style="margin-bottom: 10px;"><strong>Концепция:</strong> синтез аутентичных азиатских мотивов и локального позиционирования бистро в «Тихвине».</p><p><strong>Стратегия:</strong> интеграция гастрономического опыта в эмоциональный брендинг через мультисенсорное взаимодействие.</p></div>
                     <div class="zones-grid"><div class="zone-card"><h5>Зона «Юный ихтиолог»</h5><p>Официанты проводят экскурс для детей по обитателям морского дна во время дегустации родителями.</p></div><div class="zone-card"><h5>Фотозона «Ичибан»</h5><p>Тематическая зона для создания контента. Стимулирует гостей делиться фото в соцсетях (UGC).</p></div></div>
                     <h5 class="gallery-group-title">Digital-материалы</h5>
@@ -1105,7 +1262,7 @@
                 </div>
 
                 <div class="project-section">
-                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">7. Результаты и Аналитика</h4>
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">8. Результаты и Аналитика</h4>
                     <div class="analytics-container">
                         <div class="charts-col">
                             <h5 style="margin-bottom:20px;">Рост показателей (KPI)</h5>
