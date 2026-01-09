@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Никита Мельников | Digital Portfolio</title>
+    
+    <!-- FAVICON (Значок сайта) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23059669'/><text x='50' y='53' dominant-baseline='central' text-anchor='middle' font-size='65' fill='white' font-family='sans-serif' font-weight='800'>N</text></svg>">
+
+    <!-- Подключение современного шрифта Manrope -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-light: #ffffff;
+            --text-dark: #1d1d1f;
+            --text-grey: #6e6e73;
+            --accent-color: #059669; /* General Green */
+            --accent-blue: #0891b2;
+            --danger-color: #e11d48;
+            
+            /* Texts Block Colors */
+            --purple-main: #7c3aed;
+            --purple-light: #f3e8ff;
+            --purple-border: #ddd6fe;
+
+            --card-shadow: 0 18px 40px rgba(0,0,0,0.08);
+            --card-hover-shadow: 0 25px 60px rgba(0,0,0,0.12);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5 { 
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            line-height: 1.2; 
+            letter-spacing: -0.03em;
+            color: var(--text-dark); 
+        }
+
+        h1 { font-weight: 800; letter-spacing: -0.04em; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 10; }
+
+        /* --- HEADER ANIMATIONS --- */
+        header {
+            position: relative;
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            background: #022c22;
+            padding: 60px 0; /* Increased padding for mobile safety */
+        }
+
+        .gradient-blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.7;
+            animation: float 8s infinite ease-in-out;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* MAIN HEADER BLOBS */
+        .blob-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: #059669; animation-delay: 0s; animation-duration: 9s; }
+        .blob-2 { bottom: -10%; right: -10%; width: 70vw; height: 70vw; background: #0891b2; animation-delay: -2s; animation-duration: 11s; }
+        .blob-3 { top: 30%; left: 40%; width: 50vw; height: 50vw; background: #10b981; animation-delay: -4s; animation-duration: 8s; }
+        .blob-4 { bottom: 10%; left: -20%; width: 40vw; height: 40vw; background: #06b6d4; animation-delay: -1s; animation-duration: 10s; }
+
+        /* GALLERY BLOBS */
+        .blob-gal-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: #d1fae5; opacity: 1; animation-duration: 15s; }
+        .blob-gal-2 { bottom: -10%; right: -10%; width: 70vw; height: 70vw; background: #34d399; opacity: 0.3; animation-duration: 12s; }
+        .blob-gal-3 { top: 30%; left: 40%; width: 50vw; height: 50vw; background: #ffffff; opacity: 0.8; animation-duration: 18s; }
+        .blob-gal-4 { bottom: 10%; left: -20%; width: 40vw; height: 40vw; background: #10b981; opacity: 0.15; animation-duration: 10s; }
+
+        /* SCUBA HEADER BLOBS */
+        .blob-blue-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: #1e3a8a; animation-delay: 0s; animation-duration: 9s; }
+        .blob-blue-2 { bottom: -10%; right: -10%; width: 70vw; height: 70vw; background: #0ea5e9; animation-delay: -2s; animation-duration: 12s; }
+        .blob-blue-3 { top: 30%; left: 40%; width: 50vw; height: 50vw; background: #2563eb; animation-delay: -3s; animation-duration: 8s; }
+        .blob-blue-4 { bottom: 10%; left: -20%; width: 40vw; height: 40vw; background: #06b6d4; animation-delay: -1s; animation-duration: 10s; }
+
+        /* MAMKIDS HEADER BLOBS */
+        .blob-nude-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: #EADDCD; animation-delay: 0s; opacity: 0.9; animation-duration: 9s; }
+        .blob-nude-2 { bottom: -10%; right: -10%; width: 70vw; height: 70vw; background: #D4B499; animation-delay: -2s; opacity: 0.8; animation-duration: 11s; }
+        .blob-nude-3 { top: 30%; left: 40%; width: 50vw; height: 50vw; background: #F2E2D2; animation-delay: -4s; opacity: 0.7; animation-duration: 8s; }
+        .blob-nude-4 { bottom: 10%; left: -20%; width: 40vw; height: 40vw; background: #C5A890; animation-delay: -1s; opacity: 0.9; animation-duration: 10s; }
+
+        /* VK ADS HEADER BLOBS */
+        .blob-vk-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: #0077FF; animation-delay: 0s; animation-duration: 9s; }
+        .blob-vk-2 { bottom: -10%; right: -10%; width: 70vw; height: 70vw; background: #4680C2; animation-delay: -2s; animation-duration: 11s; }
+        .blob-vk-3 { top: 30%; left: 40%; width: 50vw; height: 50vw; background: #FFFFFF; opacity: 0.4; animation-delay: -4s; animation-duration: 8s; }
+        .blob-vk-4 { bottom: 10%; left: -20%; width: 40vw; height: 40vw; background: #0077FF; animation-delay: -1s; animation-duration: 10s; }
+
+        /* TEXTS HEADER BLOBS */
+        .blob-purple-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: #4c1d95; animation-delay: 0s; animation-duration: 9s; }
+        .blob-purple-2 { bottom: -10%; right: -10%; width: 70vw; height: 70vw; background: #8b5cf6; animation-delay: -2s; animation-duration: 12s; }
+        .blob-purple-3 { top: 30%; left: 40%; width: 50vw; height: 50vw; background: #a855f7; animation-delay: -3s; animation-duration: 8s; }
+        .blob-purple-4 { bottom: 10%; left: -20%; width: 40vw; height: 40vw; background: #6d28d9; animation-delay: -1s; animation-duration: 10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .noise-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.07; pointer-events: none; z-index: 2;
+        }
+
+        .bubbles-container { position: absolute; width: 100%; height: 100%; top: 0; left: 0; overflow: hidden; z-index: 5; pointer-events: none; }
+        .bubble { position: absolute; bottom: -100px; background: rgba(255, 255, 255, 0.15); border-radius: 50%; animation: rise infinite ease-in; }
+        @keyframes rise { 0% { bottom: -100px; transform: translateX(0); opacity: 0; } 50% { opacity: 0.5; } 100% { bottom: 100%; transform: translateX(-20px); opacity: 0; } }
+        .bubble:nth-child(1) { width: 40px; left: 10%; animation-duration: 8s; } .bubble:nth-child(2) { width: 20px; left: 20%; animation-duration: 5s; delay: 1s; }
+        .bubble:nth-child(3) { width: 50px; left: 35%; animation-duration: 10s; delay: 2s; } .bubble:nth-child(4) { width: 80px; left: 50%; animation-duration: 15s; }
+        .bubble:nth-child(5) { width: 35px; left: 55%; animation-duration: 7s; delay: 1s; } .bubble:nth-child(6) { width: 45px; left: 65%; animation-duration: 9s; delay: 3s; }
+
+        .floating-words { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
+        .word { position: absolute; color: #fff; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 1.2rem; opacity: 0; animation: fadeWord 10s infinite ease-in-out; font-family: 'Manrope', sans-serif; }
+        .w1 { top: 10%; left: 5%; } .w2 { top: 15%; left: 25%; animation-delay: 2s; } .w3 { top: 10%; right: 10%; animation-delay: 4s; }
+        .w4 { top: 25%; right: 5%; animation-delay: 1s; } .w5 { bottom: 15%; left: 5%; animation-delay: 5s; }
+        .w6 { bottom: 10%; left: 30%; animation-delay: 3s; } .w7 { bottom: 20%; right: 10%; animation-delay: 6s; }
+        .w8 { bottom: 35%; right: 5%; animation-delay: 2.5s; } .w9 { top: 40%; left: 8%; animation-delay: 7s; }
+        .w10 { top: 50%; right: 8%; animation-delay: 1.5s; }
+        @keyframes fadeWord { 0% { opacity: 0; transform: translateY(10px) scale(0.9); } 20% { opacity: 0.08; transform: translateY(0) scale(1); } 80% { opacity: 0.08; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-10px) scale(1.1); } }
+
+        /* HEADER GRID - Desktop */
+        .header-grid { 
+            display: grid; 
+            grid-template-columns: 1.2fr 0.8fr; 
+            align-items: center; 
+            gap: 40px; 
+            position: relative; 
+            z-index: 10; 
+        }
+        .text-part { color: #fff; }
+        .role-pill { display: inline-block; padding: 8px 18px; border-radius: 50px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 0.8rem; font-weight: 600; margin-bottom: 30px; letter-spacing: 1.5px; margin-top: 20px; }
+        h1 { font-size: 4.5rem; margin-bottom: 25px; text-shadow: 0 10px 30px rgba(0,0,0,0.2); font-weight: 800; }
+        .hero-desc { font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9; font-weight: 300; max-width: 90%; line-height: 1.6; }
+        
+        /* Header Buttons */
+        .btn-group { 
+            grid-column: 1 / -1; 
+            display: flex; 
+            gap: 60px; 
+            align-items: center; 
+            justify-content: center; 
+            flex-wrap: wrap; 
+            margin-top: 50px; 
+            width: 100%;
+        }
+        .btn { 
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.15); 
+            border: 1px solid #fff; 
+            color: #fff; 
+            padding: 0 35px;
+            height: 55px; 
+            text-decoration: none; 
+            border-radius: 100px; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+            transition: all 0.3s ease; 
+            cursor: pointer;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            min-width: 200px;
+            letter-spacing: 0.5px;
+        }
+        .btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25); 
+            background: #fff; 
+            color: #064e3b; 
+        }
+        
+        .photo-part { display: flex; justify-content: center; align-items: center; }
+        .avatar-frame { width: 350px; height: 350px; border-radius: 50px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.3); background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); transform: rotate(-3deg); transition: transform 0.5s ease; }
+        .avatar-frame:hover { transform: rotate(0deg) scale(1.02); }
+        .avatar-img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- CONTENT WRAPPER --- */
+        .content-wrapper { 
+            position: relative; 
+            background: var(--bg-light); 
+            margin-top: -60px; 
+            border-top-left-radius: 30px; 
+            border-top-right-radius: 30px;
+            border-bottom-left-radius: 30px; 
+            border-bottom-right-radius: 30px;
+            z-index: 20; 
+            padding-top: 80px; 
+            padding-bottom: 80px; 
+            box-shadow: 0 25px 80px rgba(0,0,0,0.25); 
+        }
+        .section-title { font-size: 3rem; margin-bottom: 60px; text-align: center; font-weight: 800; letter-spacing: -0.03em; }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-section {
+            position: relative;
+            margin-top: -40px; 
+            padding-top: 100px; 
+            padding-bottom: 80px;
+            background: #ffffff; 
+            overflow: hidden;
+            z-index: 10; 
+        }
+        
+        .gallery-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 900px; 
+            margin: 0 auto;
+        }
+        
+        .folder-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(5, 150, 105, 0.2); 
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+        }
+        .folder-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(5, 150, 105, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .folder-icon { font-size: 3rem; margin-bottom: 15px; }
+        .folder-title { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
+        .folder-subtitle { font-size: 0.9rem; color: var(--text-grey); margin-top: 5px; font-weight: 500; }
+
+        /* --- PORTFOLIO CARDS --- */
+        .bento-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            grid-auto-rows: minmax(380px, auto); 
+            gap: 24px; 
+        }
+        .card-scuba { grid-column: span 1; grid-row: span 1; }
+        .card-vk { grid-column: span 1; grid-row: span 1; }
+        .card-mamkids { grid-column: span 1; grid-row: span 1; }
+        .card-texts { grid-column: span 1; grid-row: span 1; }
+
+        .card { background: #fff; border-radius: 24px; overflow: hidden; position: relative; transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: var(--card-shadow); border: 1px solid rgba(0,0,0,0.03); display: flex; flex-direction: column; cursor: pointer; }
+        .card:hover { transform: translateY(-8px); box-shadow: var(--card-hover-shadow); }
+        
+        .card-image { 
+            height: 65%; 
+            width: 100%; 
+            background-size: cover !important; 
+            background-position: center !important; 
+            position: relative; 
+        }
+        .card-info { 
+            padding: 25px; 
+            height: 35%; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+        }
+        .card-tag { font-size: 0.7rem; font-weight: 800; color: var(--accent-color); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .card h3 { font-size: 1.3rem; margin-bottom: 5px; font-weight: 700; }
+        .card p { font-size: 0.9rem; color: var(--text-grey); line-height: 1.5; font-weight: 500; }
+        .card-btn { position: absolute; top: 20px; right: 20px; background: #fff; color: var(--text-dark); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.1); opacity: 0; transform: scale(0.8); transition: 0.2s; }
+        .card:hover .card-btn { opacity: 1; transform: scale(1); }
+
+        /* --- MODAL STYLES --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); z-index: 1000; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+        .modal-overlay.active { opacity: 1; }
+        .modal-window { background: #fff; width: 95%; max-width: 1200px; height: 92vh; border-radius: 24px; box-shadow: 0 40px 80px rgba(0,0,0,0.15); overflow-y: auto; position: relative; transform: scale(0.98); transition: transform 0.3s; border: 1px solid rgba(0,0,0,0.05); }
+        .modal-overlay.active .modal-window { transform: scale(1); }
+        .close-btn { 
+            position: absolute; 
+            top: 20px; 
+            right: 20px; 
+            font-size: 2.5rem; 
+            cursor: pointer; 
+            color: var(--text-dark); 
+            z-index: 100; 
+            line-height: 0.7; 
+            transition: 0.3s; 
+            text-shadow: none;
+        }
+        .close-btn:hover { transform: rotate(90deg); }
+        
+        /* Contact Modal Specifics */
+        .modal-contact-window { 
+            max-width: 450px; 
+            height: auto; 
+            background: #fff; 
+            color: var(--text-dark); 
+            border: 3px solid var(--accent-color); 
+            border-radius: 24px;
+            text-align: center; 
+            padding: 0; 
+            box-shadow: 0 20px 60px rgba(5, 150, 105, 0.2);
+        }
+        .contact-header {
+            background: linear-gradient(135deg, #059669, #047857);
+            padding: 30px;
+            color: #fff;
+        }
+        .contact-header h2 { 
+            color: #fff; 
+            margin: 0; 
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+        .contact-content { padding: 40px; }
+        .contact-list { list-style: none; padding: 0; margin: 0; }
+        .contact-item { 
+            margin-bottom: 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .contact-item:last-child { margin-bottom: 0; }
+        .contact-item-title { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: var(--accent-color); 
+            margin-bottom: 5px;
+        }
+        .contact-item-title span { font-size: 1.8rem; margin-right: 10px; } 
+        .contact-info-link { 
+            font-size: 1.2rem; 
+            color: var(--text-dark); 
+            text-decoration: none; 
+            font-weight: 600;
+            border-bottom: 2px solid rgba(5, 150, 105, 0.1);
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        .contact-info-link:hover { 
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        /* --- PROJECT BODY --- */
+        .project-header { position: relative; padding: 120px 50px 80px 50px; text-align: center; overflow: hidden; color: #fff; background: #0f172a; }
+        .project-header h2 { font-size: 3.5rem; margin-bottom: 15px; color: #fff; position: relative; z-index: 10; font-weight: 800; letter-spacing: -0.03em; }
+        .project-header p { font-size: 1.3rem; color: rgba(255,255,255,0.9); max-width: 800px; margin: 0 auto; position: relative; z-index: 10; font-weight: 400; }
+        .project-body { padding: 50px; max-width: 1100px; margin: 0 auto; }
+        .project-section { background: #f9fafb; border-radius: 24px; padding: 50px; margin-bottom: 40px; border: 1px solid rgba(0,0,0,0.03); }
+        .section-headline {
+            font-size: 2.5rem; 
+            margin-bottom: 60px;
+            border-left: 6px solid var(--accent-color); 
+            padding-left: 20px;
+            line-height: 1.2;
+            color: var(--text-dark);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+        }
+        .header-tag-white {
+            position: relative; z-index: 10;
+            display: inline-block;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.6);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .project-body h5 {
+            font-size: 1.5rem; 
+            margin-bottom: 25px; 
+            margin-top: 15px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        #modal-scuba .project-body h5 { color: #2563eb; }
+        #modal-mamkids .project-body h5 { color: #a87b5e; }
+        #modal-vk .project-body h5 { color: #0077FF; }
+        #modal-texts .project-body h5 { color: #7c3aed; }
+
+        #modal-scuba .swot-w h5 { color: #f59e0b; }
+        #modal-scuba .swot-o h5 { color: var(--accent-blue); }
+        #modal-scuba .swot-t h5 { color: var(--danger-color); }
+
+        .texts-table { width: 100%; border-collapse: collapse; margin-bottom: 25px; }
+        .texts-table th, .texts-table td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; vertical-align: top; }
+        .texts-table th { font-weight: 700; color: var(--purple-main); width: 25%; font-size: 0.9rem; } 
+        .texts-table td { font-size: 1rem; color: var(--text-dark); font-weight: 500; }
+        
+        .quote-container { 
+            background: var(--purple-light); 
+            border-left: 4px solid var(--purple-main); 
+            padding: 25px; 
+            border-radius: 8px; 
+            font-family: 'Manrope', sans-serif; 
+            margin-bottom: 25px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02); 
+            font-size: 1rem; 
+            line-height: 1.6; 
+            color: var(--text-dark); 
+            font-style: italic; 
+            font-weight: 500;
+        }
+        .quote-container p { margin-top: 0; margin-bottom: 10px; }
+        .quote-container p:last-child { margin-bottom: 0; }
+        .effectiveness-box { background: #f5f3ff; padding: 20px; border-radius: 12px; color: #4c1d95; border: 1px solid var(--purple-border); font-size: 0.95rem; }
+        .effectiveness-box strong { color: var(--text-dark); font-weight: 700; }
+        .effectiveness-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; color: var(--purple-main); border-bottom: 1px dashed var(--purple-border); padding-bottom: 5px; }
+
+        .holding-container { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
+        .holding-logo-box { width: 250px; height: 150px; border: 2px solid #e5e7eb; display: flex; align-items: center; justify-content: center; border-radius: 16px; background: #fff; padding: 20px; }
+        .holding-logo-box img { max-width: 100%; max-height: 100%; }
+        .brand-gallery, .usp-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .usp-item { background: #fff; padding: 15px; border-radius: 10px; font-weight: 600; color: var(--accent-color); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        
+        .dossier-container { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+        .dossier-photo { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 5px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); flex-shrink: 0; }
+        .dossier-info { flex: 1; }
+        
+        .ca-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .ca-list ul { list-style: none; padding: 0; }
+        .ca-list li { margin-bottom: 15px; padding-left: 25px; position: relative; font-weight: 500; }
+        .ca-list li::before { content: '•'; color: var(--accent-color); font-size: 1.5rem; position: absolute; left: 0; top: -5px; }
+        .chart-container { background: #fff; padding: 30px; border-radius: 16px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .bar-group { margin-bottom: 20px; }
+        .bar-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; font-weight: 600; }
+        .bar-bg { background: #f3f4f6; height: 12px; border-radius: 10px; overflow: hidden; }
+        .bar-fill { height: 100%; border-radius: 10px; background: var(--accent-color); width: 0; animation: fillBar 1s forwards; }
+        .bar-fill.core { background: #2563eb; width: 70%; animation-delay: 0.2s; }
+        .bar-fill.bloggers { background: #0891b2; width: 20%; animation-delay: 0.4s; }
+        .bar-fill.families { background: #f59e0b; width: 35%; animation-delay: 0.6s; }
+        @keyframes fillBar { from { width: 0; } }
+        .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .swot-card { background: #fff; padding: 25px; border-radius: 12px; border-top: 4px solid #ccc; font-size: 0.95rem; }
+        .swot-s { border-color: #2563eb; } .swot-s h5 { color: #2563eb; }
+        .swot-w { border-color: #f59e0b; } .swot-w h5 { color: #f59e0b; }
+        .swot-o { border-color: var(--accent-blue); } .swot-o h5 { color: var(--accent-blue); }
+        .swot-t { border-color: var(--danger-color); } .swot-t h5 { color: var(--danger-color); }
+        .swot-card h5 { margin-bottom: 10px; font-size: 1.1rem; text-transform: uppercase; }
+        .swot-card ul { padding-left: 20px; margin: 0; font-weight: 500; }
+        .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 40px; }
+        .event-card { background: #fff; padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #eee; }
+        .event-card h5 { font-size: 1.3rem; margin-bottom: 15px; color: #2563eb; }
+        .event-list { padding-left: 20px; margin: 0; color: var(--text-grey); font-size: 0.9rem; font-weight: 500; }
+        .event-list li { margin-bottom: 8px; }
+        .table-wrapper { overflow-x: auto; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-top: 20px; margin-bottom: 40px; }
+        .cjm-table { width: 100%; border-collapse: collapse; background: #fff; min-width: 600px; }
+        .cjm-table th, .cjm-table td { padding: 18px 25px; text-align: left; border-bottom: 1px solid #eee; }
+        .cjm-table th { background: #f3f4f6; color: var(--text-dark); font-weight: 700; }
+        .cjm-table td { font-size: 0.95rem; color: var(--text-grey); font-weight: 500; }
+        .cjm-table td:nth-child(1) { color: #2563eb; font-weight: 600; }
+        
+        .brief-table { width: 100%; border-collapse: collapse; background: #fff; }
+        .brief-table td { padding: 18px; border-bottom: 1px solid #eee; vertical-align: top; }
+        .brief-label { font-weight: 700; width: 25%; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+        .brief-content { font-size: 1rem; color: #444; font-weight: 500; }
+        
+        .flagship-block { margin-top: 30px; }
+        .flagship-intro { margin-bottom: 40px; font-size: 1.1rem; border-left: 4px solid #2563eb; padding-left: 20px; font-weight: 500; }
+        .zones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+        .zone-card { background: #ecfeff; padding: 25px; border-radius: 12px; border-left: 4px solid #0891b2; }
+        
+        .gallery-group-title { font-size: 1.1rem; font-weight: 700; margin: 30px 0 15px 0; color: var(--text-grey); text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .gallery-grid-digital { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .gallery-grid-story { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .gallery-grid-print { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; }
+        .gallery-item { cursor: pointer; transition: transform 0.2s; position: relative; }
+        .gallery-item:hover { transform: scale(1.03); z-index: 5; }
+        .gallery-item img { width: 100%; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: block; aspect-ratio: 1/1; object-fit: cover; }
+        .gallery-item.vertical img { aspect-ratio: 9/16; }
+        .gallery-caption { font-size: 0.75rem; color: var(--text-grey); margin-top: 5px; text-align: center; font-weight: 600; }
+        .gallery-modal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+        .gallery-modal-item { break-inside: avoid; cursor: zoom-in; transition: transform 0.2s; }
+        .gallery-modal-item:hover { transform: scale(1.02); }
+        .gallery-modal-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; display: block; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+        .logobook-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; padding: 30px; background: #f9fafb; border-radius: 12px; }
+        .logobook-page { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: zoom-in; transition: transform 0.3s; background: #fff; }
+        .logobook-page:hover { transform: scale(1.02); z-index: 2; }
+
+        .elements-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; align-items: stretch; }
+        .element-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 1px solid #eee; display: flex; flex-direction: column; }
+        .element-card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; cursor: zoom-in; border-bottom: 1px solid #eee; }
+        .element-caption { padding: 15px; text-align: center; font-size: 0.9rem; color: #666; font-weight: 600; background: #fafafa; flex-grow: 1; display: flex; align-items: center; justify-content: center; }
+
+        .vk-segment-grid { display: grid; grid-template-columns: 1fr 300px; gap: 40px; align-items: start; }
+        .vk-strategy-list { list-style: none; padding: 0; }
+        .vk-strategy-list li { margin-bottom: 15px; position: relative; padding-left: 25px; color: var(--text-dark); font-size: 1.05rem; line-height: 1.4; font-weight: 500; }
+        .vk-strategy-list li::before { content: '•'; position: absolute; left: 0; color: #0077FF; font-weight: bold; }
+        .vk-sub-list { list-style: none; padding-left: 10px; margin-top: 5px; margin-bottom: 0; }
+        .vk-sub-list li { position: relative; padding-left: 15px; margin-bottom: 5px; font-size: 1rem; font-weight: 400; }
+        .vk-sub-list li::before { content: '•'; position: absolute; left: 0; color: #0077FF; font-size: 0.8rem; line-height: 1.5; }
+        .vk-stats-box { background: #F0F7FF; padding: 20px; border-radius: 12px; margin-top: 25px; border-left: 4px solid #0077FF; }
+        .vk-stats-title { font-weight: 700; color: #0077FF; margin-bottom: 10px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
+        .vk-stats-row { display: flex; gap: 20px; }
+        .vk-stat-val { font-size: 1.2rem; font-weight: 700; color: var(--text-dark); }
+        .vk-stat-label { font-size: 0.8rem; color: var(--text-grey); font-weight: 500; }
+        .vk-img-container { width: 100%; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid #eee; }
+        .vk-img-container img { width: 100%; display: block; }
+
+        .analytics-container { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .growth-chart-item { margin-bottom: 25px; }
+        .chart-labels { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; font-weight: 600; }
+        .chart-bar-container { background: #f0fdf4; height: 20px; border-radius: 10px; overflow: hidden; position: relative; }
+        .chart-bar-fill { height: 100%; background: #059669; border-radius: 10px; animation: grow 1s forwards; width: 0; }
+        .chart-target-line { position: absolute; top: 0; height: 100%; border-right: 2px dashed #e11d48; opacity: 0.5; }
+        .target-label { font-size: 0.75rem; color: #e11d48; text-align: right; margin-top: 3px; }
+        @keyframes grow { from { width: 0; } }
+        .donut-wrapper { display: flex; flex-direction: column; align-items: center; }
+        .donut-chart { width: 180px; height: 180px; border-radius: 50%; background: conic-gradient(#1e3a8a 0% 40%, #0ea5e9 40% 70%, #059669 70% 100%); position: relative; margin-bottom: 20px; }
+        .donut-chart::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; background: #fff; border-radius: 50%; }
+        .pie-legend { list-style: none; padding: 0; }
+        .pie-legend li { display: flex; align-items: center; margin-bottom: 8px; font-size: 0.9rem; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; margin-right: 10px; }
+        .method-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .pie-chart { width: 200px; height: 200px; border-radius: 50%; background: conic-gradient(#0891b2 0% 53%, #059669 53% 90%, #f59e0b 90% 100%); margin: 0 auto; }
+        #lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 5000; justify-content: center; align-items: center; padding: 20px; cursor: zoom-out; }
+        #lightbox img { max-width: 95%; max-height: 95vh; border-radius: 4px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+        .img-framed { width: 100%; border-radius: 12px; border: 8px solid #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.08); display: block; margin-bottom: 10px; object-fit: cover; cursor: zoom-in; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .metric-item { background: #fff; padding: 20px; border-radius: 16px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .metric-number { display: block; font-size: 2.5rem; font-weight: 800; color: var(--accent-color); }
+        
+        /* TOOLS SECTION (SKILLS) - SOLID GREEN ACCENT */
+        .skills-section { padding: 60px 0; border-top: 1px solid #eee; margin-top: 40px; }
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .skill-pill { 
+            background-color: var(--accent-color); /* Solid Green */
+            color: #fff; 
+            border: none;
+            padding: 12px 25px; 
+            border-radius: 16px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-align: center; 
+            min-width: 160px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .skill-pill:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3); }
+        .skill-pill span.main { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .skill-pill span.sub { font-size: 0.8rem; color: rgba(255,255,255,0.85); font-weight: 400; }
+
+        footer { padding: 40px 0; text-align: center; color: var(--text-grey); font-size: 0.9rem; }
+        .footer-adobe { margin-top: 40px; text-align: center; font-size: 0.9rem; color: #666; background: #f5f5f5; padding: 15px; border-radius: 8px; }
+
+        /* --- COMPREHENSIVE MOBILE RESPONSIVENESS --- */
+        @media (max-width: 900px) {
+            /* Header */
+            .header-grid { 
+                grid-template-columns: 1fr; 
+                text-align: center; 
+                padding: 40px 0; 
+                height: auto; 
+                gap: 30px;
+            }
+            .photo-part { order: -1; margin-bottom: 20px; }
+            .avatar-frame { width: 200px; height: 200px; }
+            h1 { font-size: 3rem; line-height: 1.1; }
+            .hero-desc { font-size: 1.1rem; max-width: 100%; margin-bottom: 30px; }
+            
+            /* Buttons */
+            .btn-group { 
+                margin-top: 30px; 
+                gap: 20px;
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn { width: 100%; max-width: 320px; }
+
+            /* Portfolio Grid */
+            .bento-grid { grid-template-columns: 1fr; gap: 20px; }
+            .card-scuba, .card-vk, .card-mamkids, .card-texts { grid-column: auto; grid-row: auto; }
+            .card { height: auto; min-height: 400px; }
+            
+            /* Modal & Internal Grids */
+            .modal-window { width: 100%; height: 100%; border-radius: 0; }
+            .project-body { padding: 30px 20px; }
+            .project-header { padding: 80px 20px 40px 20px; }
+            .project-header h2 { font-size: 2.2rem; }
+            
+            .holding-container, .ca-grid, .swot-grid, .events-grid, .zones-grid, .analytics-container, .method-grid, .gallery-grid-print, .elements-grid, .dossier-container, .logobook-grid, .vk-segment-grid { 
+                grid-template-columns: 1fr; 
+                gap: 30px;
+            }
+            
+            .gallery-grid-digital { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid-story { grid-template-columns: repeat(2, 1fr); }
+            .gallery-modal-grid { grid-template-columns: 1fr; }
+            
+            /* Specific Adjustments */
+            .holding-logo-box { width: 100%; }
+            .dossier-photo { width: 150px; height: 150px; margin: 0 auto 20px auto; }
+            .dossier-container { flex-direction: column; align-items: center; text-align: center; }
+            .dossier-table td { text-align: left; }
+            .vk-img-container { order: -1; margin-bottom: 20px; }
+            .table-wrapper { margin-top: 20px; }
+            
+            /* Typography on Mobile */
+            .section-headline { font-size: 1.8rem; margin-bottom: 30px; }
+            .project-body h5 { font-size: 1.3rem; }
+            
+            .brief-label { width: 35%; }
+            
+            .brand-gallery { grid-template-columns: 1fr; } /* Stack gallery images on mobile */
+        }
+
+        @media (min-width: 600px) and (max-width: 900px) {
+             /* Tablet Specifics */
+            .bento-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid-digital { grid-template-columns: repeat(3, 1fr); }
+            .btn-group { flex-direction: row; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Full view">
+    </div>
+
+    <header>
+        <div class="gradient-blob blob-1"></div>
+        <div class="gradient-blob blob-2"></div>
+        <div class="gradient-blob blob-3"></div>
+        <div class="gradient-blob blob-4"></div>
+        <div class="noise-overlay"></div>
+
+        <div class="floating-words">
+            <div class="word w1">Strategy</div><div class="word w2">SMM</div><div class="word w3">PR</div>
+            <div class="word w4">Design</div><div class="word w5">Analysis</div><div class="word w6">Creative</div>
+            <div class="word w7">Growth</div><div class="word w8">Content</div><div class="word w9">Events</div>
+            <div class="word w10">CJM</div>
+        </div>
+
+        <div class="container header-grid">
+            <div class="text-part">
+                <span class="role-pill">ПОРТФОЛИО 2026</span>
+                <h1>Никита Мельников</h1>
+                <p class="hero-desc">Создаю визуальные стратегии и управляю репутацией брендов. От разработки логотипа до комплексного PR-продвижения и аналитики.</p>
+            </div>
+            <div class="photo-part">
+                <div class="avatar-frame">
+                    <img src="images/me.jpg" alt="Никита Мельников" class="avatar-img">
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <a href="#portfolio" class="btn">Изучить портфолио</a>
+                <a href="#gallery" class="btn">Смотреть галерею</a>
+                <button onclick="openModal('modal-contact')" class="btn">Связаться со мной</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <div id="portfolio" class="container">
+            <h2 class="section-title">Мои работы</h2>
+            
+            <div class="bento-grid">
+                <article class="card card-scuba" onclick="openModal('modal-scuba')">
+                    <div class="card-image" style="background: url('images/scuba-cover.jpg');"></div>
+                    <div class="card-info">
+                        <span class="card-tag">Key Case Study</span>
+                        <h3>Рыбное бистро «SCUBA»</h3>
+                        <p>Комплексная PR-стратегия, организация ивентов и CJM. Полный разбор кейса.</p>
+                    </div>
+                    <div class="card-btn">↗</div>
+                </article>
+
+                <article class="card card-mamkids" onclick="openModal('modal-mamkids')">
+                    <div class="card-image" style="background: url('images/mamkids-logo.jpg'); background-color: #EADDCD; background-size: cover !important; background-position: center !important;"></div>
+                    <div class="card-info">
+                        <span class="card-tag">Branding</span>
+                        <h3>MAMKIDS</h3>
+                        <p>Логобук и айдентика бренда.</p>
+                    </div>
+                    <div class="card-btn">↗</div>
+                </article>
+
+                <article class="card card-texts" onclick="openModal('modal-texts')">
+                    <div class="card-image" style="background: url('images/texts-cover.jpg'); background-color: #f3e8ff; background-position: center center !important; background-size: cover !important;"></div>
+                    <div class="card-info">
+                        <span class="card-tag" style="color: var(--accent-color);">Content Marketing</span>
+                        <h3>Тексты</h3>
+                        <p>5 концептов рекламного копирайтинга для Telegram: от техник до эмоций.</p>
+                    </div>
+                    <div class="card-btn">↗</div>
+                </article>
+
+                <article class="card card-vk" onclick="openModal('modal-vk')">
+                    <div class="card-image" style="background: url('images/vk-cover.jpg');"></div>
+                    <div class="card-info">
+                        <span class="card-tag" style="color: var(--accent-color);">Targeting</span>
+                        <h3>КРАФТ</h3>
+                        <p>Настройка кампаний, сегментация и креативы для кондитерской.</p>
+                    </div>
+                    <div class="card-btn">↗</div>
+                </article>
+            </div>
+
+            <div class="skills-section">
+                <h3 style="text-align: center; margin-bottom: 30px;">Инструменты</h3>
+                <div class="skills-grid">
+                    <div class="skill-pill"><span class="main">Adobe Photoshop</span><span class="sub">Графический дизайн</span></div>
+                    <div class="skill-pill"><span class="main">Tilda Publishing</span><span class="sub">Веб-конструктор</span></div>
+                    <div class="skill-pill"><span class="main">SMM Strategy</span><span class="sub">SMM Стратегия</span></div>
+                    <div class="skill-pill"><span class="main">CJM Analysis</span><span class="sub">Карта пути клиента</span></div>
+                    <div class="skill-pill"><span class="main">Target Advertising</span><span class="sub">Таргетированная реклама</span></div>
+                    <div class="skill-pill"><span class="main">Copywriting</span><span class="sub">Копирайтинг</span></div>
+                    <div class="skill-pill"><span class="main">Yandex WordStat</span><span class="sub">Аналитика запросов</span></div>
+                    <div class="skill-pill"><span class="main">SWOT Analysis</span><span class="sub">Стратегический анализ</span></div>
+                    <div class="skill-pill"><span class="main">VK Ads</span><span class="sub">VK Реклама</span></div>
+                    <div class="skill-pill"><span class="main">Telegram Marketing</span><span class="sub">Маркетинг в Телеграм</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="gradient-blob blob-gal-1"></div>
+            <div class="gradient-blob blob-gal-2"></div>
+            <div class="gradient-blob blob-gal-3"></div>
+            <div class="gradient-blob blob-gal-4"></div>
+            
+            <h2 class="section-title" style="position:relative; z-index:5; color:#1d1d1f;">Галерея</h2>
+            
+            <div class="gallery-grid" style="position:relative; z-index:5;">
+                <div class="folder-card" onclick="openModal('modal-gal-digital')">
+                    <div class="folder-icon">📁</div>
+                    <div class="folder-title">Digital-материалы</div>
+                    <div class="folder-subtitle">Баннеры, креативы, Stories</div>
+                </div>
+                <div class="folder-card" onclick="openModal('modal-gal-pos')">
+                    <div class="folder-icon">📂</div>
+                    <div class="folder-title">POS-материалы</div>
+                    <div class="folder-subtitle">Меню, листовки, полиграфия</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p style="font-weight: 600; color: var(--text-dark); margin-bottom: 10px;">nikitamelnikoff@mail.ru</p>
+            <p>© 2026 Никита Мельников</p>
+        </div>
+    </footer>
+
+    <div id="modal-contact" class="modal-overlay" onclick="closeModal(event, 'modal-contact')">
+        <div class="modal-window modal-contact-window">
+            <span class="close-btn" onclick="closeModalBtn('modal-contact')" style="color: #fff;">&times;</span>
+            <div class="contact-header">
+                <h2>Мои контакты</h2>
+            </div>
+            <div class="contact-content">
+                <ul class="contact-list">
+                    <li class="contact-item">
+                        <div class="contact-item-title"><span>💬</span> VK</div>
+                        <a href="https://vk.com/nmlnkv" target="_blank" class="contact-info-link">@nmlnkv</a>
+                    </li>
+                    <li class="contact-item">
+                        <div class="contact-item-title"><span>📱</span> Номер телефона</div>
+                        <a href="tel:+79374765600" class="contact-info-link">+7 (937) 476 56-00</a>
+                    </li>
+                    <li class="contact-item">
+                        <div class="contact-item-title"><span>📨</span> Почта</div>
+                        <a href="mailto:nikitamelnikoff@mail.ru" class="contact-info-link">nikitamelnikoff@mail.ru</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-gal-digital" class="modal-overlay" onclick="closeModal(event, 'modal-gal-digital')">
+        <div class="modal-window">
+            <span class="close-btn" onclick="closeModalBtn('modal-gal-digital')">&times;</span>
+            <div class="project-header" style="background: #064e3b;">
+                 <span class="header-tag-white">Gallery</span>
+                 <h2 style="position:relative;z-index:10;">Digital-материалы</h2>
+            </div>
+            <div class="project-body">
+                <div class="gallery-modal-grid">
+                    <div class="gallery-modal-item"><img src="images/gal-dig-1.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
+                    <div class="gallery-modal-item"><img src="images/gal-dig-2.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
+                    <div class="gallery-modal-item"><img src="images/gal-dig-3.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
+                    <div class="gallery-modal-item"><img src="images/gal-dig-4.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
+                    <div class="gallery-modal-item"><img src="images/gal-dig-5.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
+                    <div class="gallery-modal-item"><img src="images/gal-dig-dodo.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Промо-постер для Додо Пицца</div></div>
+                    <div class="gallery-modal-item"><img src="images/gal-dig-just.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Промо-постер для Just Clothes</div></div>
+                    <div class="gallery-modal-item"><img src="images/gal-dig-scuba.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Промо-постер для SCUBA</div></div>
+                </div>
+                <div class="footer-adobe">Все работы выполняются в Adobe Photoshop</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-gal-pos" class="modal-overlay" onclick="closeModal(event, 'modal-gal-pos')">
+        <div class="modal-window">
+            <span class="close-btn" onclick="closeModalBtn('modal-gal-pos')">&times;</span>
+            <div class="project-header" style="background: #065f46;">
+                 <span class="header-tag-white">Gallery</span>
+                 <h2 style="position:relative;z-index:10;">POS-материалы</h2>
+            </div>
+            <div class="project-body">
+                <div class="gallery-modal-grid">
+                     <div class="gallery-modal-item"><img src="images/gal-pos-1.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item"><img src="images/gal-pos-2.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item"><img src="images/gal-pos-3.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item"><img src="images/gal-pos-4.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item"><img src="images/gal-pos-5.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item"><img src="images/gal-pos-6.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item"><img src="images/gal-pos-7.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                </div>
+                <div class="footer-adobe">Все работы выполняются в Adobe Photoshop</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-texts" class="modal-overlay" onclick="closeModal(event, 'modal-texts')">
+        <div class="modal-window">
+            <span class="close-btn" onclick="closeModalBtn('modal-texts')">&times;</span>
+            
+            <div class="project-header" style="background: #312e81;">
+                <div class="gradient-blob blob-purple-1"></div>
+                <div class="gradient-blob blob-purple-2"></div>
+                <div class="gradient-blob blob-purple-3"></div>
+                <div class="gradient-blob blob-purple-4"></div>
+                <div class="noise-overlay"></div>
+                
+                <span class="header-tag-white">Copywriting & Content Marketing</span>
+                <h2 style="position:relative;z-index:10;">Тексты</h2>
+                <p style="position:relative;z-index:10;">Разбор 5 рекламных постов для Telegram: анализ ЦА, TOV и метрики.</p>
+            </div>
+
+            <div class="project-body">
+                
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: var(--purple-main); color: var(--text-dark);">Пост 1. Робот-пылесос Midea VCR04W</h4>
+                    <div class="table-wrapper">
+                    <table class="brief-table">
+                        <tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Робот-пылесос Midea VCR04W</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">УТП</td><td class="brief-content">Доступность, комплексная уборка, ДУ.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">ЦА</td><td class="brief-content">Молодые специалисты (20-35 лет), ценящие время.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">TOV</td><td class="brief-content">Дружелюбный, практичный, личная рекомендация.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">Личность блогера</td><td class="brief-content">Tech/Lifestyle Blogger.</td></tr>
+                    </table>
+                    </div>
+                    
+                    <div class="quote-container">
+                        <p>Ребята! Хочу поделиться с вами крутым открытием для всех, кто ценит чистоту и порядок, но не всегда может найти время на уборку. Встречайте робот-пылесос Midea VCR04W! Я, как человек, который вечно занят работой и хобби, знаю цену каждой минуте.</p>
+                        <p>Поэтому меня очень радует, что этот малыш умеет убирать квартиру без моего участия. Всё, что нужно сделать – включить его и наслаждаться результатом. Он идеально подходит для каждого, ведь он оснащён всем необходимым для наведения чистоты в вашем доме!</p>
+                        <p>Сухая и влажная уборка, пульт дистанционного управления и куча других приятностей делает процесс максимально удобным и эффективным. Но самое главное – это цена! Этот пылесос стоит гораздо дешевле своих аналогов, при этом не уступает им в качестве.</p>
+                        <p>Я лично проверила его в деле и остался доволен. Так что если вы хотите экономить время....</p>
+                    </div>
+
+                    <div class="effectiveness-box">
+                        <div class="effectiveness-title">Эффективность</div>
+                        <p><strong>Пояснение:</strong> Используется формат "Проблема → Решение" с опорой на личный опыт блогера. Копирайт снимает ключевое возражение ЦА — дефицит времени. Акцент на низкой цене и функциональности делает продукт максимально привлекательным для экономной, но занятой аудитории.</p>
+                        <p><strong>Результат:</strong> Увеличение переходов и конверсии в покупку за счет сильной личной рекомендации и акцента на оптимальном соотношении "цена/качество".</p>
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: var(--purple-main); color: var(--text-dark);">Пост 2. Премиальный курс по Web3-инвестициям</h4>
+                    <div class="table-wrapper">
+                    <table class="brief-table">
+                        <tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Онлайн-курс "Web3 Capital: От $0 до первого NFT-портфеля".</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">УТП</td><td class="brief-content">Проверенная стратегия пассивного дохода. Доступ в закрытый клуб инвесторов.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">ЦА</td><td class="brief-content">Предприниматели (30-50 лет), ТОП-менеджеры.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">TOV</td><td class="brief-content">Авторитетный, эксклюзивный, сфокусированный на результате.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">Личность блогера</td><td class="brief-content">Финансовый Аналитик/Эксперт.</td></tr>
+                    </table>
+                    </div>
+
+                    <div class="quote-container">
+                        <p><strong>[Только для тех, кто готов расти]</strong></p>
+                        <p>Пока 99% людей обсуждают вчерашние новости в кафе, 1% делает миллионы на технологиях, о которых вы даже не слышали. Мы говорим о Web3 и NFT, которые уже перевернули мир финансов, но большинство до сих пор считают их "картинками".</p>
+                        <p>Я не буду продавать вам "волшебную таблетку". Я даю <strong>систему</strong>. Систему, которую сам использую для формирования пассивного дохода, и которая дала моим ученикам X-кратный рост капитала за последний год.</p>
+                        <p><strong>Курс "Web3 Capital" — это не просто лекции.</strong> Это 6 модулей с пошаговым планом, как:<br>
+                        1. Собрать NFT-портфель, устойчивый к волатильности.<br>
+                        2. Определить будущий "голубой чип" на стадии идеи.<br>
+                        3. Получить доступ в закрытый клуб, где мы делимся сделками до их публичного анонса.</p>
+                        <p><strong>Упущенная выгода — это самая дорогая выгода.</strong> Хватит наблюдать. Пора действовать. Осталось 15 мест. Ссылка внизу.</p>
+                    </div>
+
+                    <div class="effectiveness-box">
+                        <div class="effectiveness-title">Эффективность</div>
+                        <p><strong>Пояснение:</strong> Копирайт использует контрастный прием (1% vs 99%), апеллируя к статусу ЦА и их амбициям. Акцент сделан на системе и эксклюзивном доступе, что является главным триггером для премиальной аудитории. Ограничение мест создает срочность.</p>
+                        <p><strong>Результат:</strong> Генерация высококачественных лидов (премиум-сегмент), готовых к покупке дорогого продукта. Усиление позиционирования блогера как авторитета и источника инсайдерской информации.</p>
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: var(--purple-main); color: var(--text-dark);">Пост 3. Экологичная детская одежда «МАМКИДС»</h4>
+                    <div class="table-wrapper">
+                    <table class="brief-table">
+                        <tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Комплект одежды "Единение с природой" от бренда «МАМКИДС».</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">УТП</td><td class="brief-content">100% органический хлопок, оверсайз-крой для свободы движения, скандинавский дизайн.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">ЦА</td><td class="brief-content">Молодые мамы (25-35 лет), средний+.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">TOV</td><td class="brief-content">Мягкий, заботливый, основанный на ценностях, вызывает уют.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">Личность блогера</td><td class="brief-content">Мама-блогер/Консультант по материнству.</td></tr>
+                    </table>
+                    </div>
+
+                    <div class="quote-container">
+                        <p><strong>Тихий час, когда не скрипит даже шов.</strong></p>
+                        <p>Малыш спит, и ты наконец выдыхаешь. Но что, если я скажу, что комфорт вашего ребенка начинается задолго до того, как его голова коснется подушки? Он начинается с того, что касается его нежной кожи.</p>
+                        <p>Мы с <strong>@MAMKIDS</strong> протестировали их новую оверсайз-коллекцию "Единение с природой". Девочки, это 100% органический хлопок! <em>Никаких</em> аллергий, <em>никакого</em> сковывания движений, <em>никаких</em> лишних застежек. Крой оверсайз — это не просто модно, это про свободу быть собой с первых дней.</p>
+                        <p>Представьте: теплые бежевые оттенки, как в скандинавском интерьере, и мягкость, которая похожа на объятия. Это не просто одежда, это инвестиция в спокойный сон и счастливое бодрствование.</p>
+                        <p>По промокоду <strong>MAMA_ECO</strong> скидка 15% на весь комплект. Подарите коже вашего малыша самое лучшее.</p>
+                    </div>
+
+                    <div class="effectiveness-box">
+                        <div class="effectiveness-title">Эффективность</div>
+                        <p><strong>Пояснение:</strong> Пост начинается с эмоционального крючка (тихий час), устанавливая доверительную связь. Блогер выступает как "одна из нас", которая уже проверила и одобрила. УТП (эко-хлопок, оверсайз) напрямую закрывает главные боли мам — безопасность и комфорт.</p>
+                        <p><strong>Результат:</strong> Генерация продаж с использованием промокода для отслеживания конверсии. Увеличение лояльности и доверия к бренду «МАМКИДС» через endorsement.</p>
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: var(--purple-main); color: var(--text-dark);">Пост 4. Сет экзотических морепродуктов</h4>
+                    <div class="table-wrapper">
+                    <table class="brief-table">
+                        <tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Премиальный набор для романтического ужина "Глубины Вкуса".</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">УТП</td><td class="brief-content">Свежайшие дикие морепродукты. Доставка "под ключ" в течение 120 минут.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">ЦА</td><td class="brief-content">Молодые пары (25-40 лет), Food-энтузиасты.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">TOV</td><td class="brief-content">Сенсуальный, игривый, вызывающий аппетит.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">Личность блогера</td><td class="brief-content">Food/Gastro-Блогер.</td></tr>
+                    </table>
+                    </div>
+
+                    <div class="quote-container">
+                        <p><strong>Тот самый ужин, после которого хочется не спать...</strong></p>
+                        <p>Вы устали от доставки пиццы и суши? Пора вернуть в ваш вечер пятницы атмосферу, достойную лучшего ресторана. И для этого не нужно бронировать столик!</p>
+                        <p>Наш эксперимент: сет "Глубины Вкуса" от <strong>@SEAFOOD_EXPRESS</strong>. Это лобстеры, дикие устрицы (те самые, которые открываются за 5 секунд) и 3 экзотических соуса — все, что нужно для кулинарной эйфории.</p>
+                        <p><strong>Фишка:</strong> Они доставляют все за 120 минут. Прямо в руки, с сертификатом свежести. Вам остается только открыть бутылку шампанского и начать.</p>
+                        <p>Нам с <strong>[имя партнера]</strong> не понадобилось много времени, чтобы понять: иногда лучшая инвестиция — это инвестиция в общие впечатления. Устройте романтику, которая запомнится.</p>
+                        <p>Заказать сет с бесплатной доставкой можно по ссылке. Просто скажите им кодовое слово <strong>"РИФ"</strong>.</p>
+                    </div>
+
+                    <div class="effectiveness-box">
+                        <div class="effectiveness-title">Эффективность</div>
+                        <p><strong>Пояснение:</strong> Копирайт создает ситуацию потребления (романтический ужин дома) и апеллирует к желанию уникального опыта (вместо рутины). Снимаются ключевые возражения по морепродуктам — *свежесть* (сертификат) и *сложность* (набор "под ключ").</p>
+                        <p><strong>Результат:</strong> Увеличение продаж премиальных сетов, повышение среднего чека. Кодовое слово "РИФ" обеспечивает точное отслеживание эффективности поста.</p>
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: var(--purple-main); color: var(--text-dark);">Пост 5. Интенсивный курс подготовки к ЕГЭ</h4>
+                    <div class="table-wrapper">
+                    <table class="brief-table">
+                        <tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Онлайн-интенсив "ЕГЭ Литература 100/100: Метод Экспресс-анализа".</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">УТП</td><td class="brief-content">Гарантия 85+ баллов, авторская методика, фокус на эссе.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">ЦА</td><td class="brief-content">Старшеклассники (16-18 лет) и их родители.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">TOV</td><td class="brief-content">Авторитетный, требовательный, мотивирующий на результат.</td></tr>
+                        <tr><td class="brief-label" style="color: #7c3aed;">Личность блогера</td><td class="brief-content">Опытный Преподаватель/Репетитор.</td></tr>
+                    </table>
+                    </div>
+
+                    <div class="quote-container">
+                        <p><strong>4 МЕСЯЦА. ИЛИ ПРОЩАЙ, БЮДЖЕТ.</strong></p>
+                        <p>Понимаю, что от мысли о сочинении по "Войне и миру" бросает в дрожь. А до ЕГЭ по литературе осталось всего 4 месяца. Кажется, времени нет?</p>
+                        <p>Время есть. Если знать, как его использовать. Меня зовут [Имя], и мои ученики ежегодно поступают в МГУ/СПбГУ/ВШЭ с баллами 90+. Я не заставляю вас читать 1000 страниц. Я даю <strong>Метод Экспресс-анализа</strong>, который позволяет:<br>
+                        * Разложить любую тему из кодификатора за 15 минут.<br>
+                        * Научиться писать структурированные эссе на <strong>МАКСИМАЛЬНЫЙ</strong> балл (28/28).<br>
+                        * Исключить "водянистые" фразы, за которые снижают баллы.</p>
+                        <p><strong>Наша гарантия:</strong> Если ты выполняешь все задания и не набираешь 85+ баллов, мы возвращаем деньги. Это не курс. Это <strong>Программа поступления на бюджет</strong>.</p>
+                        <p>Ссылка на запись на первый бесплатный вводный урок ниже. Хватит плыть по течению.</p>
+                    </div>
+
+                    <div class="effectiveness-box">
+                        <div class="effectiveness-title">Эффективность</div>
+                        <p><strong>Пояснение:</strong> Копирайт использует жесткий, мотивационный TOV и апелляцию к срочности и упущенной выгоде (поступление на бюджет). УТП сфокусировано на конкретных измеримых результатах (90+ баллов, 28/28 за эссе) и мощной финансовой гарантии, что критически важно для родителей при выборе курсов.</p>
+                        <p><strong>Результат:</strong> Быстрая запись на интенсив за счет ограниченного времени и четкой гарантии. Привлечение максимально мотивированной и платежеспособной аудитории. Генерация лидов через бесплатный вводный урок.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-scuba" class="modal-overlay" onclick="closeModal(event, 'modal-scuba')">
+        <div class="modal-window">
+            <span class="close-btn" onclick="closeModalBtn('modal-scuba')">&times;</span>
+            <div class="project-header" style="background: #0f172a;">
+                <div class="gradient-blob blob-blue-1"></div><div class="gradient-blob blob-blue-2"></div><div class="gradient-blob blob-blue-3"></div><div class="gradient-blob blob-blue-4"></div><div class="noise-overlay"></div>
+                <div class="bubbles-container">
+                    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+                    <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+                </div>
+                <span class="header-tag-white">PR & Event Strategy</span>
+                <h2 style="position:relative;z-index:10;">Рыбное бистро «SCUBA»</h2>
+                <p style="position:relative;z-index:10;">Разработка плана гастрономических мероприятий как инструмента PR-стратегии.</p>
+            </div>
+            <div class="project-body">
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">1. О бренде и холдинге</h4>
+                    <div class="holding-container">
+                        <div class="holding-logo-box"><img src="images/asado-logo.jpg" alt="Asado Group Logo" style="object-fit: contain;"></div>
+                        <div class="holding-info"><h5>ООО «Максимум» (Asado Group)</h5><p>Холдинг, владеющий 8 ресторанами премиум-класса в клубном доме «Тихвинъ». Флагман — стейкхаус «Asado» (20 лет на рынке). SCUBA — ключевой продукт текущей PR-кампании.</p></div>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <h5>Концепция SCUBA</h5><p>Бистро с морской атмосферой и свежайшими морепродуктами по демократичным ценам. Интерьер создает эффект "погружения" на дно океана.</p>
+                        <div class="usp-list"><div class="usp-item">✨ Уникальная атмосфера "погружения"</div><div class="usp-item">💰 Доступность цен при высоком качестве</div><div class="usp-item">📍 Премиум-локация (ЖК Тихвинъ)</div><div class="usp-item">🐠 Детское меню и Фотозоны для блогеров</div></div>
+                        
+                        <!-- Исправленный блок галереи: строгая структура как в исходном коде -->
+                        <div class="brand-gallery">
+                            <img src="images/scuba-interior-1.jpg" class="img-framed" alt="Interior 1" onclick="openLightbox(this.src)">
+                            <img src="images/scuba-interior-2.jpg" class="img-framed" alt="Interior 2" onclick="openLightbox(this.src)">
+                        </div>
+                    </div>
+                </div>
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">2. Аватар Бренда (ЦА)</h4>
+                    <div class="dossier-container">
+                        <img src="images/scuba-avatar.jpg" alt="Аватар ЦА" class="dossier-photo">
+                        <div class="dossier-info">
+                            <div class="table-wrapper">
+                            <table class="brief-table">
+                                <tr><td class="brief-label" style="color: #2563eb;">ФИО</td><td class="brief-content">Иванова Алина Игоревна</td></tr>
+                                <tr><td class="brief-label" style="color: #2563eb;">Возраст / Статус</td><td class="brief-content">27 лет / Не замужем</td></tr>
+                                <tr><td class="brief-label" style="color: #2563eb;">Деятельность</td><td class="brief-content">Самозанятая, ведет гастро-блог (ИП)</td></tr>
+                                <tr><td class="brief-label" style="color: #2563eb;">Локация</td><td class="brief-content">Центр Екатеринбурга, клубный дом «Тихвинъ»</td></tr>
+                                <tr><td class="brief-label" style="color: #2563eb;">Доход</td><td class="brief-content">Выше среднего (от 90 000 руб./мес.)</td></tr>
+                                <tr><td class="brief-label" style="color: #2563eb;">Интересы</td><td class="brief-content">Гастрономия, путешествия (Атлантика), танцы</td></tr>
+                                <tr><td class="brief-label" style="color: #2563eb;">Желания</td><td class="brief-content">Колоритная кухня, необычная подача, наличие фотозон, интерактивные программы</td></tr>
+                                <tr><td class="brief-label" style="color: #2563eb;">Боли (Страхи)</td><td class="brief-content">Скучные интерьеры, отсутствие программы лояльности, заведения без "фишки"</td></tr>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">3. Анализ Целевой Аудитории</h4>
+                    <div class="ca-grid">
+                        <div class="ca-list"><h5>Ожидания:</h5><ul><li>Оригинальность и уникальность в оформлении блюд.</li><li>Вкусная и разнообразная еда по разумной цене.</li><li>Быстрая подача без потери качества.</li><li>Высокий уровень сервиса (Премиум).</li></ul><h5 style="margin-top: 20px;">Страхи:</h5><ul><li>Проблемы со свежестью морепродуктов.</li><li>Завышенные цены и негативные отзывы.</li><li>Отсутствие развлечений для детей.</li></ul></div>
+                        <div class="chart-container"><h5>Сегментация Аудитории</h5><div class="bar-group"><div class="bar-label"><span>Ядро ЦА (30-45 лет, достаток выше среднего)</span><span>70%</span></div><div class="bar-bg"><div class="bar-fill core" style="background: #2563eb;"></div></div></div><div class="bar-group"><div class="bar-label"><span>Семьи с детьми (30-50 лет)</span><span>35%</span></div><div class="bar-bg"><div class="bar-fill families"></div></div></div><div class="bar-group"><div class="bar-label"><span>Тревел-блогеры (20-35 лет)</span><span>20%</span></div><div class="bar-bg"><div class="bar-fill bloggers"></div></div></div></div>
+                    </div>
+                </div>
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">4. SWOT-анализ</h4>
+                    <div class="swot-grid">
+                        <div class="swot-card swot-s"><h5>STRENGTHS (Сильные стороны)</h5><ul><li>Уникальная концепция ивентов.</li><li>Локационная привязка к ЖК «Тихвинъ».</li><li>Интерактивный формат мероприятий.</li></ul></div>
+                        <div class="swot-card swot-w"><h5>WEAKNESSES (Слабые стороны)</h5><ul><li>Недостаточное цифровое присутствие.</li><li>Несистематизированный фирменный стиль.</li><li>Слабый контент в соцсетях.</li></ul></div>
+                        <div class="swot-card swot-o"><h5>OPPORTUNITIES (Возможности)</h5><ul><li>Расширение онлайн-форматов.</li><li>Разработка единой визуальной стратегии.</li><li>Партнёрства с блогерами.</li></ul></div>
+                        <div class="swot-card swot-t"><h5>THREATS (Угрозы)</h5><ul><li>Конкуренция со стороны других ресторанов.</li><li>Снижение интереса к офлайн-мероприятиям.</li><li>Экономическая нестабильность.</li></ul></div>
+                    </div>
+                </div>
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">5. Стратегия CJM</h4>
+                    <div class="events-grid">
+                        <div class="event-card"><h5>Огни Латинской Америки</h5><div class="event-list"><ul><li><strong>Формат:</strong> вечер с севиче, фахитос и шоу-фламенко.</li><li><strong>Вовлеченность:</strong> дегустация специй, интерактивная карта вкусов.</li><li><strong>ЦА:</strong> молодые пары, креативный класс.</li><li><strong>Метрика:</strong> рост UGC, ER, повторные брони.</li></ul></div></div>
+                        <div class="event-card"><h5>Глубины Вкуса</h5><div class="event-list"><ul><li><strong>Формат:</strong> визуальное шоу, подача в аквариумах, озвучка воды.</li><li><strong>Фишка:</strong> NFT-меню и цифровая фотогалерея.</li><li><strong>ЦА:</strong> медиа, лидеры мнений, элита.</li><li><strong>Цель:</strong> создание флагмана PR-коммуникации.</li></ul></div></div>
+                        <div class="event-card"><h5>Ночь на Рифе</h5><div class="event-list"><ul><li><strong>Формат:</strong> коктейльная вечеринка, DJ-сет, игра света.</li><li><strong>Фишка:</strong> коктейльный сет по подписке на соцсети.</li><li><strong>ЦА:</strong> городская молодежь.</li><li><strong>Цель:</strong> омоложение аудитории.</li></ul></div></div>
+                    </div>
+                    <h5 style="margin-top: 30px; margin-bottom: 15px;">Этапы взаимодействия (CJM)</h5>
+                    <div class="table-wrapper"><table class="cjm-table"><thead><tr><th>Этап CJM</th><th>Пример точки контакта</th><th>Метрики успеха</th></tr></thead><tbody><tr><td>Внимание</td><td>Реклама в Telegram, блогеры</td><td>Охват, переходы</td></tr><tr><td>Вовлечение</td><td>Stories, тизеры, опросы</td><td>ER, вовлечённость</td></tr><tr><td>Покупка</td><td>Telegram-бот, лендинг с афишей</td><td>Конверсия</td></tr><tr><td>Поддержка</td><td>Интерактивные зоны, фотостенды</td><td>Кол-во публикаций, отзывы</td></tr><tr><td>Лояльность</td><td>Email-благодарность, опрос</td><td>LTV, возвратность, подписки</td></tr></tbody></table></div>
+                </div>
+                <div class="project-section flagship-block">
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">6. Флагман: «Зов Азии»</h4>
+                    <div class="flagship-intro"><p style="margin-bottom: 10px;"><strong>Актуальность:</strong> в условиях кризиса доверия к рекламе, гастрономические ивенты становятся инструментом формирования эмоциональной лояльности.</p><p style="margin-bottom: 10px;"><strong>Концепция:</strong> синтез аутентичных азиатских мотивов и локального позиционирования бистро в «Тихвине».</p><p><strong>Стратегия:</strong> интеграция гастрономического опыта в эмоциональный брендинг через мультисенсорное взаимодействие.</p></div>
+                    <div class="zones-grid"><div class="zone-card"><h5>Зона «Юный ихтиолог»</h5><p>Официанты проводят экскурс для детей по обитателям морского дна во время дегустации родителями.</p></div><div class="zone-card"><h5>Фотозона «Ичибан»</h5><p>Тематическая зона для создания контента. Стимулирует гостей делиться фото в соцсетях (UGC).</p></div></div>
+                    <h5 class="gallery-group-title">Digital-материалы</h5>
+                    <div class="gallery-grid-digital"><div class="gallery-item"><img src="images/scuba-dig-1.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div><div class="gallery-item"><img src="images/scuba-dig-2.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div><div class="gallery-item"><img src="images/scuba-dig-3.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div><div class="gallery-item"><img src="images/scuba-dig-4.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div></div>
+                    <div class="gallery-grid-story" style="margin-top: 20px;"><div class="gallery-item vertical"><img src="images/scuba-story.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для сторис</div></div><div class="gallery-item" style="grid-column: span 2;"><img src="images/scuba-map.jpg" onclick="openLightbox(this.src)" style="aspect-ratio: 16/9;"><div class="gallery-caption">Интерактивная карта ингредиентов</div></div></div>
+                    <h5 class="gallery-group-title">Типографика и POS</h5>
+                    <div class="gallery-grid-print"><div class="gallery-item vertical"><img src="images/scuba-menu-front.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Меню (Лицо)</div></div><div class="gallery-item vertical"><img src="images/scuba-menu-back.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Меню (Оборот)</div></div><div class="gallery-item vertical"><img src="images/scuba-poster-reg.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Афиша</div></div><div class="gallery-item vertical"><img src="images/scuba-poster-ny.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Афиша (НГ)</div></div><div class="gallery-item"><img src="images/scuba-table-tent.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Тейбл-тент</div></div></div>
+                    <h5 class="gallery-group-title">Бренд-материалы</h5>
+                    <div class="gallery-grid-story"><div class="gallery-item"><img src="images/scuba-font.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Шрифтовая пара</div></div><div class="gallery-item"><img src="images/scuba-colors.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Цветовая палитра</div></div><div class="gallery-item"><img src="images/scuba-logo-asset.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Логотип</div></div></div>
+                </div>
+
+                <div class="project-section">
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">7. Результаты и Аналитика</h4>
+                    <div class="analytics-container">
+                        <div class="charts-col">
+                            <h5 style="margin-bottom:20px;">Рост показателей (KPI)</h5>
+                            <div class="growth-chart-item"><div class="chart-labels"><span>Явка гостей</span><span>92%</span></div><div class="chart-bar-container"><div class="chart-bar-fill" style="width: 92%; background: #2563eb;"></div></div></div>
+                            <div class="growth-chart-item"><div class="chart-labels"><span>Рост доп. продаж</span><span>+12%</span></div><div class="chart-bar-container"><div class="chart-target-line" style="left: 20%;"></div><div class="chart-bar-fill" style="width: 12%; background: #059669;"></div></div><div class="target-label">Цель: +20%</div></div>
+                            <div class="growth-chart-item"><div class="chart-labels"><span>Вовлеченность (ER)</span><span>7.5%</span></div><div class="chart-bar-container"><div class="chart-bar-fill" style="width: 75%; max-width: 100%; background: #f59e0b;"></div></div></div>
+                        </div>
+                        <div class="donut-wrapper"><h5 style="margin-bottom:20px;">Методы вовлечения</h5><div class="donut-chart"></div><ul class="pie-legend"><li><div class="dot" style="background: #1e3a8a;"></div>Интерактив с Шефом</li><li><div class="dot" style="background: #0ea5e9;"></div>Сенсорная зона</li><li><div class="dot" style="background: #059669;"></div>Эксклюзивный контент</li></ul></div>
+                    </div>
+                    <div style="margin-top: 30px; background: #e0f2fe; padding: 20px; border-radius: 12px;"><h5 style="color: #0369a1;">Итог:</h5><p style="color: #0c4a6e; font-size: 0.95rem;">Анализ количественных и качественных метрик подтвердил высокую эффективность анонсов (92% явка). Несмотря на то, что рост доп. продаж (+12%) не достиг целевого показателя (+20%), общий уровень вовлеченности (ER 7.5%) соответствует ожиданиям для премиум-сегмента. В качестве оптимизации лекционный модуль был заменен на интерактив с Шефом, что усилило динамику ивента.</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-mamkids" class="modal-overlay" onclick="closeModal(event, 'modal-mamkids')">
+        <div class="modal-window">
+            <span class="close-btn" onclick="closeModalBtn('modal-mamkids')">&times;</span>
+            <div class="project-header" style="background: #c5a890;">
+                <div class="gradient-blob blob-nude-1"></div><div class="gradient-blob blob-nude-2"></div><div class="gradient-blob blob-nude-3"></div><div class="gradient-blob blob-nude-4"></div><div class="noise-overlay"></div>
+                <span class="header-tag-white">Branding</span>
+                <h2 style="position:relative;z-index:10;">MAMKIDS: Логобук</h2>
+                <p style="position:relative;z-index:10;">Разработка айдентики для бренда одежды новорожденных.</p>
+            </div>
+            <div class="project-body">
+                <div class="project-section"><h4 class="section-headline" style="border-left-color: #D4B499; color: var(--text-dark);">1. Бриф на разработку</h4><div class="table-wrapper"><table class="brief-table"><tr><td class="brief-label" style="color:#D4B499">Компания</td><td class="brief-content">ООО «МамКидс»</td></tr><tr><td class="brief-label" style="color:#D4B499">Продукт</td><td class="brief-content">Экологичная оверсайз одежда для малышей и беременных мам. Миссия: предоставление комфорта и единства с природой.</td></tr><tr><td class="brief-label" style="color:#D4B499">ЦА</td><td class="brief-content">1. Девушки 20-40 лет, ценящие стиль и комфорт.<br>2. Семейные пары, подбирающие интерьер (кроватки, вешалки).</td></tr><tr><td class="brief-label" style="color:#D4B499">УТП</td><td class="brief-content">Экологичность, оверсайз-фасоны, природные оттенки.</td></tr><tr><td class="brief-label" style="color:#D4B499">Стиль</td><td class="brief-content">Минимализм, скандинавский стиль (дерево, камень), бежевые/пастельные тона. Псевдообъёмные элементы.</td></tr><tr><td class="brief-label" style="color:#D4B499">Конкуренты</td><td class="brief-content">Детский Мир, Sela Moms & Monsters, Gloria Jeans, RE.</td></tr><tr><td class="brief-label" style="color:#D4B499">Ожидание</td><td class="brief-content">Логотип должен вызывать доверие, подчеркивать актуальность и не выглядеть «дешево».</td></tr></table></div></div>
+                <div class="project-section"><h4 class="section-headline" style="border-left-color: #D4B499; color: var(--text-dark);">2. Страницы Логобука</h4><div class="logobook-grid"><img src="images/mamkids-page-1.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 1"><img src="images/mamkids-page-2.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 2"><img src="images/mamkids-page-3.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 3"><img src="images/mamkids-page-4.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 4"><img src="images/mamkids-page-5.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 5"><img src="images/mamkids-page-6.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 6"><img src="images/mamkids-page-7.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 7"><img src="images/mamkids-page-8.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 8"><img src="images/mamkids-page-9.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 9"><img src="images/mamkids-page-10.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 10"></div></div>
+                <div class="project-section"><h4 class="section-headline" style="border-left-color: #D4B499; color: var(--text-dark);">3. Элементы айдентики</h4><div class="elements-grid"><div class="element-card"><img src="images/mamkids-vizitka-front.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Визитка Лицо"><div class="element-caption">Визитка (Лицо)</div></div><div class="element-card"><img src="images/mamkids-vizitka-back.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Визитка Оборот"><div class="element-caption">Визитка (Оборот)</div></div><div class="element-card"><img src="images/mamkids-calendar.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Календарь"><div class="element-caption">Календарь</div></div><div class="element-card"><img src="images/mamkids-logo-vert.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Лого Вертикальный"><div class="element-caption">Лого (Вертикальный)</div></div><div class="element-card"><img src="images/mamkids-logo-horiz.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Лого Горизонтальный"><div class="element-caption">Лого (Горизонтальный)</div></div><div class="element-card"><img src="images/mamkids-moodboard.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Мудборд"><div class="element-caption">Мудборд</div></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-vk" class="modal-overlay" onclick="closeModal(event, 'modal-vk')">
+        <div class="modal-window">
+            <span class="close-btn" onclick="closeModalBtn('modal-vk')">&times;</span>
+            <div class="project-header" style="background: #003366;">
+                <div class="gradient-blob blob-vk-1"></div><div class="gradient-blob blob-vk-2"></div><div class="gradient-blob blob-vk-3"></div><div class="gradient-blob blob-vk-4"></div><div class="noise-overlay"></div>
+                <span class="header-tag-white">Targeting</span>
+                <h2 style="position:relative;z-index:10;">КРАФТ</h2>
+                <p style="position:relative;z-index:10;">Кейс продвижения кондитерской «КРАФТ».</p>
+            </div>
+            <div class="project-body">
+                <div class="project-section"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">1. Техническое задание</h4><div class="table-wrapper"><table class="brief-table"><tr><td class="vk-brief-label">Компания</td><td class="brief-content">Кондитерская «КРАФТ»</td></tr><tr><td class="vk-brief-label">Продукт</td><td class="brief-content">Авторские шоколадные букеты и наборы подарков ручной работы.</td></tr><tr><td class="vk-brief-label">ЦА</td><td class="brief-content">Молодые пары, офисные работники, мужчины, ищущие оригинальный подарок.</td></tr><tr><td class="vk-brief-label">УТП</td><td class="brief-content">Оригинальная рецептура, индивидуальный подход, уникальная упаковка.</td></tr><tr><td class="vk-brief-label">Цель</td><td class="brief-content">Привлечение заявок и продаж через VK Реклама (поиск и тестирование сегментов).</td></tr></table></div></div>
+                <div class="project-section"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">2. Сегмент: Молодые пары (20-25)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong> Акцент на «оригинальность» и «эмоциональность» подарка (шоколадные букеты как альтернатива цветам). Подчеркивание ценности, а не цены.</li><li><strong>Настройки:</strong> Пол: Мужской и Женский. Возраст: 20–25 лет. Гео: Екатеринбург, радиус 5 км от точки продаж.</li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Подарки (часто)</li><li>Романтика и отношения</li><li>Студенческие сообщества</li><li>Конкуренты (Цветы, подарки)</li></ul><span style="font-size: 0.9em; color: var(--text-grey);">*Выставлены ставки по CPC для максимального охвата.</span></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">2.1%</div><div class="vk-stat-label">CTR (Выше среднего)</div></div><div><div class="vk-stat-val">9₽</div><div class="vk-stat-label">CPC (Отличная цена)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-1.jpg" alt="Образец объявления 1"></div></div></div>
+                <div class="project-section"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">3. Сегмент: Офисные работники (25-50)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong> Позиционирование как «готовое, статусное решение» для корпоративных подарков и подарков коллегам. Экономия времени.</li><li><strong>Настройки:</strong> Пол: Мужской и Женский. Возраст: 25–50 лет (максимальная платежеспособность). Гео: Бизнес-центры в пределах Садового кольца.</li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Бизнес</li><li>HR/Рекрутинг</li><li>Подарки и праздники</li><li>Деловые мероприятия</li></ul><span style="font-size: 0.9em; color: var(--text-grey);">*Использован текстовый креатив с акцентом на "Коллегам и Партнерам".</span></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">1.8%</div><div class="vk-stat-label">CTR (Средний)</div></div><div><div class="vk-stat-val">20₽</div><div class="vk-stat-label">CPC (Выше, из-за конкуренции)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-2.jpg" alt="Образец объявления 2"></div></div></div>
+                <div class="project-section"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">4. Сегмент: Парни/Мужчины (23-30)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong> Прямое обращение. Решение мужской проблемы «что подарить, чтобы точно понравилось». Использован триггер: «Сделай ее счастливой».</li><li><strong>Настройки:</strong> Пол: Мужской. Возраст: 23–30 лет. Гео: Екатеринбург и города-спутники (Первоуральск, Верхняя Пышма). <span style="font-weight: 600;">Важно:</span> При настройке анкеты в VK Рекламе выбран мужской род.</li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Знакомства</li><li>Отношения</li><li>Поиск подарков</li><li>Узконаправленный таргетинг на Подписчиков пабликов о знакомствах/пикапе</li></ul></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">3.5%</div><div class="vk-stat-label">CTR (Лидер)</div></div><div><div class="vk-stat-val">7₽</div><div class="vk-stat-label">CPC (Самый низкий)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-3.jpg" alt="Образец объявления 3"></div></div></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModalBtn(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                // Reset scroll position for the modal window
+                const modalWindow = document.querySelector(`#${modalId} .modal-window`);
+                if (modalWindow) {
+                    modalWindow.scrollTop = 0;
+                }
+            }, 300);
+        }
+        function closeModal(event, modalId) {
+            if (event.target.id === modalId) closeModalBtn(modalId);
+        }
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lightbox.style.display = 'flex';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
