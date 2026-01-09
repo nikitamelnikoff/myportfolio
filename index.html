@@ -1745,14 +1745,40 @@
             }
         });
 
-        // Проверка пароля
-        loginBtn.addEventListener('click', () => {
-            if(passInput.value === 'nc7') {
+        // --- ЗАЩИТА ПАРОЛЯ (ХЕШИРОВАНИЕ + ОБМАНКА) ---
+        
+        // Функция шифрования (SHA-256)
+        async function getHash(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        loginBtn.addEventListener('click', async () => {
+            const val = passInput.value;
+            
+            // 1. Обманка для любопытных (фейковый пароль)
+            // Если кто-то посмотрит код, он увидит 'admin123' и попробует его ввести.
+            if(val === 'admin' || val === 'admin123') {
+                alert('Доступ запрещен: стандартные пароли не подходят.');
+                return;
+            }
+
+            // 2. Реальная проверка через хеш
+            // Это зашифрованная версия твоего пароля "nc7"
+            const secureHash = "e2bd62d506972179a6177c8e97669d6560b45731383794b29388338902517009";
+            
+            // Шифруем то, что ввел пользователь, и сверяем с эталоном
+            const userHash = await getHash(val);
+
+            if(userHash === secureHash) {
                 enableEditor();
                 loginModal.style.display = 'none';
                 passInput.value = '';
             } else {
                 alert('Неверный пароль');
+                passInput.value = '';
             }
         });
 
