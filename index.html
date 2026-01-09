@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="theme-color-meta" name="theme-color" content="#022c22">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Никита Мельников | Digital Portfolio</title>
     
     <!-- FAVICON (Значок сайта) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23059669'/><text x='50' y='53' dominant-baseline='central' text-anchor='middle' font-size='65' fill='white' font-family='sans-serif' font-weight='800'>N</text></svg>">
 
-    <!-- Подключение современного шрифта Manrope -->
+    <!-- Подключение современного шрифта Onest -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23059669'/><text x='50' y='53' dominant-baseline='central' text-anchor='middle' font-size='65' fill='white' font-family='sans-serif' font-weight='800'>N</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,24 +40,29 @@
             --card-hover-shadow: 0 25px 60px rgba(0,0,0,0.12);
         }
 
+        /* Базовый сброс */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
+        /* Плавная прокрутка для всего сайта */
+        html { scroll-behavior: smooth; }
+
         body {
-            /* Onest - современный, умный, "дорогой" шрифт */
+            /* Onest - основной шрифт для всего сайта */
             font-family: 'Onest', sans-serif;
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
-            font-weight: 300; /* Делаем основной текст легким и воздушным */
-            -webkit-font-smoothing: antialiased;
+            font-weight: 300; /* Light: делает текст воздушным и эстетичным */
+            -webkit-font-smoothing: antialiased; /* Сглаживание как на Mac */
         }
 
+        /* Заголовки: строгие, современные, без лишней жирности */
         h1, h2, h3, h4, h5 { 
             font-family: 'Onest', sans-serif;
-            font-weight: 500; /* Заголовки строгие, но не жирные */
-            line-height: 1.2; 
-            letter-spacing: -0.02em; /* Плотная верстка как у топ-брендов */
+            font-weight: 500; /* Medium вместо Bold */
+            line-height: 1.15; 
+            letter-spacing: -0.02em; /* Плотная "дорогая" верстка */
             color: var(--text-dark); 
         }
 
@@ -63,52 +70,22 @@
             font-weight: 600; /* Главный заголовок чуть плотнее */
             letter-spacing: -0.03em; 
         }
+
+        /* Обновляем шрифт в специфических элементах, чтобы не осталось старого */
+        .hero-desc, .btn, .role-pill, .quote-container, .word, .brief-content, .contact-value {
+            font-family: 'Onest', sans-serif;
+        }
         
-        /* Исправление описания в шапке (делаем тоньше) */
+        /* Делаем описание в шапке более тонким и стильным */
         .hero-desc {
             font-weight: 300;
-            color: var(--text-dark);
-            font-size: 1.3rem; 
-            margin-bottom: 40px; 
-            opacity: 0.95; 
-            max-width: 90%; 
-            line-height: 1.5;
-        }
-        
-        /* Исправление для кнопок в шапке */
-        .btn {
-             font-family: 'Onest', sans-serif;
-             font-weight: 500; /* Аккуратный вес текста кнопок */
-             letter-spacing: 0;
-        }
-        
-        .role-pill {
-            font-family: 'Onest', sans-serif;
-            letter-spacing: 1px;
-            font-weight: 500;
+            opacity: 0.95;
         }
 
+        /* Летающие слова на фоне */
         .word { 
-            position: absolute; color: #fff; font-weight: 600; 
-            text-transform: uppercase; letter-spacing: 2px; 
-            font-size: 1.2rem; opacity: 0; 
-            animation: fadeWord 10s infinite ease-in-out; 
-            font-family: 'Onest', sans-serif; 
-        }
-
-        .quote-container { 
-            background: var(--purple-light); 
-            border-left: 4px solid var(--purple-main); 
-            padding: 25px; 
-            border-radius: 8px; 
-            font-family: 'Onest', sans-serif; 
-            margin-bottom: 25px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02); 
-            font-size: 1rem; 
-            line-height: 1.6; 
-            color: var(--text-dark); 
-            font-style: italic; 
-            font-weight: 400;
+            font-weight: 600; 
+            letter-spacing: 2px;
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 10; }
@@ -972,8 +949,118 @@
     .contact-link-card:hover {
         background: rgba(255, 255, 255, 0.95) !important;
     }
+    /* ============================================== */
+    /* === МОБИЛЬНАЯ АДАПТАЦИЯ v3.0 (FINAL) === */
+    /* ============================================== */
+    
+    @media (max-width: 900px) {
+        
+        /* 1. ХЕДЕР И ОТСТУПЫ */
+        header {
+            padding-bottom: 120px !important; /* Место для кнопок */
+            background: #022c22; /* Гарантия зеленого фона */
+        }
+        
+        /* Принудительно белый текст в хедере */
+        .header-grid h1, .header-grid p, .header-grid span {
+            color: #ffffff !important;
+        }
+
+        /* 2. КАРТИНКИ (СТРОГОЕ ОГРАНИЧЕНИЕ) */
+        /* Галерея: 2 колонки, квадратные фото */
+        .gallery-grid-digital, .gallery-grid-story, .gallery-modal-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
+        }
+        
+        /* Ограничение высоты фото, чтобы не занимали весь экран */
+        .gallery-item img, .gallery-modal-item img {
+            height: 180px !important; /* Фиксированная высота */
+            width: 100% !important;
+            object-fit: cover !important;
+        }
+        
+        /* Логотипы холдинга */
+        .holding-logo-box { height: auto !important; padding: 20px !important; }
+
+        /* 3. ГРАФИК SCUBA (РЕМОНТ) */
+        /* Делаем поле графика ВЫСОКИМ, чтобы всем хватило места */
+        .project-section > div[style*="position: relative; height: 300px"] {
+            height: 480px !important; /* Увеличили высоту */
+            margin-top: 40px !important;
+            background: #f8fafc !important;
+            border: 1px solid #e2e8f0 !important;
+        }
+
+        /* Подписи осей */
+        .project-section > div > div[style*="font-size: 0.8rem"] {
+            font-size: 0.65rem !important;
+            color: #94a3b8 !important;
+        }
+
+        /* --- ТОЧКИ (РАССТАНОВКА) --- */
+        
+        /* Конкурент 1 (Верх Лево) */
+        .project-section > div > div[style*="top: 35%"] {
+            top: 15% !important; 
+            left: 5% !important;
+        }
+        
+        /* Конкурент 2 (Верх Право) */
+        .project-section > div > div[style*="top: 15%"] {
+            top: 25% !important; 
+            left: auto !important; right: 5% !important; text-align: right;
+        }
+
+        /* SCUBA (Низ Центр) - САМОЕ ВАЖНОЕ */
+        .project-section > div > div[style*="bottom: 30%"] {
+            bottom: auto !important; /* Отменяем bottom */
+            top: 75% !important; /* Ставим жестко в нижней четверти */
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 150px !important;
+            text-align: center;
+        }
+        
+        /* Анимация пульсации для Scuba */
+        .project-section > div > div[style*="bottom: 30%"] > div {
+            margin: 0 auto 5px auto !important; /* Центрируем кружок */
+        }
+        
+        /* 4. ТАБЛИЦЫ */
+        .table-wrapper { margin-right: -20px; padding-right: 20px; }
+        .table-wrapper::after {
+            content: '← Листать влево-вправо →';
+            display: block; text-align: center; font-size: 0.75rem; 
+            color: #94a3b8; margin-top: 8px; font-family: 'Onest', sans-serif;
+        }
+    }
     </style>
 </head>
+<script>
+    // --- ДИНАМИЧЕСКИЙ СТАТУС БАР ---
+    window.addEventListener('scroll', function() {
+        const meta = document.getElementById('theme-color-meta');
+        const content = document.querySelector('.content-wrapper');
+        
+        if (!meta || !content) return;
+
+        // Получаем позицию белого блока относительно верха экрана
+        const rect = content.getBoundingClientRect();
+        
+        // Порог срабатывания (чуть раньше, чем блок коснется верха, для плавности)
+        const triggerPoint = 50; 
+
+        // Если белый блок достиг верха экрана
+        if (rect.top <= triggerPoint) {
+            // Ставим БЕЛЫЙ цвет (значки станут черными автоматически)
+            meta.setAttribute('content', '#ffffff');
+        } else {
+            // Возвращаем ЗЕЛЕНЫЙ цвет (значки станут белыми)
+            meta.setAttribute('content', '#022c22');
+        }
+    });
+</script>
 <body>
 
     <div id="lightbox" onclick="closeLightbox()">
