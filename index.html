@@ -9,16 +9,23 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23059669'/><text x='50' y='53' dominant-baseline='central' text-anchor='middle' font-size='65' fill='white' font-family='sans-serif' font-weight='800'>N</text></svg>">
 
     <!-- Подключение современного шрифта Manrope -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23059669'/><text x='50' y='53' dominant-baseline='central' text-anchor='middle' font-size='65' fill='white' font-family='sans-serif' font-weight='800'>N</text></svg>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
+        /* Плавная прокрутка для эстетики */
+        html {
+            scroll-behavior: smooth;
+        }
+
         :root {
             --bg-light: #ffffff;
             --text-dark: #1d1d1f;
             --text-grey: #6e6e73;
-            --accent-color: #059669; /* General Green */
+            --accent-color: #059669; 
             --accent-blue: #0891b2;
             --danger-color: #e11d48;
             
@@ -34,25 +41,76 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            font-family: 'Manrope', sans-serif;
+            /* Onest - современный, умный, "дорогой" шрифт */
+            font-family: 'Onest', sans-serif;
             background-color: var(--bg-light);
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
-            font-weight: 400;
+            font-weight: 300; /* Делаем основной текст легким и воздушным */
             -webkit-font-smoothing: antialiased;
         }
 
         h1, h2, h3, h4, h5 { 
-            font-family: 'Manrope', sans-serif;
-            font-weight: 700;
+            font-family: 'Onest', sans-serif;
+            font-weight: 500; /* Заголовки строгие, но не жирные */
             line-height: 1.2; 
-            letter-spacing: -0.03em;
+            letter-spacing: -0.02em; /* Плотная верстка как у топ-брендов */
             color: var(--text-dark); 
         }
 
-        h1 { font-weight: 800; letter-spacing: -0.04em; }
+        h1 { 
+            font-weight: 600; /* Главный заголовок чуть плотнее */
+            letter-spacing: -0.03em; 
+        }
         
+        /* Исправление описания в шапке (делаем тоньше) */
+        .hero-desc {
+            font-weight: 300;
+            color: var(--text-dark);
+            font-size: 1.3rem; 
+            margin-bottom: 40px; 
+            opacity: 0.95; 
+            max-width: 90%; 
+            line-height: 1.5;
+        }
+        
+        /* Исправление для кнопок в шапке */
+        .btn {
+             font-family: 'Onest', sans-serif;
+             font-weight: 500; /* Аккуратный вес текста кнопок */
+             letter-spacing: 0;
+        }
+        
+        .role-pill {
+            font-family: 'Onest', sans-serif;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .word { 
+            position: absolute; color: #fff; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 2px; 
+            font-size: 1.2rem; opacity: 0; 
+            animation: fadeWord 10s infinite ease-in-out; 
+            font-family: 'Onest', sans-serif; 
+        }
+
+        .quote-container { 
+            background: var(--purple-light); 
+            border-left: 4px solid var(--purple-main); 
+            padding: 25px; 
+            border-radius: 8px; 
+            font-family: 'Onest', sans-serif; 
+            margin-bottom: 25px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02); 
+            font-size: 1rem; 
+            line-height: 1.6; 
+            color: var(--text-dark); 
+            font-style: italic; 
+            font-weight: 400;
+        }
+
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 10; }
 
         /* --- HEADER ANIMATIONS --- */
@@ -560,16 +618,16 @@
         .gallery-item.vertical img { aspect-ratio: 9/16; }
         .gallery-caption { font-size: 0.75rem; color: var(--text-grey); margin-top: 5px; text-align: center; font-weight: 600; }
         .gallery-modal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
-        .gallery-modal-item { break-inside: avoid; cursor: zoom-in; transition: transform 0.2s; }
+        .gallery-modal-item { break-inside: avoid; cursor: zoom-in; transition: transform 0.2s; position: relative; }
         .gallery-modal-item:hover { transform: scale(1.02); }
         .gallery-modal-item img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 8px; display: block; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
         .logobook-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; padding: 30px; background: #f9fafb; border-radius: 12px; }
-        .logobook-page { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: zoom-in; transition: transform 0.3s; background: #fff; }
+        .logobook-page { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: zoom-in; transition: transform 0.3s; background: #fff; position: relative; }
         .logobook-page:hover { transform: scale(1.02); z-index: 2; }
 
         .elements-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; align-items: stretch; }
-        .element-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 1px solid #eee; display: flex; flex-direction: column; }
+        .element-card { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03); border: 1px solid #eee; display: flex; flex-direction: column; position: relative; }
         .element-card-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; cursor: zoom-in; border-bottom: 1px solid #eee; }
         .element-caption { padding: 15px; text-align: center; font-size: 0.9rem; color: #666; font-weight: 600; background: #fafafa; flex-grow: 1; display: flex; align-items: center; justify-content: center; }
 
@@ -632,8 +690,104 @@
         .skill-pill span.main { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
         .skill-pill span.sub { font-size: 0.8rem; color: rgba(255,255,255,0.85); font-weight: 400; }
 
-        footer { padding: 40px 0; text-align: center; color: var(--text-grey); font-size: 0.9rem; }
+        footer { padding: 40px 0; text-align: center; color: var(--text-grey); font-size: 0.9rem; position: relative; }
         .footer-adobe { margin-top: 40px; text-align: center; font-size: 0.9rem; color: #666; background: #f5f5f5; padding: 15px; border-radius: 8px; }
+
+        /* EDITOR STYLES */
+        .editor-mode [contenteditable="true"] {
+            cursor: text;
+        }
+        /* No outline as requested */
+        .editor-mode [contenteditable="true"]:focus {
+            outline: none;
+        }
+        
+        /* Add Photo Button (Green Plus) */
+        .add-photo-btn {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border: 2px dashed var(--accent-color);
+            border-radius: 12px;
+            cursor: pointer;
+            min-height: 200px;
+            color: var(--accent-color);
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .editor-mode .add-photo-btn { display: flex; }
+        .add-photo-btn:hover { background: #ecfdf5; transform: scale(1.02); }
+        .add-photo-btn span { font-size: 3rem; line-height: 1; font-weight: 700; color: #059669; }
+        
+        /* Delete Button (Green Cross) */
+        .delete-btn {
+            display: none;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            background: #059669; /* Green background */
+            color: #fff;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-family: sans-serif;
+            font-size: 1rem;
+            line-height: 1;
+            border: 2px solid #fff;
+        }
+        
+        /* Show delete button on hover in editor mode */
+        .editor-mode .gallery-item:hover .delete-btn,
+        .editor-mode .gallery-modal-item:hover .delete-btn,
+        .editor-mode .logobook-page:hover + .delete-btn,
+        .editor-mode .element-card:hover .delete-btn,
+        .editor-mode .card:hover .delete-btn,
+        .editor-mode .project-section:hover > .delete-btn,
+        .editor-mode .folder-card:hover .delete-btn,
+        .editor-mode .skill-pill:hover .delete-btn,
+        .editor-mode .event-card:hover .delete-btn,
+        .editor-mode .swot-card:hover .delete-btn,
+        .editor-mode .zone-card:hover .delete-btn,
+        .editor-mode .vk-segment-grid:hover .delete-btn,
+        .editor-mode .text-block-wrapper:hover > .delete-btn {
+            display: flex;
+        }
+
+        /* Admin UI */
+        #admin-trigger-footer { 
+            position: absolute; 
+            bottom: 20px; 
+            right: 20px; 
+            opacity: 0.1; 
+            cursor: pointer; 
+            font-size: 12px; 
+            transition: opacity 0.3s; 
+        }
+        #admin-trigger-footer:hover { opacity: 1; }
+        
+        #admin-panel {
+            position: fixed; bottom: 20px; right: 20px; background: #1d1d1f; color: #fff; padding: 15px 25px; border-radius: 50px; z-index: 9999; display: none; align-items: center; gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        #admin-panel button { background: #059669; border: none; padding: 8px 15px; border-radius: 20px; color: #fff; cursor: pointer; font-weight: 600; }
+        #admin-panel button:hover { background: #047857; }
+        
+        /* Modal for password */
+        #admin-login-modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; align-items:center; justify-content:center; }
+        .login-box { background:#fff; padding:30px; border-radius:12px; display:flex; flex-direction:column; gap:10px; width: 300px; text-align: center; }
+        .login-box input { padding:10px; border:1px solid #ccc; border-radius:6px; font-size: 1rem; }
+        .login-box button { padding:10px; background:#1d1d1f; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight: 600; }
+        .login-box button:hover { opacity: 0.9; }
+
+        /* Generic Text Block Wrapper for Delete Button Positioning */
+        .text-block-wrapper { position: relative; }
 
         /* --- COMPREHENSIVE MOBILE RESPONSIVENESS --- */
         @media (max-width: 900px) {
@@ -702,6 +856,122 @@
             .gallery-grid-digital { grid-template-columns: repeat(3, 1fr); }
             .btn-group { flex-direction: row; }
         }
+    /* ========================================= */
+    /* === НОВЫЙ СТИЛЬ: APPLE LIQUID GLASS 26 == */
+    /* ========================================= */
+
+    /* 1. Стеклянные Кнопки */
+    .btn { 
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1) !important; /* Принудительно меняем фон */
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.4); 
+        border-top: 1px solid rgba(255, 255, 255, 0.6);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff; 
+        padding: 0 35px;
+        height: 55px; 
+        text-decoration: none; 
+        border-radius: 100px; 
+        font-weight: 500; 
+        font-size: 0.95rem; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.1);
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+        cursor: pointer;
+        text-align: center;
+        min-width: 200px;
+        letter-spacing: 0.3px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn:hover { 
+        transform: translateY(-3px) scale(1.02); 
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2), inset 0 0 20px rgba(255,255,255,0.2); 
+        background: rgba(255, 255, 255, 0.2) !important; 
+        border-color: rgba(255, 255, 255, 0.8);
+        color: #fff; 
+    }
+
+    /* 2. Стеклянная плашка "Портфолио" */
+    .role-pill { 
+        background: rgba(255, 255, 255, 0.15) !important; 
+        backdrop-filter: blur(15px) saturate(160%);
+        -webkit-backdrop-filter: blur(15px) saturate(160%);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border-radius: 50px;
+    }
+
+    /* 3. Карточки проектов (Морозное стекло) */
+    .card { 
+        background: rgba(255, 255, 255, 0.65) !important; 
+        backdrop-filter: blur(20px) saturate(120%);
+        -webkit-backdrop-filter: blur(20px) saturate(120%);
+        border: 1px solid rgba(255, 255, 255, 0.8) !important;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.05); 
+        border-radius: 24px;
+    }
+    .card:hover { 
+        background: rgba(255, 255, 255, 0.85) !important; 
+        box-shadow: 0 30px 60px rgba(0,0,0,0.12); 
+        border-color: #fff !important;
+    }
+
+    /* 4. Папки галереи */
+    .folder-card {
+        background: rgba(255, 255, 255, 0.5) !important;
+        backdrop-filter: blur(25px) saturate(150%);
+        -webkit-backdrop-filter: blur(25px) saturate(150%);
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .folder-card:hover {
+        background: rgba(255, 255, 255, 0.85) !important;
+        box-shadow: 0 25px 50px rgba(5, 150, 105, 0.15);
+    }
+
+    /* 5. Модальные окна (Глубокое стекло) */
+    .modal-overlay {
+        background: rgba(29, 29, 31, 0.3) !important; /* Размытый темный фон */
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+    .modal-window {
+        background: rgba(255, 255, 255, 0.8) !important;
+        backdrop-filter: blur(40px) saturate(180%);
+        -webkit-backdrop-filter: blur(40px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.5) !important;
+        box-shadow: 0 50px 100px rgba(0,0,0,0.25);
+        border-radius: 32px;
+    }
+
+    /* 6. Кнопки закрытия */
+    .close-btn {
+        background: rgba(0,0,0,0.05);
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .close-btn:hover {
+        background: rgba(0,0,0,0.1);
+    }
+
+    /* 7. Контакты */
+    .contact-link-card {
+        background: rgba(255, 255, 255, 0.6) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba(255,255,255,0.5) !important;
+        border-radius: 24px;
+    }
+    .contact-link-card:hover {
+        background: rgba(255, 255, 255, 0.95) !important;
+    }
     </style>
 </head>
 <body>
@@ -836,6 +1106,9 @@
         <div class="container">
             <p style="font-weight: 600; color: var(--text-dark); margin-bottom: 10px;">nikitamelnikoff@mail.ru</p>
             <p>© 2026 Никита Мельников</p>
+            <div id="admin-trigger-footer" title="Вход в режим редактора">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
         </div>
     </footer>
 
@@ -1312,21 +1585,40 @@
             </div>
         </div>
     </div>
+    
+    <!-- ADMIN UI MODALS -->
+    <div id="admin-login-modal">
+        <div class="login-box">
+            <h3 style="margin-bottom:10px; color:#1d1d1f;">Вход в редактор</h3>
+            <input type="password" id="admin-pass" placeholder="Пароль">
+            <button id="login-btn">Войти</button>
+            <button onclick="document.getElementById('admin-login-modal').style.display='none'" style="background:transparent; color:#999; margin-top:5px; font-weight:400;">Отмена</button>
+        </div>
+    </div>
 
-    <script>
+    <div id="admin-panel">
+        <span style="font-weight:bold; font-size:0.9rem;">Режим редактора</span>
+        <button onclick="saveChanges()">Сохранить изменения</button>
+        <button onclick="exitEditor()" style="background:#e11d48;">Выйти</button>
+    </div>
+
+<script>
+        // --- БАЗОВЫЕ ФУНКЦИИ (MODALS, LIGHTBOX) ---
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
+            if (!modal) return;
             modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('active'), 10);
             document.body.style.overflow = 'hidden';
         }
         function closeModalBtn(modalId) {
             const modal = document.getElementById(modalId);
+            if (!modal) return;
             modal.classList.remove('active');
             setTimeout(() => {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';
-                // Reset scroll position for the modal window
+                // Сброс скролла модалки
                 const modalWindow = document.querySelector(`#${modalId} .modal-window`);
                 if (modalWindow) {
                     modalWindow.scrollTop = 0;
@@ -1344,6 +1636,204 @@
         }
         function closeLightbox() {
             document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // --- ЛОГИКА РЕДАКТОРА И СОХРАНЕНИЯ ---
+        const trigger = document.getElementById('admin-trigger-footer');
+        const loginModal = document.getElementById('admin-login-modal');
+        const loginBtn = document.getElementById('login-btn');
+        const passInput = document.getElementById('admin-pass');
+        const adminPanel = document.getElementById('admin-panel');
+
+        // Открытие окна входа
+        trigger.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+            passInput.focus();
+        });
+
+        // Вход по Enter
+        passInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                loginBtn.click();
+            }
+        });
+
+        // Проверка пароля
+        loginBtn.addEventListener('click', () => {
+            if(passInput.value === 'nc7') {
+                enableEditor();
+                loginModal.style.display = 'none';
+                passInput.value = '';
+            } else {
+                alert('Неверный пароль');
+            }
+        });
+
+        // Включение режима редактора
+        function enableEditor() {
+            document.body.classList.add('editor-mode');
+            trigger.style.display = 'none';
+            adminPanel.style.display = 'flex';
+
+            // 1. Делаем тексты редактируемыми
+            const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, p, span, .brief-content, .gallery-caption, .folder-title, .folder-subtitle, td, li, .word, .contact-value, .contact-label, .logobook-page, .skill-pill, .usp-item, .element-caption');
+            textElements.forEach(el => {
+                // Избегаем редактирования контейнеров, только конечные элементы
+                if (el.children.length === 0 || (el.children.length === 1 && el.children[0].tagName === 'BR')) {
+                   el.setAttribute('contenteditable', 'true');
+                }
+            });
+
+            // 2. Добавляем кнопки добавления фото ("+")
+            const grids = document.querySelectorAll('.gallery-modal-grid, .gallery-grid-digital, .gallery-grid-story, .gallery-grid-print, .logobook-grid, .elements-grid, .brand-gallery');
+            grids.forEach(grid => {
+                if(!grid.querySelector('.add-photo-btn')) {
+                    const btn = document.createElement('div');
+                    btn.className = 'add-photo-btn';
+                    btn.innerHTML = '<span>+</span><div style="font-size:0.8rem; margin-top:10px; font-weight:600;">Добавить фото</div>';
+                    btn.onclick = function() { addPhotoToGrid(grid, btn); };
+                    grid.appendChild(btn);
+                }
+            });
+
+            // 3. Добавляем кнопки удаления ("x")
+            attachDeleteButtons();
+        }
+
+        // Функция прикрепления кнопок удаления
+        function attachDeleteButtons() {
+            const targets = document.querySelectorAll('.gallery-item, .gallery-modal-item, .logobook-page, .element-card, .card, .project-section, .contact-link-card, .vk-segment-grid, .folder-card, .skill-pill, .event-card, .swot-card, .zone-card');
+            
+            targets.forEach(el => {
+                // Убедимся, что позиционирование позволяет разместить кнопку
+                const computedStyle = window.getComputedStyle(el);
+                if(computedStyle.position === 'static') {
+                    el.style.position = 'relative';
+                }
+                
+                // Проверяем, нет ли уже кнопки, чтобы не дублировать
+                if(!el.querySelector('.delete-btn')) {
+                    const delBtn = document.createElement('div');
+                    delBtn.className = 'delete-btn';
+                    delBtn.innerHTML = '&times;'; 
+                    delBtn.title = 'Удалить';
+
+                    // Если это просто IMG (как в логобуке), кнопку нужно вставить рядом или обработать иначе.
+                    // Для упрощения, если это IMG, мы не добавляем кнопку (удаление через DevTools или обертку).
+                    // Но для большинства блоков это сработает.
+                    if(el.tagName === 'IMG') return; 
+
+                    delBtn.onclick = function(e) {
+                        e.stopPropagation(); 
+                        if(confirm('Удалить этот блок?')) {
+                            el.remove();
+                        }
+                    };
+                    el.appendChild(delBtn);
+                }
+            });
+        }
+
+        // Логика добавления фото
+        function addPhotoToGrid(grid, btn) {
+            let url = prompt('Введите ссылку на изображение:');
+            if(url === null) return;
+            if(!url) url = 'https://via.placeholder.com/600x600?text=New+Photo';
+            
+            const isLogobook = grid.classList.contains('logobook-grid');
+            let caption = '';
+            
+            if(!isLogobook) {
+                caption = prompt('Введите подпись для фото:');
+                if(caption === null) caption = 'Новое фото';
+            }
+
+            const isElement = grid.classList.contains('elements-grid');
+            const isModalGrid = grid.classList.contains('gallery-modal-grid');
+
+            let newEl;
+
+            if (isLogobook) {
+                newEl = document.createElement('img');
+                newEl.src = url;
+                newEl.className = 'logobook-page';
+                newEl.onclick = function() { openLightbox(url); };
+            } 
+            else if (isElement) {
+                newEl = document.createElement('div');
+                newEl.className = 'element-card';
+                newEl.innerHTML = `<img src="${url}" class="element-card-img" onclick="openLightbox(this.src)"><div class="element-caption" contenteditable="true">${caption}</div>`;
+            }
+            else {
+                newEl = document.createElement('div');
+                newEl.className = isModalGrid ? 'gallery-modal-item' : 'gallery-item';
+                newEl.innerHTML = `<img src="${url}" onclick="openLightbox(this.src)"><div class="gallery-caption" contenteditable="true">${caption}</div>`;
+            }
+
+            // Вставляем перед кнопкой "+"
+            grid.insertBefore(newEl, btn);
+            
+            // Сразу вешаем кнопку удаления на новый элемент
+            attachDeleteButtons();
+        }
+
+        // --- ГЛАВНАЯ ФУНКЦИЯ СОХРАНЕНИЯ (СКАЧИВАНИЯ) ---
+        function saveChanges() {
+            // 1. Создаем клон всего документа, чтобы не ломать текущую страницу очисткой
+            const clone = document.documentElement.cloneNode(true);
+
+            // 2. Очистка клона от служебных элементов редактора
+            
+            // Убираем класс режима редактора
+            clone.querySelector('body').classList.remove('editor-mode');
+
+            // Убираем атрибуты редактирования текста
+            const editables = clone.querySelectorAll('[contenteditable]');
+            editables.forEach(el => el.removeAttribute('contenteditable'));
+
+            // Удаляем кнопки "Добавить фото"
+            const addBtns = clone.querySelectorAll('.add-photo-btn');
+            addBtns.forEach(btn => btn.remove());
+
+            // Удаляем кнопки "Удалить"
+            const delBtns = clone.querySelectorAll('.delete-btn');
+            delBtns.forEach(btn => btn.remove());
+
+            // Скрываем админ-панель (возвращаем display: none)
+            const adminPanelClone = clone.querySelector('#admin-panel');
+            if(adminPanelClone) adminPanelClone.style.display = 'none';
+
+            // Возвращаем иконку входа в футер (если она была скрыта)
+            const triggerClone = clone.querySelector('#admin-trigger-footer');
+            if(triggerClone) triggerClone.style.display = 'block';
+
+            // 3. Формируем HTML файл
+            const htmlContent = "<!DOCTYPE html>\n" + clone.outerHTML;
+
+            // 4. Создаем Blob и ссылку для скачивания
+            const blob = new Blob([htmlContent], {type: "text/html"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            
+            // Генерируем имя файла с датой, чтобы не запутаться
+            const date = new Date();
+            const timestamp = `${date.getHours()}-${date.getMinutes()}`;
+            a.href = url;
+            a.download = `index_updated_${timestamp}.html`;
+            
+            document.body.appendChild(a);
+            a.click();
+            
+            // Чистим память
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function exitEditor() {
+            if(confirm('Выйти из режима редактора? Несохраненные изменения могут быть потеряны (если вы не скачали файл).')) {
+                // Перезагружаем страницу, чтобы сбросить все визуальные эффекты редактора
+                window.location.reload();
+            }
         }
     </script>
 
