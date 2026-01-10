@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
+<html lang="ru"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta id="theme-color-meta" name="theme-color" content="#022c22">
+    <meta id="theme-color-meta" name="theme-color" content="#ffffff">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Никита Мельников | Digital Portfolio</title>
     
     <!-- FAVICON (Значок сайта) -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23059669'/><text x='50' y='53' dominant-baseline='central' text-anchor='middle' font-size='65' fill='white' font-family='sans-serif' font-weight='800'>N</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;rect width='100' height='100' rx='25' fill='%23059669'/&gt;&lt;text x='50' y='53' dominant-baseline='central' text-anchor='middle' font-size='65' fill='white' font-family='sans-serif' font-weight='800'&gt;N&lt;/text&gt;&lt;/svg&gt;">
 
     <!-- Подключение современного шрифта Onest -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23059669'/><text x='50' y='53' dominant-baseline='central' text-anchor='middle' font-size='65' fill='white' font-family='sans-serif' font-weight='800'>N</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;rect width='100' height='100' rx='25' fill='%23059669'/&gt;&lt;text x='50' y='53' dominant-baseline='central' text-anchor='middle' font-size='65' fill='white' font-family='sans-serif' font-weight='800'&gt;N&lt;/text&gt;&lt;/svg&gt;">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&amp;display=swap" rel="stylesheet">
     
     <style>
         /* Плавная прокрутка для эстетики */
@@ -1035,8 +1034,152 @@
             color: #94a3b8; margin-top: 8px; font-family: 'Onest', sans-serif;
         }
     }
+    /* ========================================= */
+    /* === ПАНЕЛЬ РЕДАКТИРОВАНИЯ (LIQUID) === */
+    /* ========================================= */
+
+    .glass-toolbar {
+        position: fixed;
+        z-index: 10000;
+        /* Скрыта по умолчанию */
+        opacity: 0; 
+        pointer-events: none;
+        transform: translateY(10px) scale(0.95);
+        transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+        /* Стиль Apple Liquid Glass */
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(25px) saturate(180%);
+        -webkit-backdrop-filter: blur(25px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 
+            0 20px 50px rgba(0,0,0,0.15),
+            inset 0 0 0 1px rgba(255,255,255,0.2);
+        
+        padding: 8px 12px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .glass-toolbar.active {
+        opacity: 1;
+        pointer-events: all;
+        transform: translateY(0) scale(1);
+    }
+
+    /* Группы инструментов */
+    .tool-group {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        position: relative;
+    }
+    
+    /* Разделитель между группами */
+    .tool-group::after {
+        content: '';
+        width: 1px;
+        height: 20px;
+        background: rgba(0,0,0,0.1);
+        position: absolute;
+        right: -7px;
+    }
+    .tool-group:last-child::after, .tool-group:nth-last-child(2)::after { display: none; }
+
+    /* Поля ввода (Размер) */
+    #tool-size {
+        width: 50px;
+        background: rgba(0,0,0,0.05);
+        border: none;
+        border-radius: 8px;
+        padding: 6px;
+        text-align: center;
+        font-family: 'Onest', sans-serif;
+        font-weight: 600;
+        font-size: 0.9rem;
+        outline: none;
+        color: var(--text-dark);
+    }
+
+    /* Выбор веса (Select) */
+    #tool-weight {
+        background: rgba(0,0,0,0.05);
+        border: none;
+        border-radius: 8px;
+        padding: 6px 10px;
+        font-family: 'Onest', sans-serif;
+        font-size: 0.85rem;
+        outline: none;
+        cursor: pointer;
+        color: var(--text-dark);
+    }
+
+    /* Кнопки (B, I, U) */
+    .btn-group-tools button {
+        width: 32px;
+        height: 32px;
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: serif;
+        font-size: 1.1rem;
+        transition: 0.2s;
+        color: var(--text-dark);
+    }
+    .btn-group-tools button:hover {
+        background: rgba(0,0,0,0.05);
+    }
+    .btn-group-tools button.active-tool {
+        background: var(--accent-color);
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
+    }
+
+    /* Цветовой круг */
+    .color-wrapper {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        cursor: pointer;
+        position: relative;
+    }
+    #tool-color {
+        position: absolute;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        cursor: pointer;
+        border: none;
+        padding: 0;
+    }
+    
+    .tool-icon {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #999;
+        margin-right: 2px;
+    }
+    
+    .close-toolbar {
+        margin-left: 5px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: #999;
+        line-height: 1;
+    }
+    .close-toolbar:hover { color: #e11d48; }
+
+    /* Убираем стрелочки у input number */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; margin: 0; 
+    }
     </style>
-</head>
 <script>
     // --- ДИНАМИЧЕСКИЙ СТАТУС БАР ---
     window.addEventListener('scroll', function() {
@@ -1060,8 +1203,9 @@
             meta.setAttribute('content', '#022c22');
         }
     });
-</script>
-<body>
+</script></head>
+
+<body class="" style="overflow: auto;">
 
     <div id="lightbox" onclick="closeLightbox()">
         <img id="lightbox-img" src="" alt="Full view">
@@ -1084,7 +1228,7 @@
         <div class="container header-grid">
             <div class="text-part">
                 <span class="role-pill">ПОРТФОЛИО 2026</span>
-                <h1>Никита Мельников</h1>
+                <h1 style="color: rgb(0, 0, 0);"><span style="color: rgb(255, 255, 255);">Никита<span style="color: rgb(237, 222, 222);"> <span style="color: rgb(255, 255, 255);">Мельников</span></span></span><span style="color: rgb(237, 222, 222);"><span style="color: rgb(78, 78, 116);"></span></span><span style="color: rgb(78, 78, 116);"></span></h1>
                 <p class="hero-desc">Создаю визуальные стратегии и управляю репутацией брендов. От разработки логотипа до комплексного PR-продвижения и аналитики.</p>
             </div>
             <div class="photo-part">
@@ -1106,7 +1250,7 @@
             <h2 class="section-title">Готовые кейсы</h2>
             
             <div class="bento-grid">
-                <article class="card card-scuba" onclick="openModal('modal-scuba')">
+                <article class="card card-scuba" onclick="openModal('modal-scuba')" style="position: relative;">
                     <div class="card-image" style="background: url('images/scuba-cover.jpg');"></div>
                     <div class="card-info">
                         <span class="card-tag">Key Case Study</span>
@@ -1116,7 +1260,7 @@
                     <div class="card-btn">↗</div>
                 </article>
 
-                <article class="card card-mamkids" onclick="openModal('modal-mamkids')">
+                <article class="card card-mamkids" onclick="openModal('modal-mamkids')" style="position: relative;">
                     <div class="card-image" style="background: url('images/mamkids-logo.jpg'); background-color: #EADDCD; background-size: cover !important; background-position: center !important;"></div>
                     <div class="card-info">
                         <span class="card-tag">Branding</span>
@@ -1126,7 +1270,7 @@
                     <div class="card-btn">↗</div>
                 </article>
 
-                <article class="card card-texts" onclick="openModal('modal-texts')">
+                <article class="card card-texts" onclick="openModal('modal-texts')" style="position: relative;">
                     <div class="card-image" style="background: url('images/texts-cover.jpg'); background-color: #f3e8ff; background-position: center center !important; background-size: cover !important;"></div>
                     <div class="card-info">
                         <span class="card-tag" style="color: var(--accent-color);">Content Marketing</span>
@@ -1136,7 +1280,7 @@
                     <div class="card-btn">↗</div>
                 </article>
 
-                <article class="card card-vk" onclick="openModal('modal-vk')">
+                <article class="card card-vk" onclick="openModal('modal-vk')" style="position: relative;">
                     <div class="card-image" style="background: url('images/vk-cover.jpg');"></div>
                     <div class="card-info">
                         <span class="card-tag" style="color: var(--accent-color);">Targeting</span>
@@ -1150,16 +1294,16 @@
             <div class="skills-section">
                 <h3 style="text-align: center; margin-bottom: 30px;">Инструменты</h3>
                 <div class="skills-grid">
-                    <div class="skill-pill"><span class="main">Adobe Photoshop</span><span class="sub">Графический дизайн</span></div>
-                    <div class="skill-pill"><span class="main">Tilda Publishing</span><span class="sub">Веб-конструктор</span></div>
-                    <div class="skill-pill"><span class="main">SMM Strategy</span><span class="sub">SMM Стратегия</span></div>
-                    <div class="skill-pill"><span class="main">CJM Analysis</span><span class="sub">Карта пути клиента</span></div>
-                    <div class="skill-pill"><span class="main">Target Advertising</span><span class="sub">Таргетированная реклама</span></div>
-                    <div class="skill-pill"><span class="main">Copywriting</span><span class="sub">Копирайтинг</span></div>
-                    <div class="skill-pill"><span class="main">Yandex WordStat</span><span class="sub">Аналитика запросов</span></div>
-                    <div class="skill-pill"><span class="main">SWOT Analysis</span><span class="sub">Стратегический анализ</span></div>
-                    <div class="skill-pill"><span class="main">VK Ads</span><span class="sub">VK Реклама</span></div>
-                    <div class="skill-pill"><span class="main">Telegram Marketing</span><span class="sub">Маркетинг в Телеграм</span></div>
+                    <div class="skill-pill" style="position: relative;"><span class="main">Adobe Photoshop</span><span class="sub">Графический дизайн</span></div>
+                    <div class="skill-pill" style="position: relative;"><span class="main">Tilda Publishing</span><span class="sub">Веб-конструктор</span></div>
+                    <div class="skill-pill" style="position: relative;"><span class="main">SMM Strategy</span><span class="sub">SMM Стратегия</span></div>
+                    <div class="skill-pill" style="position: relative;"><span class="main">CJM Analysis</span><span class="sub">Карта пути клиента</span></div>
+                    <div class="skill-pill" style="position: relative;"><span class="main">Target Advertising</span><span class="sub">Таргетированная реклама</span></div>
+                    <div class="skill-pill" style="position: relative;"><span class="main">Copywriting</span><span class="sub">Копирайтинг</span></div>
+                    <div class="skill-pill" style="position: relative;"><span class="main">Yandex WordStat</span><span class="sub">Аналитика запросов</span></div>
+                    <div class="skill-pill" style="position: relative;"><span class="main">SWOT Analysis</span><span class="sub">Стратегический анализ</span></div>
+                    <div class="skill-pill" style="position: relative;"><span class="main">VK Ads</span><span class="sub">VK Реклама</span></div>
+                    <div class="skill-pill" style="position: relative;"><span class="main">Telegram Marketing</span><span class="sub">Маркетинг в Телеграм</span></div>
                 </div>
             </div>
         </div>
@@ -1193,15 +1337,15 @@
         <div class="container">
             <p style="font-weight: 600; color: var(--text-dark); margin-bottom: 10px;">nikitamelnikoff@mail.ru</p>
             <p>© 2026 Никита Мельников</p>
-            <div id="admin-trigger-footer" title="Вход в режим редактора">
+            <div id="admin-trigger-footer" title="Вход в режим редактора" style="display: block;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
             </div>
         </div>
     </footer>
 
-    <div id="modal-contact" class="modal-overlay" onclick="closeModal(event, 'modal-contact')">
+    <div id="modal-contact" class="modal-overlay" onclick="closeModal(event, 'modal-contact')" style="display: none;">
         <div class="modal-window modal-contact-window">
-            <span class="close-btn" onclick="closeModalBtn('modal-contact')" style="color: #1d1d1f; top: 20px; right: 25px; text-shadow: none;">&times;</span>
+            <span class="close-btn" onclick="closeModalBtn('modal-contact')" style="color: #1d1d1f; top: 20px; right: 25px; text-shadow: none;">×</span>
             
             <div class="contact-wrapper">
                 <h2 class="contact-title">Свяжитесь со мной</h2>
@@ -1248,54 +1392,54 @@
         </div>
     </div>
 
-    <div id="modal-gal-digital" class="modal-overlay" onclick="closeModal(event, 'modal-gal-digital')">
+    <div id="modal-gal-digital" class="modal-overlay" onclick="closeModal(event, 'modal-gal-digital')" style="display: none;">
         <div class="modal-window">
-            <span class="close-btn" onclick="closeModalBtn('modal-gal-digital')">&times;</span>
+            <span class="close-btn" onclick="closeModalBtn('modal-gal-digital')">×</span>
             <div class="project-header" style="background: #064e3b;">
                  <span class="header-tag-white">Gallery</span>
                  <h2 style="position:relative;z-index:10;">Digital-материалы</h2>
             </div>
             <div class="project-body">
                 <div class="gallery-modal-grid">
-                    <div class="gallery-modal-item"><img src="images/gal-dig-1.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
-                    <div class="gallery-modal-item"><img src="images/gal-dig-2.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
-                    <div class="gallery-modal-item"><img src="images/gal-dig-3.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
-                    <div class="gallery-modal-item"><img src="images/gal-dig-4.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
-                    <div class="gallery-modal-item"><img src="images/gal-dig-5.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
-                    <div class="gallery-modal-item"><img src="images/gal-dig-dodo.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Промо-постер для Додо Пицца</div></div>
-                    <div class="gallery-modal-item"><img src="images/gal-dig-just.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Промо-постер для Just Clothes</div></div>
-                    <div class="gallery-modal-item"><img src="images/gal-dig-scuba.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Промо-постер для SCUBA</div></div>
+                    <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-dig-1.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
+                    <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-dig-2.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
+                    <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-dig-3.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
+                    <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-dig-4.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
+                    <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-dig-5.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Food-фотосессия EAT / MEET</div></div>
+                    <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-dig-dodo.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Промо-постер для Додо Пицца</div></div>
+                    <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-dig-just.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Промо-постер для Just Clothes</div></div>
+                    <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-dig-scuba.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Промо-постер для SCUBA</div></div>
                 </div>
                 <div class="footer-adobe">Все работы выполняются в Adobe Photoshop</div>
             </div>
         </div>
     </div>
 
-    <div id="modal-gal-pos" class="modal-overlay" onclick="closeModal(event, 'modal-gal-pos')">
+    <div id="modal-gal-pos" class="modal-overlay" onclick="closeModal(event, 'modal-gal-pos')" style="display: none;">
         <div class="modal-window">
-            <span class="close-btn" onclick="closeModalBtn('modal-gal-pos')">&times;</span>
+            <span class="close-btn" onclick="closeModalBtn('modal-gal-pos')">×</span>
             <div class="project-header" style="background: #065f46;">
                  <span class="header-tag-white">Gallery</span>
                  <h2 style="position:relative;z-index:10;">POS-материалы</h2>
             </div>
             <div class="project-body">
                 <div class="gallery-modal-grid">
-                     <div class="gallery-modal-item"><img src="images/gal-pos-1.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
-                     <div class="gallery-modal-item"><img src="images/gal-pos-2.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
-                     <div class="gallery-modal-item"><img src="images/gal-pos-3.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
-                     <div class="gallery-modal-item"><img src="images/gal-pos-4.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
-                     <div class="gallery-modal-item"><img src="images/gal-pos-5.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
-                     <div class="gallery-modal-item"><img src="images/gal-pos-6.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
-                     <div class="gallery-modal-item"><img src="images/gal-pos-7.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-pos-1.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-pos-2.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-pos-3.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-pos-4.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-pos-5.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-pos-6.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
+                     <div class="gallery-modal-item" style="position: relative;"><img src="images/gal-pos-7.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Типографические материалы для EAT / MEET</div></div>
                 </div>
                 <div class="footer-adobe">Все работы выполняются в Adobe Photoshop</div>
             </div>
         </div>
     </div>
 
-    <div id="modal-texts" class="modal-overlay" onclick="closeModal(event, 'modal-texts')">
+    <div id="modal-texts" class="modal-overlay" onclick="closeModal(event, 'modal-texts')" style="display: none;">
         <div class="modal-window">
-            <span class="close-btn" onclick="closeModalBtn('modal-texts')">&times;</span>
+            <span class="close-btn" onclick="closeModalBtn('modal-texts')">×</span>
             
             <div class="project-header" style="background: #312e81;">
                 <div class="gradient-blob blob-purple-1"></div>
@@ -1304,23 +1448,23 @@
                 <div class="gradient-blob blob-purple-4"></div>
                 <div class="noise-overlay"></div>
                 
-                <span class="header-tag-white">Copywriting & Content Marketing</span>
+                <span class="header-tag-white">Copywriting &amp; Content Marketing</span>
                 <h2 style="position:relative;z-index:10;">Тексты</h2>
                 <p style="position:relative;z-index:10;">Разбор 5 рекламных постов для Telegram: анализ ЦА, TOV и метрики.</p>
             </div>
 
             <div class="project-body">
                 
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: var(--purple-main); color: var(--text-dark);">Пост 1. Робот-пылесос Midea VCR04W</h4>
                     <div class="table-wrapper">
                     <table class="brief-table">
-                        <tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Робот-пылесос Midea VCR04W</td></tr>
+                        <tbody><tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Робот-пылесос Midea VCR04W</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">УТП</td><td class="brief-content">Доступность, комплексная уборка, ДУ.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">ЦА</td><td class="brief-content">Молодые специалисты (20-35 лет), ценящие время.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">TOV</td><td class="brief-content">Дружелюбный, практичный, личная рекомендация.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">Личность блогера</td><td class="brief-content">Tech/Lifestyle Blogger.</td></tr>
-                    </table>
+                    </tbody></table>
                     </div>
                     
                     <div class="quote-container">
@@ -1337,16 +1481,16 @@
                     </div>
                 </div>
 
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: var(--purple-main); color: var(--text-dark);">Пост 2. Премиальный курс по Web3-инвестициям</h4>
                     <div class="table-wrapper">
                     <table class="brief-table">
-                        <tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Онлайн-курс "Web3 Capital: От $0 до первого NFT-портфеля".</td></tr>
+                        <tbody><tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Онлайн-курс "Web3 Capital: От $0 до первого NFT-портфеля".</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">УТП</td><td class="brief-content">Проверенная стратегия пассивного дохода. Доступ в закрытый клуб инвесторов.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">ЦА</td><td class="brief-content">Предприниматели (30-50 лет), ТОП-менеджеры.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">TOV</td><td class="brief-content">Авторитетный, эксклюзивный, сфокусированный на результате.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">Личность блогера</td><td class="brief-content">Финансовый Аналитик/Эксперт.</td></tr>
-                    </table>
+                    </tbody></table>
                     </div>
 
                     <div class="quote-container">
@@ -1367,16 +1511,16 @@
                     </div>
                 </div>
 
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: var(--purple-main); color: var(--text-dark);">Пост 3. Экологичная детская одежда «МАМКИДС»</h4>
                     <div class="table-wrapper">
                     <table class="brief-table">
-                        <tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Комплект одежды "Единение с природой" от бренда «МАМКИДС».</td></tr>
+                        <tbody><tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Комплект одежды "Единение с природой" от бренда «МАМКИДС».</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">УТП</td><td class="brief-content">100% органический хлопок, оверсайз-крой для свободы движения, скандинавский дизайн.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">ЦА</td><td class="brief-content">Молодые мамы (25-35 лет), средний+.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">TOV</td><td class="brief-content">Мягкий, заботливый, основанный на ценностях, вызывает уют.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">Личность блогера</td><td class="brief-content">Мама-блогер/Консультант по материнству.</td></tr>
-                    </table>
+                    </tbody></table>
                     </div>
 
                     <div class="quote-container">
@@ -1394,16 +1538,16 @@
                     </div>
                 </div>
 
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: var(--purple-main); color: var(--text-dark);">Пост 4. Сет экзотических морепродуктов</h4>
                     <div class="table-wrapper">
                     <table class="brief-table">
-                        <tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Премиальный набор для романтического ужина "Глубины Вкуса".</td></tr>
+                        <tbody><tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Премиальный набор для романтического ужина "Глубины Вкуса".</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">УТП</td><td class="brief-content">Свежайшие дикие морепродукты. Доставка "под ключ" в течение 120 минут.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">ЦА</td><td class="brief-content">Молодые пары (25-40 лет), Food-энтузиасты.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">TOV</td><td class="brief-content">Сенсуальный, игривый, вызывающий аппетит.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">Личность блогера</td><td class="brief-content">Food/Gastro-Блогер.</td></tr>
-                    </table>
+                    </tbody></table>
                     </div>
 
                     <div class="quote-container">
@@ -1422,16 +1566,16 @@
                     </div>
                 </div>
 
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: var(--purple-main); color: var(--text-dark);">Пост 5. Интенсивный курс подготовки к ЕГЭ</h4>
                     <div class="table-wrapper">
                     <table class="brief-table">
-                        <tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Онлайн-интенсив "ЕГЭ Литература 100/100: Метод Экспресс-анализа".</td></tr>
+                        <tbody><tr><td class="brief-label" style="color: #7c3aed;">Продукт</td><td class="brief-content">Онлайн-интенсив "ЕГЭ Литература 100/100: Метод Экспресс-анализа".</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">УТП</td><td class="brief-content">Гарантия 85+ баллов, авторская методика, фокус на эссе.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">ЦА</td><td class="brief-content">Старшеклассники (16-18 лет) и их родители.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">TOV</td><td class="brief-content">Авторитетный, требовательный, мотивирующий на результат.</td></tr>
                         <tr><td class="brief-label" style="color: #7c3aed;">Личность блогера</td><td class="brief-content">Опытный Преподаватель/Репетитор.</td></tr>
-                    </table>
+                    </tbody></table>
                     </div>
 
                     <div class="quote-container">
@@ -1456,21 +1600,21 @@
         </div>
     </div>
 
-    <div id="modal-scuba" class="modal-overlay" onclick="closeModal(event, 'modal-scuba')">
+    <div id="modal-scuba" class="modal-overlay" onclick="closeModal(event, 'modal-scuba')" style="display: none;">
         <div class="modal-window">
-            <span class="close-btn" onclick="closeModalBtn('modal-scuba')">&times;</span>
+            <span class="close-btn" onclick="closeModalBtn('modal-scuba')">×</span>
             <div class="project-header" style="background: #0f172a;">
                 <div class="gradient-blob blob-blue-1"></div><div class="gradient-blob blob-blue-2"></div><div class="gradient-blob blob-blue-3"></div><div class="gradient-blob blob-blue-4"></div><div class="noise-overlay"></div>
                 <div class="bubbles-container">
                     <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
                     <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
                 </div>
-                <span class="header-tag-white">PR & Event Strategy</span>
+                <span class="header-tag-white">PR &amp; Event Strategy</span>
                 <h2 style="position:relative;z-index:10;">Рыбное бистро «SCUBA»</h2>
                 <p style="position:relative;z-index:10;">Разработка плана гастрономических мероприятий как инструмента PR-стратегии.</p>
             </div>
             <div class="project-body">
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">1. О бренде и холдинге</h4>
                     <div class="holding-container">
                         <div class="holding-logo-box"><img src="images/asado-logo.jpg" alt="Asado Group Logo" style="object-fit: contain;"></div>
@@ -1478,7 +1622,7 @@
                     </div>
                     <div style="margin-top: 30px;">
                         <h5>Концепция SCUBA</h5><p>Бистро с морской атмосферой и свежайшими морепродуктами по демократичным ценам. Интерьер создает эффект "погружения" на дно океана.</p>
-                        <div class="usp-list"><div class="usp-item">✨ Уникальная атмосфера "погружения"</div><div class="usp-item">💰 Доступность цен при высоком качестве</div><div class="usp-item">📍 Премиум-локация (ЖК Тихвинъ)</div><div class="usp-item">🐠 Детское меню и Фотозоны для блогеров</div></div>
+                        <div class="usp-list"><div class="usp-item">Уникальная атмосфера "погружения"</div><div class="usp-item">Доступность цен при высоком качестве</div><div class="usp-item">Премиум-локация (Клубный дом&nbsp;<span style="color: rgb(5, 145, 101); background-color: rgb(249, 250, 251);">«Тихвинъ</span><span style="color: rgb(5, 144, 101); font-weight: 600; background-color: rgb(249, 250, 251);">»</span>)</div><div class="usp-item">Детское меню и фотозоны для блогеров</div></div>
                         
                         <!-- Исправленный блок галереи: строгая структура как в исходном коде -->
                         <div class="brand-gallery">
@@ -1487,14 +1631,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">2. Аватар Бренда (ЦА)</h4>
                     <div class="dossier-container">
                         <img src="images/scuba-avatar.jpg" alt="Аватар ЦА" class="dossier-photo">
                         <div class="dossier-info">
                             <div class="table-wrapper">
                             <table class="brief-table">
-                                <tr><td class="brief-label" style="color: #2563eb;">ФИО</td><td class="brief-content">Иванова Алина Игоревна</td></tr>
+                                <tbody><tr><td class="brief-label" style="color: #2563eb;">ФИО</td><td class="brief-content">Иванова Алина Игоревна</td></tr>
                                 <tr><td class="brief-label" style="color: #2563eb;">Возраст / Статус</td><td class="brief-content">27 лет / Не замужем</td></tr>
                                 <tr><td class="brief-label" style="color: #2563eb;">Деятельность</td><td class="brief-content">Самозанятая, ведет гастро-блог (ИП)</td></tr>
                                 <tr><td class="brief-label" style="color: #2563eb;">Локация</td><td class="brief-content">Центр Екатеринбурга, клубный дом «Тихвинъ»</td></tr>
@@ -1502,12 +1646,12 @@
                                 <tr><td class="brief-label" style="color: #2563eb;">Интересы</td><td class="brief-content">Гастрономия, путешествия (Атлантика), танцы</td></tr>
                                 <tr><td class="brief-label" style="color: #2563eb;">Желания</td><td class="brief-content">Колоритная кухня, необычная подача, наличие фотозон, интерактивные программы</td></tr>
                                 <tr><td class="brief-label" style="color: #2563eb;">Боли (Страхи)</td><td class="brief-content">Скучные интерьеры, отсутствие программы лояльности, заведения без "фишки"</td></tr>
-                            </table>
+                            </tbody></table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">3. Анализ Целевой Аудитории</h4>
                     <div class="ca-grid">
                         <div class="ca-list"><h5>Ожидания:</h5><ul><li>Оригинальность и уникальность в оформлении блюд.</li><li>Вкусная и разнообразная еда по разумной цене.</li><li>Быстрая подача без потери качества.</li><li>Высокий уровень сервиса (Премиум).</li></ul><h5 style="margin-top: 20px;">Страхи:</h5><ul><li>Проблемы со свежестью морепродуктов.</li><li>Завышенные цены и негативные отзывы.</li><li>Отсутствие развлечений для детей.</li></ul></div>
@@ -1516,7 +1660,7 @@
                 </div>
 
                 <!-- NEW BLOCK: COMPETITIVE ANALYSIS (UPDATED) -->
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">4. Конкурентный анализ</h4>
                     <p style="margin-bottom: 30px; color: var(--text-grey);">Сравнительный анализ ключевых конкурентов в сегменте рыбных ресторанов Екатеринбурга. Оценка проводилась по стоимости мероприятий, форматам взаимодействия и digital-активности.</p>
                     
@@ -1535,7 +1679,7 @@
                                     <td class="brief-label" style="color: #2563eb; width: 20%;">Концепция</td>
                                     <td class="brief-content">Иммерсивное бистро. Атмосфера "погружения".</td>
                                     <td class="brief-content">Средиземноморская кухня. Акцент на вино и деликатесы.</td>
-                                    <td class="brief-content">Бистро авторской кухни. Casual dining & bar.</td>
+                                    <td class="brief-content">Бистро авторской кухни. Casual dining &amp; bar.</td>
                                 </tr>
                                 <tr>
                                     <td class="brief-label" style="color: #2563eb;">Цена ивента</td>
@@ -1589,39 +1733,39 @@
                     </div>
                 </div>
 
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">5. SWOT-анализ</h4>
                     <div class="swot-grid">
-                        <div class="swot-card swot-s"><h5>STRENGTHS (Сильные стороны)</h5><ul><li>Уникальная концепция ивентов.</li><li>Локационная привязка к ЖК «Тихвинъ».</li><li>Интерактивный формат мероприятий.</li></ul></div>
-                        <div class="swot-card swot-w"><h5>WEAKNESSES (Слабые стороны)</h5><ul><li>Недостаточное цифровое присутствие.</li><li>Несистематизированный фирменный стиль.</li><li>Слабый контент в соцсетях.</li></ul></div>
-                        <div class="swot-card swot-o"><h5>OPPORTUNITIES (Возможности)</h5><ul><li>Расширение онлайн-форматов.</li><li>Разработка единой визуальной стратегии.</li><li>Партнёрства с блогерами.</li></ul></div>
-                        <div class="swot-card swot-t"><h5>THREATS (Угрозы)</h5><ul><li>Конкуренция со стороны других ресторанов.</li><li>Снижение интереса к офлайн-мероприятиям.</li><li>Экономическая нестабильность.</li></ul></div>
+                        <div class="swot-card swot-s" style="position: relative;"><h5>STRENGTHS (Сильные стороны)</h5><ul><li>Уникальная концепция ивентов.</li><li>Локационная привязка к ЖК «Тихвинъ».</li><li>Интерактивный формат мероприятий.</li></ul></div>
+                        <div class="swot-card swot-w" style="position: relative;"><h5>WEAKNESSES (Слабые стороны)</h5><ul><li>Недостаточное цифровое присутствие.</li><li>Несистематизированный фирменный стиль.</li><li>Слабый контент в соцсетях.</li></ul></div>
+                        <div class="swot-card swot-o" style="position: relative;"><h5>OPPORTUNITIES (Возможности)</h5><ul><li>Расширение онлайн-форматов.</li><li>Разработка единой визуальной стратегии.</li><li>Партнёрства с блогерами.</li></ul></div>
+                        <div class="swot-card swot-t" style="position: relative;"><h5>THREATS (Угрозы)</h5><ul><li>Конкуренция со стороны других ресторанов.</li><li>Снижение интереса к офлайн-мероприятиям.</li><li>Экономическая нестабильность.</li></ul></div>
                     </div>
                 </div>
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">6. Стратегия CJM</h4>
                     <div class="events-grid">
-                        <div class="event-card"><h5>Огни Латинской Америки</h5><div class="event-list"><ul><li><strong>Формат:</strong> вечер с севиче, фахитос и шоу-фламенко.</li><li><strong>Вовлеченность:</strong> дегустация специй, интерактивная карта вкусов.</li><li><strong>ЦА:</strong> молодые пары, креативный класс.</li><li><strong>Метрика:</strong> рост UGC, ER, повторные брони.</li></ul></div></div>
-                        <div class="event-card"><h5>Глубины Вкуса</h5><div class="event-list"><ul><li><strong>Формат:</strong> визуальное шоу, подача в аквариумах, озвучка воды.</li><li><strong>Фишка:</strong> NFT-меню и цифровая фотогалерея.</li><li><strong>ЦА:</strong> медиа, лидеры мнений, элита.</li><li><strong>Цель:</strong> создание флагмана PR-коммуникации.</li></ul></div></div>
-                        <div class="event-card"><h5>Ночь на Рифе</h5><div class="event-list"><ul><li><strong>Формат:</strong> коктейльная вечеринка, DJ-сет, игра света.</li><li><strong>Фишка:</strong> коктейльный сет по подписке на соцсети.</li><li><strong>ЦА:</strong> городская молодежь.</li><li><strong>Цель:</strong> омоложение аудитории.</li></ul></div></div>
+                        <div class="event-card" style="position: relative;"><h5>Огни Латинской Америки</h5><div class="event-list"><ul><li><strong>Формат:</strong> вечер с севиче, фахитос и шоу-фламенко.</li><li><strong>Вовлеченность:</strong> дегустация специй, интерактивная карта вкусов.</li><li><strong>ЦА:</strong> молодые пары, креативный класс.</li><li><strong>Метрика:</strong> рост UGC, ER, повторные брони.</li></ul></div></div>
+                        <div class="event-card" style="position: relative;"><h5>Глубины Вкуса</h5><div class="event-list"><ul><li><strong>Формат:</strong> визуальное шоу, подача в аквариумах, озвучка воды.</li><li><strong>Фишка:</strong> NFT-меню и цифровая фотогалерея.</li><li><strong>ЦА:</strong> медиа, лидеры мнений, элита.</li><li><strong>Цель:</strong> создание флагмана PR-коммуникации.</li></ul></div></div>
+                        <div class="event-card" style="position: relative;"><h5>Ночь на Рифе</h5><div class="event-list"><ul><li><strong>Формат:</strong> коктейльная вечеринка, DJ-сет, игра света.</li><li><strong>Фишка:</strong> коктейльный сет по подписке на соцсети.</li><li><strong>ЦА:</strong> городская молодежь.</li><li><strong>Цель:</strong> омоложение аудитории.</li></ul></div></div>
                     </div>
                     <h5 style="margin-top: 30px; margin-bottom: 15px;">Этапы взаимодействия (CJM)</h5>
                     <div class="table-wrapper"><table class="cjm-table"><thead><tr><th>Этап CJM</th><th>Пример точки контакта</th><th>Метрики успеха</th></tr></thead><tbody><tr><td>Внимание</td><td>Реклама в Telegram, блогеры</td><td>Охват, переходы</td></tr><tr><td>Вовлечение</td><td>Stories, тизеры, опросы</td><td>ER, вовлечённость</td></tr><tr><td>Покупка</td><td>Telegram-бот, лендинг с афишей</td><td>Конверсия</td></tr><tr><td>Поддержка</td><td>Интерактивные зоны, фотостенды</td><td>Кол-во публикаций, отзывы</td></tr><tr><td>Лояльность</td><td>Email-благодарность, опрос</td><td>LTV, возвратность, подписки</td></tr></tbody></table></div>
                 </div>
-                <div class="project-section flagship-block">
+                <div class="project-section flagship-block" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">7. Флагман: «Зов Азии»</h4>
                     <div class="flagship-intro"><p style="margin-bottom: 10px;"><strong>Актуальность:</strong> в условиях кризиса доверия к рекламе, гастрономические ивенты становятся инструментом формирования эмоциональной лояльности.</p><p style="margin-bottom: 10px;"><strong>Концепция:</strong> синтез аутентичных азиатских мотивов и локального позиционирования бистро в «Тихвине».</p><p><strong>Стратегия:</strong> интеграция гастрономического опыта в эмоциональный брендинг через мультисенсорное взаимодействие.</p></div>
-                    <div class="zones-grid"><div class="zone-card"><h5>Зона «Юный ихтиолог»</h5><p>Официанты проводят экскурс для детей по обитателям морского дна во время дегустации родителями.</p></div><div class="zone-card"><h5>Фотозона «Ичибан»</h5><p>Тематическая зона для создания контента. Стимулирует гостей делиться фото в соцсетях (UGC).</p></div></div>
+                    <div class="zones-grid"><div class="zone-card" style="position: relative;"><h5>Зона «Юный ихтиолог»</h5><p>Официанты проводят экскурс для детей по обитателям морского дна во время дегустации родителями.</p></div><div class="zone-card" style="position: relative;"><h5>Фотозона «Ичибан»</h5><p>Тематическая зона для создания контента. Стимулирует гостей делиться фото в соцсетях (UGC).</p></div></div>
                     <h5 class="gallery-group-title">Digital-материалы</h5>
-                    <div class="gallery-grid-digital"><div class="gallery-item"><img src="images/scuba-dig-1.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div><div class="gallery-item"><img src="images/scuba-dig-2.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div><div class="gallery-item"><img src="images/scuba-dig-3.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div><div class="gallery-item"><img src="images/scuba-dig-4.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div></div>
-                    <div class="gallery-grid-story" style="margin-top: 20px;"><div class="gallery-item vertical"><img src="images/scuba-story.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для сторис</div></div><div class="gallery-item" style="grid-column: span 2;"><img src="images/scuba-map.jpg" onclick="openLightbox(this.src)" style="aspect-ratio: 16/9;"><div class="gallery-caption">Интерактивная карта ингредиентов</div></div></div>
+                    <div class="gallery-grid-digital"><div class="gallery-item" style="position: relative;"><img src="images/scuba-dig-1.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div><div class="gallery-item" style="position: relative;"><img src="images/scuba-dig-2.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div><div class="gallery-item" style="position: relative;"><img src="images/scuba-dig-3.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div><div class="gallery-item" style="position: relative;"><img src="images/scuba-dig-4.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для поста</div></div></div>
+                    <div class="gallery-grid-story" style="margin-top: 20px;"><div class="gallery-item vertical" style="position: relative;"><img src="images/scuba-story.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Для сторис</div></div><div class="gallery-item" style="grid-column: span 2; position: relative;"><img src="images/scuba-map.jpg" onclick="openLightbox(this.src)" style="aspect-ratio: 16/9;"><div class="gallery-caption">Интерактивная карта ингредиентов</div></div></div>
                     <h5 class="gallery-group-title">Типографика и POS</h5>
-                    <div class="gallery-grid-print"><div class="gallery-item vertical"><img src="images/scuba-menu-front.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Меню (Лицо)</div></div><div class="gallery-item vertical"><img src="images/scuba-menu-back.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Меню (Оборот)</div></div><div class="gallery-item vertical"><img src="images/scuba-poster-reg.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Афиша</div></div><div class="gallery-item vertical"><img src="images/scuba-poster-ny.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Афиша (НГ)</div></div><div class="gallery-item"><img src="images/scuba-table-tent.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Тейбл-тент</div></div></div>
+                    <div class="gallery-grid-print"><div class="gallery-item vertical" style="position: relative;"><img src="images/scuba-menu-front.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Меню (Лицо)</div></div><div class="gallery-item vertical" style="position: relative;"><img src="images/scuba-menu-back.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Меню (Оборот)</div></div><div class="gallery-item vertical" style="position: relative;"><img src="images/scuba-poster-reg.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Афиша</div></div><div class="gallery-item vertical" style="position: relative;"><img src="images/scuba-poster-ny.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Афиша (НГ)</div></div><div class="gallery-item" style="position: relative;"><img src="images/scuba-table-tent.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Тейбл-тент</div></div></div>
                     <h5 class="gallery-group-title">Бренд-материалы</h5>
-                    <div class="gallery-grid-story"><div class="gallery-item"><img src="images/scuba-font.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Шрифтовая пара</div></div><div class="gallery-item"><img src="images/scuba-colors.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Цветовая палитра</div></div><div class="gallery-item"><img src="images/scuba-logo-asset.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Логотип</div></div></div>
+                    <div class="gallery-grid-story"><div class="gallery-item" style="position: relative;"><img src="images/scuba-font.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Шрифтовая пара</div></div><div class="gallery-item" style="position: relative;"><img src="images/scuba-colors.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Цветовая палитра</div></div><div class="gallery-item" style="position: relative;"><img src="images/scuba-logo-asset.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Логотип</div></div></div>
                 </div>
 
-                <div class="project-section">
+                <div class="project-section" style="position: relative;">
                     <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">8. Результаты и Аналитика</h4>
                     <div class="analytics-container">
                         <div class="charts-col">
@@ -1638,9 +1782,9 @@
         </div>
     </div>
 
-    <div id="modal-mamkids" class="modal-overlay" onclick="closeModal(event, 'modal-mamkids')">
+    <div id="modal-mamkids" class="modal-overlay" onclick="closeModal(event, 'modal-mamkids')" style="display: none;">
         <div class="modal-window">
-            <span class="close-btn" onclick="closeModalBtn('modal-mamkids')">&times;</span>
+            <span class="close-btn" onclick="closeModalBtn('modal-mamkids')">×</span>
             <div class="project-header" style="background: #c5a890;">
                 <div class="gradient-blob blob-nude-1"></div><div class="gradient-blob blob-nude-2"></div><div class="gradient-blob blob-nude-3"></div><div class="gradient-blob blob-nude-4"></div><div class="noise-overlay"></div>
                 <span class="header-tag-white">Branding</span>
@@ -1648,16 +1792,16 @@
                 <p style="position:relative;z-index:10;">Разработка айдентики для бренда одежды новорожденных.</p>
             </div>
             <div class="project-body">
-                <div class="project-section"><h4 class="section-headline" style="border-left-color: #D4B499; color: var(--text-dark);">1. Бриф на разработку</h4><div class="table-wrapper"><table class="brief-table"><tr><td class="brief-label" style="color:#D4B499">Компания</td><td class="brief-content">ООО «МамКидс»</td></tr><tr><td class="brief-label" style="color:#D4B499">Продукт</td><td class="brief-content">Экологичная оверсайз одежда для малышей и беременных мам. Миссия: предоставление комфорта и единства с природой.</td></tr><tr><td class="brief-label" style="color:#D4B499">ЦА</td><td class="brief-content">1. Девушки 20-40 лет, ценящие стиль и комфорт.<br>2. Семейные пары, подбирающие интерьер (кроватки, вешалки).</td></tr><tr><td class="brief-label" style="color:#D4B499">УТП</td><td class="brief-content">Экологичность, оверсайз-фасоны, природные оттенки.</td></tr><tr><td class="brief-label" style="color:#D4B499">Стиль</td><td class="brief-content">Минимализм, скандинавский стиль (дерево, камень), бежевые/пастельные тона. Псевдообъёмные элементы.</td></tr><tr><td class="brief-label" style="color:#D4B499">Конкуренты</td><td class="brief-content">Детский Мир, Sela Moms & Monsters, Gloria Jeans, RE.</td></tr><tr><td class="brief-label" style="color:#D4B499">Ожидание</td><td class="brief-content">Логотип должен вызывать доверие, подчеркивать актуальность и не выглядеть «дешево».</td></tr></table></div></div>
-                <div class="project-section"><h4 class="section-headline" style="border-left-color: #D4B499; color: var(--text-dark);">2. Страницы Логобука</h4><div class="logobook-grid"><img src="images/mamkids-page-1.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 1"><img src="images/mamkids-page-2.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 2"><img src="images/mamkids-page-3.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 3"><img src="images/mamkids-page-4.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 4"><img src="images/mamkids-page-5.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 5"><img src="images/mamkids-page-6.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 6"><img src="images/mamkids-page-7.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 7"><img src="images/mamkids-page-8.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 8"><img src="images/mamkids-page-9.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 9"><img src="images/mamkids-page-10.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 10"></div></div>
-                <div class="project-section"><h4 class="section-headline" style="border-left-color: #D4B499; color: var(--text-dark);">3. Элементы айдентики</h4><div class="elements-grid"><div class="element-card"><img src="images/mamkids-vizitka-front.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Визитка Лицо"><div class="element-caption">Визитка (Лицо)</div></div><div class="element-card"><img src="images/mamkids-vizitka-back.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Визитка Оборот"><div class="element-caption">Визитка (Оборот)</div></div><div class="element-card"><img src="images/mamkids-calendar.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Календарь"><div class="element-caption">Календарь</div></div><div class="element-card"><img src="images/mamkids-logo-vert.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Лого Вертикальный"><div class="element-caption">Лого (Вертикальный)</div></div><div class="element-card"><img src="images/mamkids-logo-horiz.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Лого Горизонтальный"><div class="element-caption">Лого (Горизонтальный)</div></div><div class="element-card"><img src="images/mamkids-moodboard.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Мудборд"><div class="element-caption">Мудборд</div></div></div></div>
+                <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #D4B499; color: var(--text-dark);">1. Бриф на разработку</h4><div class="table-wrapper"><table class="brief-table"><tbody><tr><td class="brief-label" style="color:#D4B499">Компания</td><td class="brief-content">ООО «МамКидс»</td></tr><tr><td class="brief-label" style="color:#D4B499">Продукт</td><td class="brief-content">Экологичная оверсайз одежда для малышей и беременных мам. Миссия: предоставление комфорта и единства с природой.</td></tr><tr><td class="brief-label" style="color:#D4B499">ЦА</td><td class="brief-content">1. Девушки 20-40 лет, ценящие стиль и комфорт.<br>2. Семейные пары, подбирающие интерьер (кроватки, вешалки).</td></tr><tr><td class="brief-label" style="color:#D4B499">УТП</td><td class="brief-content">Экологичность, оверсайз-фасоны, природные оттенки.</td></tr><tr><td class="brief-label" style="color:#D4B499">Стиль</td><td class="brief-content">Минимализм, скандинавский стиль (дерево, камень), бежевые/пастельные тона. Псевдообъёмные элементы.</td></tr><tr><td class="brief-label" style="color:#D4B499">Конкуренты</td><td class="brief-content">Детский Мир, Sela Moms &amp; Monsters, Gloria Jeans, RE.</td></tr><tr><td class="brief-label" style="color:#D4B499">Ожидание</td><td class="brief-content">Логотип должен вызывать доверие, подчеркивать актуальность и не выглядеть «дешево».</td></tr></tbody></table></div></div>
+                <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #D4B499; color: var(--text-dark);">2. Страницы Логобука</h4><div class="logobook-grid"><img src="images/mamkids-page-1.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 1"><img src="images/mamkids-page-2.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 2"><img src="images/mamkids-page-3.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 3"><img src="images/mamkids-page-4.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 4"><img src="images/mamkids-page-5.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 5"><img src="images/mamkids-page-6.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 6"><img src="images/mamkids-page-7.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 7"><img src="images/mamkids-page-8.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 8"><img src="images/mamkids-page-9.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 9"><img src="images/mamkids-page-10.jpg" class="logobook-page" onclick="openLightbox(this.src)" alt="Page 10"></div></div>
+                <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #D4B499; color: var(--text-dark);">3. Элементы айдентики</h4><div class="elements-grid"><div class="element-card" style="position: relative;"><img src="images/mamkids-vizitka-front.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Визитка Лицо"><div class="element-caption">Визитка (Лицо)</div></div><div class="element-card" style="position: relative;"><img src="images/mamkids-vizitka-back.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Визитка Оборот"><div class="element-caption">Визитка (Оборот)</div></div><div class="element-card" style="position: relative;"><img src="images/mamkids-calendar.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Календарь"><div class="element-caption">Календарь</div></div><div class="element-card" style="position: relative;"><img src="images/mamkids-logo-vert.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Лого Вертикальный"><div class="element-caption">Лого (Вертикальный)</div></div><div class="element-card" style="position: relative;"><img src="images/mamkids-logo-horiz.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Лого Горизонтальный"><div class="element-caption">Лого (Горизонтальный)</div></div><div class="element-card" style="position: relative;"><img src="images/mamkids-moodboard.jpg" class="element-card-img" onclick="openLightbox(this.src)" alt="Мудборд"><div class="element-caption">Мудборд</div></div></div></div>
             </div>
         </div>
     </div>
 
-    <div id="modal-vk" class="modal-overlay" onclick="closeModal(event, 'modal-vk')">
+    <div id="modal-vk" class="modal-overlay" onclick="closeModal(event, 'modal-vk')" style="display: none;">
         <div class="modal-window">
-            <span class="close-btn" onclick="closeModalBtn('modal-vk')">&times;</span>
+            <span class="close-btn" onclick="closeModalBtn('modal-vk')">×</span>
             <div class="project-header" style="background: #003366;">
                 <div class="gradient-blob blob-vk-1"></div><div class="gradient-blob blob-vk-2"></div><div class="gradient-blob blob-vk-3"></div><div class="gradient-blob blob-vk-4"></div><div class="noise-overlay"></div>
                 <span class="header-tag-white">Targeting</span>
@@ -1665,16 +1809,16 @@
                 <p style="position:relative;z-index:10;">Кейс продвижения кондитерской «КРАФТ».</p>
             </div>
             <div class="project-body">
-                <div class="project-section"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">1. Техническое задание</h4><div class="table-wrapper"><table class="brief-table"><tr><td class="vk-brief-label">Компания</td><td class="brief-content">Кондитерская «КРАФТ»</td></tr><tr><td class="vk-brief-label">Продукт</td><td class="brief-content">Авторские шоколадные букеты и наборы подарков ручной работы.</td></tr><tr><td class="vk-brief-label">ЦА</td><td class="brief-content">Молодые пары, офисные работники, мужчины, ищущие оригинальный подарок.</td></tr><tr><td class="vk-brief-label">УТП</td><td class="brief-content">Оригинальная рецептура, индивидуальный подход, уникальная упаковка.</td></tr><tr><td class="vk-brief-label">Цель</td><td class="brief-content">Привлечение заявок и продаж через VK Реклама (поиск и тестирование сегментов).</td></tr></table></div></div>
-                <div class="project-section"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">2. Сегмент: Молодые пары (20-25)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong> Акцент на «оригинальность» и «эмоциональность» подарка (шоколадные букеты как альтернатива цветам). Подчеркивание ценности, а не цены.</li><li><strong>Настройки:</strong> Пол: Мужской и Женский. Возраст: 20–25 лет. Гео: Екатеринбург, радиус 5 км от точки продаж.</li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Подарки (часто)</li><li>Романтика и отношения</li><li>Студенческие сообщества</li><li>Конкуренты (Цветы, подарки)</li></ul><span style="font-size: 0.9em; color: var(--text-grey);">*Выставлены ставки по CPC для максимального охвата.</span></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">2.1%</div><div class="vk-stat-label">CTR (Выше среднего)</div></div><div><div class="vk-stat-val">9₽</div><div class="vk-stat-label">CPC (Отличная цена)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-1.jpg" alt="Образец объявления 1"></div></div></div>
-                <div class="project-section"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">3. Сегмент: Офисные работники (25-50)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong> Позиционирование как «готовое, статусное решение» для корпоративных подарков и подарков коллегам. Экономия времени.</li><li><strong>Настройки:</strong> Пол: Мужской и Женский. Возраст: 25–50 лет (максимальная платежеспособность). Гео: Бизнес-центры в пределах Садового кольца.</li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Бизнес</li><li>HR/Рекрутинг</li><li>Подарки и праздники</li><li>Деловые мероприятия</li></ul><span style="font-size: 0.9em; color: var(--text-grey);">*Использован текстовый креатив с акцентом на "Коллегам и Партнерам".</span></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">1.8%</div><div class="vk-stat-label">CTR (Средний)</div></div><div><div class="vk-stat-val">20₽</div><div class="vk-stat-label">CPC (Выше, из-за конкуренции)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-2.jpg" alt="Образец объявления 2"></div></div></div>
-                <div class="project-section"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">4. Сегмент: Парни/Мужчины (23-30)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong> Прямое обращение. Решение мужской проблемы «что подарить, чтобы точно понравилось». Использован триггер: «Сделай ее счастливой».</li><li><strong>Настройки:</strong> Пол: Мужской. Возраст: 23–30 лет. Гео: Екатеринбург и города-спутники (Первоуральск, Верхняя Пышма). <span style="font-weight: 600;">Важно:</span> При настройке анкеты в VK Рекламе выбран мужской род.</li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Знакомства</li><li>Отношения</li><li>Поиск подарков</li><li>Узконаправленный таргетинг на Подписчиков пабликов о знакомствах/пикапе</li></ul></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">3.5%</div><div class="vk-stat-label">CTR (Лидер)</div></div><div><div class="vk-stat-val">7₽</div><div class="vk-stat-label">CPC (Самый низкий)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-3.jpg" alt="Образец объявления 3"></div></div></div>
+                <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">1. Техническое задание</h4><div class="table-wrapper"><table class="brief-table"><tbody><tr><td class="vk-brief-label">Компания</td><td class="brief-content">Кондитерская «КРАФТ»</td></tr><tr><td class="vk-brief-label">Продукт</td><td class="brief-content">Авторские шоколадные букеты и наборы подарков ручной работы.</td></tr><tr><td class="vk-brief-label">ЦА</td><td class="brief-content">Молодые пары, офисные работники, мужчины, ищущие оригинальный подарок.</td></tr><tr><td class="vk-brief-label">УТП</td><td class="brief-content">Оригинальная рецептура, индивидуальный подход, уникальная упаковка.</td></tr><tr><td class="vk-brief-label">Цель</td><td class="brief-content">Привлечение заявок и продаж через VK Реклама (поиск и тестирование сегментов).</td></tr></tbody></table></div></div>
+                <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">2. Сегмент: Молодые пары (20-25)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong> Акцент на «оригинальность» и «эмоциональность» подарка (шоколадные букеты как альтернатива цветам). Подчеркивание ценности, а не цены.</li><li><strong>Настройки:</strong> Пол: Мужской и Женский. Возраст: 20–25 лет. Гео: Екатеринбург, радиус 5 км от точки продаж.</li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Подарки (часто)</li><li>Романтика и отношения</li><li>Студенческие сообщества</li><li>Конкуренты (Цветы, подарки)</li></ul><span style="font-size: 0.9em; color: var(--text-grey);">*Выставлены ставки по CPC для максимального охвата.</span></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">2.1%</div><div class="vk-stat-label">CTR (Выше среднего)</div></div><div><div class="vk-stat-val">9₽</div><div class="vk-stat-label">CPC (Отличная цена)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-1.jpg" alt="Образец объявления 1"></div></div></div>
+                <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">3. Сегмент: Офисные работники (25-50)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong> Позиционирование как «готовое, статусное решение» для корпоративных подарков и подарков коллегам. Экономия времени.</li><li><strong>Настройки:</strong> Пол: Мужской и Женский. Возраст: 25–50 лет (максимальная платежеспособность). Гео: Бизнес-центры в пределах Садового кольца.</li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Бизнес</li><li>HR/Рекрутинг</li><li>Подарки и праздники</li><li>Деловые мероприятия</li></ul><span style="font-size: 0.9em; color: var(--text-grey);">*Использован текстовый креатив с акцентом на "Коллегам и Партнерам".</span></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">1.8%</div><div class="vk-stat-label">CTR (Средний)</div></div><div><div class="vk-stat-val">20₽</div><div class="vk-stat-label">CPC (Выше, из-за конкуренции)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-2.jpg" alt="Образец объявления 2"></div></div></div>
+                <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">4. Сегмент: Парни/Мужчины (23-30)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong> Прямое обращение. Решение мужской проблемы «что подарить, чтобы точно понравилось». Использован триггер: «Сделай ее счастливой».</li><li><strong>Настройки:</strong> Пол: Мужской. Возраст: 23–30 лет. Гео: Екатеринбург и города-спутники (Первоуральск, Верхняя Пышма). <span style="font-weight: 600;">Важно:</span> При настройке анкеты в VK Рекламе выбран мужской род.</li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Знакомства</li><li>Отношения</li><li>Поиск подарков</li><li>Узконаправленный таргетинг на Подписчиков пабликов о знакомствах/пикапе</li></ul></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">3.5%</div><div class="vk-stat-label">CTR (Лидер)</div></div><div><div class="vk-stat-val">7₽</div><div class="vk-stat-label">CPC (Самый низкий)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-3.jpg" alt="Образец объявления 3"></div></div></div>
             </div>
         </div>
     </div>
     
     <!-- ADMIN UI MODALS -->
-    <div id="admin-login-modal">
+    <div id="admin-login-modal" style="display: none;">
         <div class="login-box">
             <h3 style="margin-bottom:10px; color:#1d1d1f;">Вход в редактор</h3>
             <input type="password" id="admin-pass" placeholder="Пароль">
@@ -1683,96 +1827,93 @@
         </div>
     </div>
 
-    <div id="admin-panel">
+    <div id="admin-panel" style="display: none;">
         <span style="font-weight:bold; font-size:0.9rem;">Режим редактора</span>
         <button onclick="saveChanges()">Сохранить изменения</button>
         <button onclick="exitEditor()" style="background:#e11d48;">Выйти</button>
     </div>
 
 <script>
-        // --- БАЗОВЫЕ ФУНКЦИИ (MODALS, LIGHTBOX) ---
-        function openModal(modalId) {
-            const modal = document.getElementById(modalId);
-            if (!modal) return;
-            modal.style.display = 'flex';
-            setTimeout(() => modal.classList.add('active'), 10);
-            document.body.style.overflow = 'hidden';
+// --- 1. БАЗОВЫЕ ФУНКЦИИ САЙТА (МОДАЛКИ, ГАЛЕРЕЯ) ---
+    
+    // Динамический статус бар (цвет браузера)
+    window.addEventListener('scroll', function() {
+        const meta = document.getElementById('theme-color-meta');
+        const content = document.querySelector('.content-wrapper');
+        if (!meta || !content) return;
+        const rect = content.getBoundingClientRect();
+        if (rect.top <= 50) {
+            meta.setAttribute('content', '#ffffff');
+        } else {
+            meta.setAttribute('content', '#022c22');
         }
-        function closeModalBtn(modalId) {
-            const modal = document.getElementById(modalId);
-            if (!modal) return;
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                // Сброс скролла модалки
-                const modalWindow = document.querySelector(`#${modalId} .modal-window`);
-                if (modalWindow) {
-                    modalWindow.scrollTop = 0;
-                }
-            }, 300);
-        }
-        function closeModal(event, modalId) {
-            if (event.target.id === modalId) closeModalBtn(modalId);
-        }
-        function openLightbox(src) {
-            const lightbox = document.getElementById('lightbox');
-            const img = document.getElementById('lightbox-img');
-            img.src = src;
-            lightbox.style.display = 'flex';
-        }
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-        }
+    });
 
-        // --- ЛОГИКА РЕДАКТОРА И СОХРАНЕНИЯ ---
-        const trigger = document.getElementById('admin-trigger-footer');
-        const loginModal = document.getElementById('admin-login-modal');
-        const loginBtn = document.getElementById('login-btn');
-        const passInput = document.getElementById('admin-pass');
-        const adminPanel = document.getElementById('admin-panel');
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal.style.display = 'flex';
+        // Небольшая задержка для анимации opacity
+        setTimeout(() => modal.classList.add('active'), 10);
+        document.body.style.overflow = 'hidden';
+    }
 
-        // Открытие окна входа
+    function closeModalBtn(modalId) {
+        const modal = document.getElementById(modalId);
+        if (!modal) return;
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            // Сброс скролла внутри окна
+            const modalWindow = modal.querySelector('.modal-window');
+            if (modalWindow) modalWindow.scrollTop = 0;
+        }, 300);
+    }
+
+    function closeModal(event, modalId) {
+        if (event.target.id === modalId) closeModalBtn(modalId);
+    }
+
+    function openLightbox(src) {
+        const lightbox = document.getElementById('lightbox');
+        const img = document.getElementById('lightbox-img');
+        img.src = src;
+        lightbox.style.display = 'flex';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = 'none';
+    }
+
+
+    // --- 2. ЛОГИКА ВХОДА И АДМИНКИ ---
+    
+    const trigger = document.getElementById('admin-trigger-footer');
+    const loginModal = document.getElementById('admin-login-modal');
+    const loginBtn = document.getElementById('login-btn');
+    const passInput = document.getElementById('admin-pass');
+    const adminPanel = document.getElementById('admin-panel');
+
+    // Открытие окна пароля
+    if(trigger) {
         trigger.addEventListener('click', () => {
             loginModal.style.display = 'flex';
             passInput.focus();
         });
+    }
 
-        // Вход по Enter
+    // Вход по Enter
+    if(passInput) {
         passInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                loginBtn.click();
-            }
+            if (e.key === 'Enter') loginBtn.click();
         });
+    }
 
-        // --- ЗАЩИТА ПАРОЛЯ (ХЕШИРОВАНИЕ + ОБМАНКА) ---
-        
-        // Функция шифрования (SHA-256)
-        async function getHash(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        loginBtn.addEventListener('click', async () => {
-            const val = passInput.value;
-            
-            // 1. Обманка для любопытных (фейковый пароль)
-            // Если кто-то посмотрит код, он увидит 'admin123' и попробует его ввести.
-            if(val === 'admin' || val === 'admin123') {
-                alert('Доступ запрещен: стандартные пароли не подходят.');
-                return;
-            }
-
-            // 2. Реальная проверка через хеш
-            // Это зашифрованная версия твоего пароля "nc7"
-            const secureHash = "e2bd62d506972179a6177c8e97669d6560b45731383794b29388338902517009";
-            
-            // Шифруем то, что ввел пользователь, и сверяем с эталоном
-            const userHash = await getHash(val);
-
-            if(userHash === secureHash) {
+    // Проверка пароля
+    if(loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            if(passInput.value === 'nc7') {
                 enableEditor();
                 loginModal.style.display = 'none';
                 passInput.value = '';
@@ -1781,174 +1922,343 @@
                 passInput.value = '';
             }
         });
+    }
 
-        // Включение режима редактора
-        function enableEditor() {
-            document.body.classList.add('editor-mode');
-            trigger.style.display = 'none';
-            adminPanel.style.display = 'flex';
 
-            // 1. Делаем тексты редактируемыми
-            const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, p, span, .brief-content, .gallery-caption, .folder-title, .folder-subtitle, td, li, .word, .contact-value, .contact-label, .logobook-page, .skill-pill, .usp-item, .element-caption');
-            textElements.forEach(el => {
-                // Избегаем редактирования контейнеров, только конечные элементы
-                if (el.children.length === 0 || (el.children.length === 1 && el.children[0].tagName === 'BR')) {
-                   el.setAttribute('contenteditable', 'true');
-                }
-            });
+    // --- 3. РЕЖИМ РЕДАКТОРА ---
 
-            // 2. Добавляем кнопки добавления фото ("+")
-            const grids = document.querySelectorAll('.gallery-modal-grid, .gallery-grid-digital, .gallery-grid-story, .gallery-grid-print, .logobook-grid, .elements-grid, .brand-gallery');
-            grids.forEach(grid => {
-                if(!grid.querySelector('.add-photo-btn')) {
-                    const btn = document.createElement('div');
-                    btn.className = 'add-photo-btn';
-                    btn.innerHTML = '<span>+</span><div style="font-size:0.8rem; margin-top:10px; font-weight:600;">Добавить фото</div>';
-                    btn.onclick = function() { addPhotoToGrid(grid, btn); };
-                    grid.appendChild(btn);
-                }
-            });
+    let currentEditingElement = null;
 
-            // 3. Добавляем кнопки удаления ("x")
-            attachDeleteButtons();
+    function enableEditor() {
+        document.body.classList.add('editor-mode');
+        if(trigger) trigger.style.display = 'none';
+        if(adminPanel) adminPanel.style.display = 'flex';
+
+        // А. Делаем тексты редактируемыми
+        const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, p, span, .brief-content, .gallery-caption, .folder-title, .folder-subtitle, td, li, .word, .contact-value, .contact-label, .logobook-page, .skill-pill, .usp-item, .element-caption');
+        
+        textElements.forEach(el => {
+            // Пропускаем пустые или служебные элементы
+            if (el.closest('.glass-toolbar') || el.closest('#admin-panel')) return;
+
+            if (el.children.length === 0 || (el.children.length === 1 && el.children[0].tagName === 'BR')) {
+               el.setAttribute('contenteditable', 'true');
+               
+               // Слушатели для тулбара
+               el.addEventListener('click', (e) => {
+                   e.stopPropagation(); 
+                   showToolbar(el);
+               });
+               el.addEventListener('mouseup', () => updateToolbarValues(el));
+               el.addEventListener('keyup', () => updateToolbarValues(el));
+            }
+        });
+
+        // Б. Добавляем кнопки "+" (добавить фото)
+        const grids = document.querySelectorAll('.gallery-modal-grid, .gallery-grid-digital, .gallery-grid-story, .gallery-grid-print, .logobook-grid, .elements-grid, .brand-gallery');
+        grids.forEach(grid => {
+            if(!grid.querySelector('.add-photo-btn')) {
+                const btn = document.createElement('div');
+                btn.className = 'add-photo-btn';
+                btn.innerHTML = '<span>+</span><div style="font-size:0.8rem; margin-top:10px; font-weight:600;">Добавить фото</div>';
+                btn.onclick = function() { addPhotoToGrid(grid, btn); };
+                grid.appendChild(btn);
+            }
+        });
+
+        // В. Добавляем кнопки удаление
+        attachDeleteButtons();
+        
+        // Г. Запускаем логику тулбара
+        initToolbarLogic();
+        
+        // Скрытие тулбара при клике в пустоту
+        document.addEventListener('click', (e) => {
+            const toolbar = document.getElementById('editor-toolbar');
+            if (toolbar && !e.target.closest('#editor-toolbar') && !e.target.isContentEditable) {
+                toolbar.classList.remove('active');
+                currentEditingElement = null;
+            }
+        });
+    }
+
+    // Функция добавления фото
+    function addPhotoToGrid(grid, btn) {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = e => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    // Создаем новый элемент галереи
+                    const div = document.createElement('div');
+                    
+                    // Определяем класс в зависимости от типа сетки
+                    if(grid.classList.contains('gallery-modal-grid')) div.className = 'gallery-modal-item';
+                    else if(grid.classList.contains('logobook-grid')) div.className = 'logobook-page-wrapper'; 
+                    else div.className = 'gallery-item';
+
+                    // Вставляем картинку
+                    // Для логобука структура чуть другая, но для простоты используем общую
+                    if(grid.classList.contains('logobook-grid')) {
+                         div.innerHTML = `<img src="${event.target.result}" class="logobook-page" onclick="openLightbox(this.src)">`;
+                    } else {
+                         div.innerHTML = `<img src="${event.target.result}" onclick="openLightbox(this.src)"><div class="gallery-caption" contenteditable="true">Описание</div>`;
+                    }
+                    
+                    // Вставляем ПЕРЕД кнопкой плюса
+                    grid.insertBefore(div, btn);
+                    
+                    // Добавляем кнопку удаления к новому элементу
+                    attachDeleteButtons();
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+        input.click();
+    }
+
+    // Функция добавления кнопок удаления
+    function attachDeleteButtons() {
+        const items = document.querySelectorAll('.gallery-item, .gallery-modal-item, .card, .project-section, .logobook-page, .element-card, .skill-pill, .event-card, .swot-card, .zone-card');
+        
+        items.forEach(item => {
+            // Если кнопки еще нет и это не кнопка добавления
+            if(!item.querySelector('.delete-btn') && !item.classList.contains('add-photo-btn')) {
+                // Для логобука (там img - сам элемент) нужна обертка, но пока пропустим сложные случаи
+                if(item.tagName === 'IMG') return; 
+
+                item.style.position = 'relative';
+                const delBtn = document.createElement('div');
+                delBtn.className = 'delete-btn';
+                delBtn.innerHTML = '&times;';
+                delBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    if(confirm('Удалить этот элемент?')) item.remove();
+                };
+                item.appendChild(delBtn);
+            }
+        });
+    }
+
+
+    // --- 4. ЛОГИКА ТУЛБАРА (FIXED) ---
+
+    function showToolbar(el) {
+        currentEditingElement = el;
+        const toolbar = document.getElementById('editor-toolbar');
+        if(!toolbar) return;
+        
+        const rect = el.getBoundingClientRect();
+        let top = rect.top - 60;
+        let left = rect.left;
+        
+        if (top < 10) top = rect.bottom + 10;
+        if (left < 10) left = 10;
+        if (left + toolbar.offsetWidth > window.innerWidth) left = window.innerWidth - toolbar.offsetWidth - 10;
+
+        toolbar.style.top = top + 'px';
+        toolbar.style.left = left + 'px';
+        toolbar.classList.add('active');
+
+        updateToolbarValues(el);
+    }
+
+    function updateToolbarValues(el) {
+        // Умное определение стиля (выделение или весь блок)
+        const selection = window.getSelection();
+        let targetNode = el;
+
+        if (selection.rangeCount > 0) {
+            const anchor = selection.anchorNode;
+            if (anchor && anchor.nodeType === 3) targetNode = anchor.parentElement;
+            else if (anchor && anchor.nodeType === 1) targetNode = anchor;
+            if (!el.contains(targetNode)) targetNode = el;
         }
 
-        // Функция прикрепления кнопок удаления
-        function attachDeleteButtons() {
-            const targets = document.querySelectorAll('.gallery-item, .gallery-modal-item, .logobook-page, .element-card, .card, .project-section, .contact-link-card, .vk-segment-grid, .folder-card, .skill-pill, .event-card, .swot-card, .zone-card');
-            
-            targets.forEach(el => {
-                // Убедимся, что позиционирование позволяет разместить кнопку
-                const computedStyle = window.getComputedStyle(el);
-                if(computedStyle.position === 'static') {
-                    el.style.position = 'relative';
-                }
-                
-                // Проверяем, нет ли уже кнопки, чтобы не дублировать
-                if(!el.querySelector('.delete-btn')) {
-                    const delBtn = document.createElement('div');
-                    delBtn.className = 'delete-btn';
-                    delBtn.innerHTML = '&times;'; 
-                    delBtn.title = 'Удалить';
+        const style = window.getComputedStyle(targetNode);
+        
+        // Размер
+        const fontSize = parseFloat(style.fontSize);
+        const sizeInput = document.getElementById('tool-size');
+        if(sizeInput) sizeInput.value = isNaN(fontSize) ? 16 : Math.round(fontSize);
+        
+        // Жирность
+        let weight = style.fontWeight;
+        if(weight === '400' || weight === 'normal') weight = '400';
+        if(weight === '700' || weight === 'bold') weight = '700';
+        const weightSelect = document.getElementById('tool-weight');
+        if(weightSelect) weightSelect.value = weight; 
 
-                    // Если это просто IMG (как в логобуке), кнопку нужно вставить рядом или обработать иначе.
-                    // Для упрощения, если это IMG, мы не добавляем кнопку (удаление через DevTools или обертку).
-                    // Но для большинства блоков это сработает.
-                    if(el.tagName === 'IMG') return; 
+        // Ширина
+        let spacing = parseFloat(style.letterSpacing);
+        if(isNaN(spacing) || style.letterSpacing === 'normal') spacing = 0;
+        const spacingInput = document.getElementById('tool-spacing');
+        if(spacingInput) spacingInput.value = spacing;
 
-                    delBtn.onclick = function(e) {
-                        e.stopPropagation(); 
-                        if(confirm('Удалить этот блок?')) {
-                            el.remove();
-                        }
-                    };
-                    el.appendChild(delBtn);
-                }
-            });
+        // Цвет
+        const colorInput = document.getElementById('tool-color');
+        if (colorInput) {
+            const rgb = style.color.match(/\d+/g);
+            if(rgb) {
+                const hex = "#" + ((1 << 24) + (parseInt(rgb[0]) << 16) + (parseInt(rgb[1]) << 8) + parseInt(rgb[2])).toString(16).slice(1);
+                colorInput.value = hex;
+            } else {
+                colorInput.value = '#000000';
+            }
         }
 
-        // Логика добавления фото
-        function addPhotoToGrid(grid, btn) {
-            let url = prompt('Введите ссылку на изображение:');
-            if(url === null) return;
-            if(!url) url = 'https://via.placeholder.com/600x600?text=New+Photo';
+        // Кнопки
+        const toggleActive = (id, condition) => {
+            const btn = document.getElementById(id);
+            if(btn) condition ? btn.classList.add('active-tool') : btn.classList.remove('active-tool');
+        };
+        toggleActive('tool-italic', style.fontStyle === 'italic');
+        toggleActive('tool-underline', style.textDecorationLine.includes('underline'));
+        toggleActive('tool-uppercase', style.textTransform === 'uppercase');
+    }
+
+    function initToolbarLogic() {
+        const apply = (prop, value) => {
+            if (!currentEditingElement) return;
+            const selection = window.getSelection();
             
-            const isLogobook = grid.classList.contains('logobook-grid');
-            let caption = '';
-            
-            if(!isLogobook) {
-                caption = prompt('Введите подпись для фото:');
-                if(caption === null) caption = 'Новое фото';
+            // Если курсор просто мигает - красим весь блок
+            if (selection.isCollapsed || !currentEditingElement.contains(selection.anchorNode)) {
+                currentEditingElement.style[prop] = value;
+                return;
             }
 
-            const isElement = grid.classList.contains('elements-grid');
-            const isModalGrid = grid.classList.contains('gallery-modal-grid');
-
-            let newEl;
-
-            if (isLogobook) {
-                newEl = document.createElement('img');
-                newEl.src = url;
-                newEl.className = 'logobook-page';
-                newEl.onclick = function() { openLightbox(url); };
-            } 
-            else if (isElement) {
-                newEl = document.createElement('div');
-                newEl.className = 'element-card';
-                newEl.innerHTML = `<img src="${url}" class="element-card-img" onclick="openLightbox(this.src)"><div class="element-caption" contenteditable="true">${caption}</div>`;
+            // Если есть выделение
+            const range = selection.getRangeAt(0);
+            let parentSpan = selection.anchorNode.parentElement;
+            
+            // Если уже внутри span
+            if (parentSpan.tagName === 'SPAN' && currentEditingElement.contains(parentSpan) && parentSpan !== currentEditingElement) {
+                parentSpan.style[prop] = value;
+            } else {
+                // Создаем новый span
+                try {
+                    const span = document.createElement('span');
+                    span.style[prop] = value;
+                    const content = range.extractContents();
+                    span.appendChild(content);
+                    range.insertNode(span);
+                    selection.removeAllRanges(); // Сброс
+                } catch (e) {
+                    currentEditingElement.style[prop] = value;
+                }
             }
-            else {
-                newEl = document.createElement('div');
-                newEl.className = isModalGrid ? 'gallery-modal-item' : 'gallery-item';
-                newEl.innerHTML = `<img src="${url}" onclick="openLightbox(this.src)"><div class="gallery-caption" contenteditable="true">${caption}</div>`;
+        };
+
+        const addListener = (id, event, prop, unit = '') => {
+            const el = document.getElementById(id);
+            if(el) el.addEventListener(event, (e) => apply(prop, e.target.value + unit));
+        };
+
+        addListener('tool-size', 'input', 'fontSize', 'px');
+        addListener('tool-weight', 'change', 'fontWeight');
+        addListener('tool-spacing', 'input', 'letterSpacing', 'px');
+        addListener('tool-color', 'input', 'color');
+
+        const setupToggle = (id, prop, valOn, valOff) => {
+            const btn = document.getElementById(id);
+            if(btn) {
+                btn.addEventListener('click', function() {
+                   if(!currentEditingElement) return;
+                   // Простая логика переключения для кнопок
+                   const current = currentEditingElement.style[prop];
+                   const newVal = (current === valOn || (prop==='textDecoration' && current.includes(valOn))) ? valOff : valOn;
+                   
+                   // Применяем ко всему блоку для надежности кнопок (упрощение)
+                   currentEditingElement.style[prop] = newVal;
+                   this.classList.toggle('active-tool');
+                });
             }
+        };
+        
+        setupToggle('tool-italic', 'fontStyle', 'italic', 'normal');
+        setupToggle('tool-underline', 'textDecoration', 'underline', 'none');
+        setupToggle('tool-uppercase', 'textTransform', 'uppercase', 'none');
+    }
 
-            // Вставляем перед кнопкой "+"
-            grid.insertBefore(newEl, btn);
-            
-            // Сразу вешаем кнопку удаления на новый элемент
-            attachDeleteButtons();
-        }
 
-        // --- ГЛАВНАЯ ФУНКЦИЯ СОХРАНЕНИЯ (СКАЧИВАНИЯ) ---
-        function saveChanges() {
-            // 1. Создаем клон всего документа, чтобы не ломать текущую страницу очисткой
-            const clone = document.documentElement.cloneNode(true);
+    // --- 5. СОХРАНЕНИЕ ---
+    function saveChanges() {
+        const clone = document.documentElement.cloneNode(true);
+        const body = clone.querySelector('body');
+        
+        body.classList.remove('editor-mode');
+        
+        // Чистим мусор редактора
+        clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+        clone.querySelectorAll('.add-photo-btn').forEach(el => el.remove());
+        clone.querySelectorAll('.delete-btn').forEach(el => el.remove());
+        
+        const panel = clone.querySelector('#admin-panel');
+        if(panel) panel.style.display = 'none';
+        
+        const trig = clone.querySelector('#admin-trigger-footer');
+        if(trig) trig.style.display = 'block';
 
-            // 2. Очистка клона от служебных элементов редактора
-            
-            // Убираем класс режима редактора
-            clone.querySelector('body').classList.remove('editor-mode');
+        const htmlContent = "<!DOCTYPE html>\n" + clone.outerHTML;
+        const blob = new Blob([htmlContent], {type: "text/html"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        
+        const date = new Date();
+        a.href = url;
+        a.download = `portfolio_update_${date.getHours()}${date.getMinutes()}.html`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
 
-            // Убираем атрибуты редактирования текста
-            const editables = clone.querySelectorAll('[contenteditable]');
-            editables.forEach(el => el.removeAttribute('contenteditable'));
+    function exitEditor() {
+        if(confirm('Выйти без сохранения?')) window.location.reload();
+    }
 
-            // Удаляем кнопки "Добавить фото"
-            const addBtns = clone.querySelectorAll('.add-photo-btn');
-            addBtns.forEach(btn => btn.remove());
-
-            // Удаляем кнопки "Удалить"
-            const delBtns = clone.querySelectorAll('.delete-btn');
-            delBtns.forEach(btn => btn.remove());
-
-            // Скрываем админ-панель (возвращаем display: none)
-            const adminPanelClone = clone.querySelector('#admin-panel');
-            if(adminPanelClone) adminPanelClone.style.display = 'none';
-
-            // Возвращаем иконку входа в футер (если она была скрыта)
-            const triggerClone = clone.querySelector('#admin-trigger-footer');
-            if(triggerClone) triggerClone.style.display = 'block';
-
-            // 3. Формируем HTML файл
-            const htmlContent = "<!DOCTYPE html>\n" + clone.outerHTML;
-
-            // 4. Создаем Blob и ссылку для скачивания
-            const blob = new Blob([htmlContent], {type: "text/html"});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            
-            // Генерируем имя файла с датой, чтобы не запутаться
-            const date = new Date();
-            const timestamp = `${date.getHours()}-${date.getMinutes()}`;
-            a.href = url;
-            a.download = `index_updated_${timestamp}.html`;
-            
-            document.body.appendChild(a);
-            a.click();
-            
-            // Чистим память
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        function exitEditor() {
-            if(confirm('Выйти из режима редактора? Несохраненные изменения могут быть потеряны (если вы не скачали файл).')) {
-                // Перезагружаем страницу, чтобы сбросить все визуальные эффекты редактора
-                window.location.reload();
-            }
-        }
     </script>
+    <div id="editor-toolbar" class="glass-toolbar" style="top: 161.137px; left: 535.8px;">
+        <div class="tool-group">
+            <span class="tool-icon" title="Размер">T</span>
+            <input type="number" id="tool-size" min="10" max="150" value="16" title="Размер шрифта (px)">
+        </div>
 
-</body>
-</html>
+        <div class="tool-group">
+            <select id="tool-weight" title="Жирность">
+                <option value="100">Thin (100)</option>
+                <option value="200">ExtraLight (200)</option>
+                <option value="300">Light (300)</option>
+                <option value="400">Regular (400)</option>
+                <option value="500">Medium (500)</option>
+                <option value="600">SemiBold (600)</option>
+                <option value="700">Bold (700)</option>
+                <option value="800">ExtraBold (800)</option>
+            </select>
+        </div>
+
+        <div class="tool-group">
+            <span class="tool-icon" title="Межбуквенный интервал (Ширина)">AV</span>
+            <input type="number" id="tool-spacing" step="0.5" min="-2" max="10" value="0" title="Межбуквенный интервал (px)">
+        </div>
+
+        <div class="tool-group btn-group-tools">
+            <button id="tool-italic" title="Курсив"><i>I</i></button>
+            <button id="tool-underline" title="Подчеркивание"><u>U</u></button>
+            <button id="tool-uppercase" title="ВСЕ ЗАГЛАВНЫЕ">TT</button>
+        </div>
+
+        <div class="tool-group">
+            <div class="color-wrapper">
+                <input type="color" id="tool-color" title="Цвет текста">
+            </div>
+        </div>
+        
+        <div class="close-toolbar" onclick="document.getElementById('editor-toolbar').classList.remove('active')">×</div>
+    </div>
+
+
+</body></html>
