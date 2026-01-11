@@ -2,17 +2,14 @@
 <html lang="ru"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta id="theme-color-meta" name="theme-color" content="#ffffff">
+    <meta id="theme-color-meta" name="theme-color" content="#022c22">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>Никита Мельников | Digital Portfolio</title>
     
     <!-- FAVICON (Значок сайта) -->
     <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;rect width='100' height='100' rx='25' fill='%23059669'/&gt;&lt;text x='50' y='53' dominant-baseline='central' text-anchor='middle' font-size='65' fill='white' font-family='sans-serif' font-weight='800'&gt;N&lt;/text&gt;&lt;/svg&gt;">
 
-    <!-- Подключение современного шрифта Onest -->
-    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;rect width='100' height='100' rx='25' fill='%23059669'/&gt;&lt;text x='50' y='53' dominant-baseline='central' text-anchor='middle' font-size='65' fill='white' font-family='sans-serif' font-weight='800'&gt;N&lt;/text&gt;&lt;/svg&gt;">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600&amp;display=swap" rel="stylesheet">
     
@@ -125,12 +122,6 @@
         .blob-3 { top: 30%; left: 40%; width: 50vw; height: 50vw; background: #10b981; animation-delay: -2s; animation-duration: 5s; }
         .blob-4 { bottom: 10%; left: -20%; width: 40vw; height: 40vw; background: #06b6d4; animation-delay: -0.5s; animation-duration: 6s; }
 
-        /* GALLERY BLOBS */
-        .blob-gal-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: #d1fae5; opacity: 1; animation-duration: 8s; }
-        .blob-gal-2 { bottom: -10%; right: -10%; width: 70vw; height: 70vw; background: #34d399; opacity: 0.3; animation-duration: 7s; }
-        .blob-gal-3 { top: 30%; left: 40%; width: 50vw; height: 50vw; background: #ffffff; opacity: 0.8; animation-duration: 9s; }
-        .blob-gal-4 { bottom: 10%; left: -20%; width: 40vw; height: 40vw; background: #10b981; opacity: 0.15; animation-duration: 6s; }
-
         /* SCUBA HEADER BLOBS */
         .blob-blue-1 { top: -10%; left: -10%; width: 60vw; height: 60vw; background: #1e3a8a; animation-delay: 0s; animation-duration: 6s; }
         .blob-blue-2 { bottom: -10%; right: -10%; width: 70vw; height: 70vw; background: #0ea5e9; animation-delay: -1s; animation-duration: 7s; }
@@ -162,13 +153,6 @@
             opacity: 0.07; pointer-events: none; z-index: 2;
         }
 
-        .bubbles-container { position: absolute; width: 100%; height: 100%; top: 0; left: 0; overflow: hidden; z-index: 5; pointer-events: none; }
-        .bubble { position: absolute; bottom: -100px; background: rgba(255, 255, 255, 0.15); border-radius: 50%; animation: rise infinite ease-in; }
-        @keyframes rise { 0% { bottom: -100px; transform: translateX(0); opacity: 0; } 50% { opacity: 0.5; } 100% { bottom: 100%; transform: translateX(-20px); opacity: 0; } }
-        .bubble:nth-child(1) { width: 40px; left: 10%; animation-duration: 8s; } .bubble:nth-child(2) { width: 20px; left: 20%; animation-duration: 5s; delay: 1s; }
-        .bubble:nth-child(3) { width: 50px; left: 35%; animation-duration: 10s; delay: 2s; } .bubble:nth-child(4) { width: 80px; left: 50%; animation-duration: 15s; }
-        .bubble:nth-child(5) { width: 35px; left: 55%; animation-duration: 7s; delay: 1s; } .bubble:nth-child(6) { width: 45px; left: 65%; animation-duration: 9s; delay: 3s; }
-
         /* FLOATING WORDS (Больше слов, быстрее анимация) */
         .floating-words { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 3; pointer-events: none; }
         
@@ -192,8 +176,6 @@
         .w8 { bottom: 35%; right: 5%; animation-delay: 4s; } 
         .w9 { top: 40%; left: 8%; animation-delay: 2s; }
         .w10 { top: 50%; right: 8%; animation-delay: 4.5s; }
-        
-        /* Новые слова */
         .w11 { top: 5%; left: 50%; animation-delay: 1.2s; }
         .w12 { bottom: 5%; left: 50%; animation-delay: 3.2s; }
         .w13 { top: 60%; left: 20%; animation-delay: 0.8s; }
@@ -235,34 +217,7 @@
             margin-top: 50px; 
             width: 100%;
         }
-        .btn { 
-            display: flex; 
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.15); 
-            border: 1px solid #fff; 
-            color: #fff; 
-            padding: 0 35px;
-            height: 55px; 
-            text-decoration: none; 
-            border-radius: 100px; 
-            font-weight: 600; 
-            font-size: 0.95rem; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
-            transition: all 0.3s ease; 
-            cursor: pointer;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            min-width: 200px;
-            letter-spacing: 0.5px;
-        }
-        .btn:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.25); 
-            background: #fff; 
-            color: #064e3b; 
-        }
-        
+                
         /* --- 3D AVATAR (LIQUID GLASS v3 - THIN & ELEGANT) --- */
         .photo-part { 
             display: flex; 
@@ -372,25 +327,6 @@
         .folder-icon { font-size: 3rem; margin-bottom: 15px; }
         .folder-title { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
         .folder-subtitle { font-size: 0.9rem; color: var(--text-grey); margin-top: 5px; font-weight: 500; }
-
-        /* --- ЗАГОЛОВКИ СЕКЦИЙ (ВОЗВРАЩЕНИЕ) --- */
-        .section-title {
-            font-size: 3.5rem; 
-            font-weight: 700;
-            margin-bottom: 50px;
-            text-align: center;
-            color: var(--text-dark);
-            letter-spacing: -0.03em;
-            position: relative;
-            z-index: 10;
-        }
-
-        @media (max-width: 900px) {
-            .section-title {
-                font-size: 2.2rem; /* Адаптация для мобильных */
-                margin-bottom: 30px;
-            }
-        }
 
         /* --- PORTFOLIO CARDS --- */
         .bento-grid { 
@@ -612,20 +548,6 @@
         .texts-table th, .texts-table td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; vertical-align: top; }
         .texts-table th { font-weight: 700; color: var(--purple-main); width: 25%; font-size: 0.9rem; } 
         .texts-table td { font-size: 1rem; color: var(--text-dark); font-weight: 500; }
-        
-        .quote-container { 
-            background: var(--purple-light); 
-            border-left: 4px solid var(--purple-main); 
-            padding: 25px; 
-            border-radius: 8px; 
-            font-family: 'Manrope', sans-serif; 
-            margin-bottom: 25px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.02); 
-            font-size: 1rem; 
-            line-height: 1.6; 
-            color: var(--text-dark); 
-            font-style: italic; 
-            font-weight: 500;
         }
         .quote-container p { margin-top: 0; margin-bottom: 10px; }
         .quote-container p:last-child { margin-bottom: 0; }
@@ -999,20 +921,6 @@
         border-color: #fff !important;
     }
 
-    /* 4. Папки галереи */
-    .folder-card {
-        background: rgba(255, 255, 255, 0.5) !important;
-        backdrop-filter: blur(25px) saturate(150%);
-        -webkit-backdrop-filter: blur(25px) saturate(150%);
-        border: 1px solid rgba(255, 255, 255, 0.6) !important;
-        border-radius: 24px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    }
-    .folder-card:hover {
-        background: rgba(255, 255, 255, 0.85) !important;
-        box-shadow: 0 25px 50px rgba(5, 150, 105, 0.15);
-    }
-
     /* 5. Модальные окна (Глубокое стекло) */
     .modal-overlay {
         background: rgba(29, 29, 31, 0.3) !important; /* Размытый темный фон */
@@ -1286,27 +1194,6 @@
     /* === ВОЗВРАТ ДИЗАЙНА (БЕЛАЯ ПЛАШКА С ТЕНЬЮ) === */
     /* ================================================= */
 
-    /* 1. Белая карточка, наезжающая на хедер */
-    .content-wrapper {
-        background-color: #ffffff !important;
-        position: relative;
-        z-index: 20; 
-        
-        /* Наезд на зеленый фон (как раньше) */
-        margin-top: -60px !important; 
-        
-        /* Скругление углов сверху */
-        border-top-left-radius: 40px !important;
-        border-top-right-radius: 40px !important;
-        
-        /* Тень для объема */
-        box-shadow: 0 -20px 60px rgba(0,0,0,0.15) !important;
-        
-        /* Отступы */
-        padding-top: 60px !important;
-        padding-bottom: 60px !important;
-    }
-
     /* 2. Заголовки (Аккуратные, не гигантские) */
     .section-title {
         font-size: 2.5rem !important; /* Вернули нормальный размер */
@@ -1315,14 +1202,6 @@
         margin-top: 0 !important;
         text-align: center;
         color: var(--text-dark);
-    }
-
-    /* 3. Галерея (Стыковка без дырок) */
-    .gallery-section {
-        background: #ffffff !important;
-        margin-top: 0 !important;
-        padding-top: 0 !important;
-        z-index: 20;
     }
 
     /* Мобильная версия */
@@ -1372,29 +1251,6 @@
         padding-bottom: 60px !important;
     }
 
-    /* 4. Секция Галереи */
-    .gallery-section {
-        background: transparent !important; /* Прозрачный фон (виден зеленый body) */
-        padding-top: 0 !important;
-        margin-top: 0 !important;
-    }
-
-    /* Заголовок "Галерея" делаем белым (так как он на зеленом фоне) */
-    .gallery-section .section-title {
-        color: #ffffff !important;
-        margin-bottom: 40px !important;
-    }
-
-    /* 5. Сами папки галереи заворачиваем в белую карточку */
-    .gallery-grid {
-        background-color: #ffffff !important;
-        padding: 40px !important;
-        border-radius: 40px !important;
-        
-        /* Тень для галереи */
-        box-shadow: 0 10px 40px rgba(0,0,0,0.15) !important;
-    }
-
     /* 6. Мобильная адаптация отступов */
     @media (max-width: 900px) {
         header { padding-bottom: 100px !important; }
@@ -1434,143 +1290,11 @@
         z-index: 10;
     }
     
-    /* Заголовок "Галерея" */
-    .gallery-section .section-title {
-        color: #ffffff !important;
-        text-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-
     /* 2. Папки: Убираем белую подложку и делаем Liquid Glass */
     .gallery-grid {
         background: transparent !important; /* Убираем белый фон */
         box-shadow: none !important;        /* Убираем тень контейнера */
         padding: 0 !important;              /* Убираем отступы */
-    }
-
-    /* Стиль папок как Liquid Glass (как в хедере) */
-    .folder-card {
-        background: rgba(255, 255, 255, 0.1) !important;
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        border: 1px solid rgba(255, 255, 255, 0.3) !important;
-        border-top: 1px solid rgba(255, 255, 255, 0.5) !important;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important;
-        border-radius: 24px;
-        transition: transform 0.3s, background 0.3s;
-    }
-    
-    .folder-card:hover {
-        background: rgba(255, 255, 255, 0.2) !important;
-        transform: translateY(-5px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.25) !important;
-    }
-
-    /* Цвет текста внутри папок (теперь на темном фоне) */
-    .folder-title { color: #ffffff !important; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-    .folder-subtitle { color: rgba(255, 255, 255, 0.7) !important; }
-    .folder-icon { text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-
-    /* 3. Объединение с Футером */
-    footer {
-        background: transparent !important; /* Прозрачный футер */
-        margin-top: 0 !important;
-        padding-top: 40px;
-        padding-bottom: 60px;
-        position: relative;
-        z-index: 10;
-    }
-    
-    /* Текст футера делаем светлым */
-    footer p { color: rgba(255, 255, 255, 0.6) !important; }
-    
-    /* Иконка замка в футере (сделать белой) */
-    #admin-trigger-footer svg {
-        stroke: rgba(255,255,255,0.5) !important;
-    }
-
-    /* ======================================================= */
-    /* === ФИНАЛ: ЛЕДЯНЫЕ ПАПКИ И БЛАГОРОДНЫЙ ФУТЕР === */
-    /* ======================================================= */
-
-    /* 1. ПАПКИ: Стиль "Frosted Ice" (Контрастный и дорогой) */
-    .folder-card {
-        /* Более светлый и плотный фон, чтобы не сливалось */
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.1) 100%) !important;
-        
-        /* Сильный блюр для эффекта матового стекла */
-        backdrop-filter: blur(40px) saturate(200%);
-        -webkit-backdrop-filter: blur(40px) saturate(200%);
-        
-        /* Яркая белая обводка для четких границ */
-        border: 1px solid rgba(255, 255, 255, 0.6) !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-        
-        /* Глубокая тень для отрыва от фона */
-        box-shadow: 
-            0 20px 50px rgba(0,0,0,0.2),
-            inset 0 0 0 1px rgba(255,255,255,0.2) !important;
-            
-        border-radius: 30px !important;
-        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        overflow: hidden;
-        position: relative;
-    }
-
-    /* Эффект свечения при наведении */
-    .folder-card:hover {
-        transform: translateY(-10px) scale(1.02);
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 100%) !important;
-        box-shadow: 0 30px 80px rgba(0,0,0,0.3), inset 0 0 20px rgba(255,255,255,0.4) !important;
-        border-color: #fff !important;
-    }
-    
-    /* Текст внутри папок делаем четче */
-    .folder-title { 
-        color: #fff !important; 
-        font-weight: 800 !important;
-        letter-spacing: -0.5px;
-        text-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    .folder-subtitle { 
-        color: rgba(255,255,255,0.9) !important; 
-        font-weight: 500 !important;
-    }
-    .folder-icon {
-        font-size: 3.5rem !important;
-        filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
-    }
-
-
-    /* 2. ФУТЕР: Отступ и затемнение (Убираем "вырвиглаз") */
-    footer {
-        /* Большой отступ сверху */
-        margin-top: 120px !important; 
-        padding-top: 80px !important;
-        padding-bottom: 60px !important;
-        
-        /* Плавный переход из прозрачного в глубокий темный цвет */
-        background: linear-gradient(to bottom, transparent 0%, #001a14 100%) !important;
-        
-        position: relative;
-        z-index: 10;
-    }
-
-    /* Текст футера */
-    footer p {
-        color: rgba(255, 255, 255, 0.5) !important;
-        font-weight: 400 !important;
-        letter-spacing: 0.5px;
-    }
-    
-    /* Блок галереи - убеждаемся что он прозрачный, чтобы виден был градиент сайта */
-    .gallery-grid {
-        background: transparent !important;
-        box-shadow: none !important;
-    }
-
-    /* Адаптация для мобильных */
-    @media (max-width: 900px) {
-        footer { margin-top: 80px !important; }
     }
 
     /* ======================================================= */
@@ -1631,78 +1355,6 @@
     }
 
     /* ======================================================= */
-    /* === ОТСТУП МЕЖДУ ГАЛЕРЕЕЙ И ФУТЕРОМ === */
-    /* ======================================================= */
-
-    .gallery-section {
-        /* Увеличиваем отступ снизу в 2 раза (было 80px) */
-        padding-bottom: 180px !important;
-    }
-
-    @media (max-width: 900px) {
-        .gallery-section {
-            /* На мобильных тоже добавляем воздуха */
-            padding-bottom: 120px !important;
-        }
-    }
-
-    /* ======================================================= */
-    /* === ГРАДИЕНТ ГАЛЕРЕИ (FRESH MINT: TURQUOISE + GREEN + WHITE) === */
-    /* ======================================================= */
-
-    /* 1. Настройка пятен (Только 3 цвета) */
-    
-    /* Пятно 1: Насыщенный Зеленый (Emerald) */
-    .blob-gal-1 { 
-        background: #059669 !important; 
-        opacity: 0.5 !important; 
-        width: 60vw !important;
-        height: 60vw !important;
-        filter: blur(90px) !important;
-    }
-
-    /* Пятно 2: Яркая Бирюза (Cyan) */
-    .blob-gal-2 { 
-        background: #06b6d4 !important; 
-        opacity: 0.5 !important; 
-        filter: blur(100px) !important;
-        bottom: -20% !important;
-    }
-
-    /* Пятно 3: Белое свечение (White Glow) */
-    /* Делаем его мягким, чтобы не было эффекта "тумана", а был "свет" */
-    .blob-gal-3 { 
-        background: #ffffff !important; 
-        opacity: 0.25 !important; /* Непрозрачность ниже, чтобы не было "молока" */
-        top: 20% !important;
-        left: 25% !important;
-        width: 50vw !important;
-        height: 50vw !important;
-        filter: blur(120px) !important;
-        animation-duration: 12s !important; /* Медленное движение */
-    }
-
-    /* Пятно 4: Снова Бирюза для баланса */
-    .blob-gal-4 { 
-        background: #0891b2 !important; 
-        opacity: 0.4 !important; 
-        filter: blur(80px) !important;
-    }
-
-    /* 2. Увеличение отступа до футера (Максимальный воздух) */
-    .gallery-section {
-        /* Было 180px -> Стало 250px. Огромное пространство */
-        padding-bottom: 250px !important;
-    }
-
-    /* Мобильная версия отступа */
-    @media (max-width: 900px) {
-        .gallery-section {
-            padding-bottom: 150px !important;
-        }
-    }
-
-    /* ======================================================= */
     /* === ГАЛЕРЕЯ НА БЕЛОМ ФОНЕ (CLEAN STYLE) === */
     /* ======================================================= */
 
@@ -1725,86 +1377,70 @@
         margin-bottom: 40px !important;
     }
 
-    /* 3. Пятна (Blobs) на белом фоне */
-    /* Делаем их прозрачнее и нежнее, чтобы не было "грязи" */
-    
-    .blob-gal-1 { 
-        background: #34d399 !important; /* Мятный */
-        opacity: 0.25 !important;       /* Полупрозрачный */
-        filter: blur(80px) !important;
-        top: 10% !important;
-    }
-
-    .blob-gal-2 { 
-        background: #22d3ee !important; /* Голубой неон */
-        opacity: 0.25 !important; 
-        filter: blur(90px) !important;
-        bottom: 10% !important;
-    }
-
-    .blob-gal-3 { 
-        background: #ffffff !important; /* Белый (для разбавления) */
-        opacity: 0.0 !important;        /* Скрываем, так как фон и так белый */
-    }
-
-    .blob-gal-4 { 
-        background: #059669 !important; /* Изумруд */
-        opacity: 0.15 !important; 
-        filter: blur(100px) !important;
-        right: 0 !important;
-        top: 40% !important;
-    }
-
-    /* 4. Адаптация папок под белый фон */
-    /* Чтобы они не терялись, добавляем легкую серую обводку и тень */
+    /* 4. Папки: LIQUID GLASS (Прозрачное стекло, как в шапке) */
     .folder-card {
-        background: rgba(255, 255, 255, 0.4) !important; /* Еле заметная подложка */
-        backdrop-filter: blur(20px) !important;
+        /* Прозрачный фон с сильным размытием (Apple Glass) */
+        background: rgba(255, 255, 255, 0.4) !important;
+        backdrop-filter: blur(20px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+
+        /* Тонкая светлая обводка */
+        border: 1px solid rgba(255, 255, 255, 0.7) !important;
+        border-top: 1px solid #ffffff !important;
         
-        /* Тонкая серая граница для четкости */
-        border: 1px solid rgba(0, 0, 0, 0.05) !important; 
+        /* Тень для объема на светлом фоне */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05), inset 0 2px 10px rgba(255, 255, 255, 0.5) !important;
         
-        /* Тень для объема на белом */
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03) !important;
+        /* Форма */
+        border-radius: 24px !important;
+        padding: 35px !important;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+        
+        /* Выравнивание */
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
     }
 
-    /* При наведении делаем ярче */
+    /* Эффект наведения: стекло становится чище и выше */
     .folder-card:hover {
-        background: #ffffff !important;
-        box-shadow: 0 20px 50px rgba(5, 150, 105, 0.1) !important; /* Зеленоватая тень */
-        transform: translateY(-5px);
+        transform: translateY(-5px) scale(1.02) !important;
+        background: rgba(255, 255, 255, 0.7) !important; 
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08) !important;
+        border-color: #ffffff !important;
+    }
+    
+    .folder-card:active {
+        transform: scale(0.98) !important;
     }
 
-    /* Текст внутри папок делаем ТЕМНЫМ */
-    .folder-title { color: #1d1d1f !important; text-shadow: none !important; }
-    .folder-subtitle { color: #86868b !important; }
-    .folder-icon { filter: none !important; text-shadow: none !important; }
+    /* Текст внутри ТЕМНЫЙ (чтобы читался на светлом стекле) */
+    .folder-title { 
+        color: #1d1d1f !important; 
+        text-shadow: none !important;
+    }
+    
+    .folder-subtitle { 
+        color: #6e6e73 !important; 
+    }
+    
+    /* Иконка с легкой тенью */
+    .folder-icon { 
+        text-shadow: none !important;
+        transform: scale(1);
+        transition: transform 0.3s;
+        filter: drop-shadow(0 5px 10px rgba(0,0,0,0.05));
+    }
+    
+    .folder-card:hover .folder-icon {
+        transform: scale(1.1) rotate(-5deg);
+    }
 
     /* 5. Футер (Коррекция тени) */
     footer {
         background: #ffffff !important;
         /* Тень, падающая вверх на белую галерею, должна быть очень мягкой */
         box-shadow: 0 -10px 30px rgba(0,0,0,0.03) !important;
-    }
-
-    /* ======================================================= */
-    /* === ОТКРЫТЫЕ ПАПКИ: ПОЛНОЕ МАТОВОЕ СТЕКЛО (FROSTED) === */
-    /* ======================================================= */
-
-    /* 1. Превращаем все окно модалки в единый кусок стекла */
-    #modal-gal-digital .modal-window,
-    #modal-gal-pos .modal-window {
-        /* Убираем белый фон, ставим матовое стекло */
-        background: rgba(255, 255, 255, 0.8) !important; /* Плотный "ледяной" цвет */
-        backdrop-filter: blur(50px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(50px) saturate(180%) !important;
-        
-        /* Стеклянные границы */
-        border: 1px solid rgba(255, 255, 255, 0.9) !important;
-        box-shadow: 0 40px 100px rgba(0,0,0,0.2) !important;
-        
-        border-radius: 32px !important;
-        overflow: hidden !important; /* Чтобы ничего не вылезало */
     }
 
     /* 2. Убираем ЦВЕТНУЮ (зеленую) заливку у шапок */
@@ -1921,53 +1557,67 @@
     }
 
     /* ======================================================= */
-    /* === ГРАДИЕНТ ГАЛЕРЕИ (PURE MINT & WHITE) === */
+    /* === ГРАДИЕНТ ГАЛЕРЕИ (PURE MINT & WHITE) - FULL === */
     /* ======================================================= */
 
-    /* 1. Настройка пятен: Только Зеленый и Белый */
+    /* 1. Настройка пятен: Полные настройки (Размер + Цвет) */
 
-    /* Пятно 1: Мягкий мятный (Верх) */
+    /* Пятно 1: Мягкий мятный (Верх-Лево) */
     .blob-gal-1 { 
-        background: #34d399 !important; /* Чистый мятный зеленый */
-        opacity: 0.35 !important;       /* Чуть плотнее */
-        width: 65vw !important;
-        height: 65vw !important;
+        width: 60vw !important;
+        height: 60vw !important;
+        top: -10% !important;
+        left: -10% !important;
+        background: #34d399 !important; 
+        opacity: 0.35 !important;       
         filter: blur(100px) !important;
-        top: 0 !important;
-        left: 0 !important;
+        animation-duration: 8s !important;
     }
 
-    /* Пятно 2: Светлый изумруд (Низ Лево) - БЫЛ БИРЮЗОВЫМ */
-    /* Теперь это теплый светло-зеленый */
+    /* Пятно 2: Светлый изумруд (Низ-Лево) */
     .blob-gal-2 { 
+        width: 70vw !important;
+        height: 70vw !important;
+        bottom: -10% !important;
+        right: auto !important; /* Сбрасываем старое */
+        left: 10% !important;
         background: #6ee7b7 !important; 
         opacity: 0.3 !important; 
         filter: blur(120px) !important;
-        bottom: -10% !important;
-        left: 10% !important;
+        animation-duration: 7s !important;
     }
 
     /* Пятно 3: Большое БЕЛОЕ пятно по центру */
-    /* Оно "размывает" зелень, делая фон чистым, как на скрине */
     .blob-gal-3 { 
-        background: #ffffff !important; 
-        opacity: 0.9 !important; /* Сильная непрозрачность, перекрывает зелень */
-        top: 25% !important;
-        left: 15% !important;
         width: 70vw !important;
         height: 70vw !important;
+        top: 25% !important;
+        left: 15% !important;
+        background: #ffffff !important; 
+        opacity: 0.9 !important; 
         filter: blur(80px) !important;
-        z-index: 1; /* Лежит поверх нижних слоев */
+        z-index: 1; 
+        animation-duration: 9s !important;
     }
 
-    /* Пятно 4: Глубокий зеленый (Акцент справа) */
+    /* Пятно 4: Глубокий зеленый (Акцент Справа) */
     .blob-gal-4 { 
-        background: #10b981 !important; /* Насыщенный зеленый */
+        width: 45vw !important;
+        height: 45vw !important;
+        top: 40% !important;
+        right: -10% !important;
+        left: auto !important; /* Сбрасываем старое */
+        bottom: auto !important;
+        background: #10b981 !important; 
         opacity: 0.25 !important; 
         filter: blur(100px) !important;
-        right: -10% !important;
-        top: 40% !important;
         z-index: 0;
+        animation-duration: 6s !important;
+    }
+    
+    /* Гарантируем белый фон подложки */
+    .gallery-section {
+        background-color: #ffffff !important;
     }
     
     /* Гарантируем белый фон подложки */
@@ -1999,36 +1649,63 @@
         box-shadow: 0 0 25px rgba(255, 255, 255, 0.5) !important;
     }
 
+    /* ======================================================= */
+    /* === ОФОРМЛЕНИЕ ЦИТАТ (TEXTS BLOCK) === */
+    /* ======================================================= */
+
+    .quote-container {
+        /* Внешний вид плашки */
+        background: #fcfaff !important; /* Очень легкий фиолетовый оттенок */
+        border-left: 4px solid #7c3aed !important; /* Яркая линия слева */
+        border-radius: 0 16px 16px 0 !important; /* Скругление справа */
+        
+        /* Отступы ВНУТРИ */
+        padding: 25px 35px !important;
+        
+        /* ОТСТУПЫ СНАРУЖИ (Увеличили нижний отступ до 50px) */
+        margin-top: 30px !important;
+        margin-bottom: 50px !important; 
+        
+        /* Стилизация текста */
+        font-style: italic !important;
+        color: #4b5563 !important; /* Темно-серый, комфортный для чтения */
+        font-size: 1.05rem !important;
+        line-height: 1.8 !important;
+        
+        position: relative; /* Для иконки кавычки */
+        box-shadow: 0 5px 15px rgba(124, 58, 237, 0.05) !important;
+    }
+
+    /* Добавляем большую полупрозрачную кавычку для красоты */
+    .quote-container::before {
+        content: '“';
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        font-size: 5rem;
+        color: rgba(124, 58, 237, 0.1); /* Прозрачный фиолетовый */
+        font-family: serif;
+        line-height: 1;
+        pointer-events: none;
+    }
+
+    /* ======================================================= */
+    /* === АНИМАЦИЯ ТОЧКИ НА ГРАФИКЕ (GENTLE PULSE) === */
+    /* ======================================================= */
+    
+    @keyframes pulse-dot {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-6px); } /* Легкое парение */
+        100% { transform: translateY(0); }
+    }
+
     </style>
-<script>
-    // --- ДИНАМИЧЕСКИЙ СТАТУС БАР ---
-    window.addEventListener('scroll', function() {
-        const meta = document.getElementById('theme-color-meta');
-        const content = document.querySelector('.content-wrapper');
-        
-        if (!meta || !content) return;
-
-        // Получаем позицию белого блока относительно верха экрана
-        const rect = content.getBoundingClientRect();
-        
-        // Порог срабатывания (чуть раньше, чем блок коснется верха, для плавности)
-        const triggerPoint = 50; 
-
-        // Если белый блок достиг верха экрана
-        if (rect.top <= triggerPoint) {
-            // Ставим БЕЛЫЙ цвет (значки станут черными автоматически)
-            meta.setAttribute('content', '#ffffff');
-        } else {
-            // Возвращаем ЗЕЛЕНЫЙ цвет (значки станут белыми)
-            meta.setAttribute('content', '#022c22');
-        }
-    });
-</script></head>
+</head>
 
 <body class="" style="overflow: auto;">
 
-    <div id="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" alt="Full view">
+    <div id="lightbox" onclick="closeLightbox()" style="display: none;">
+        <img id="lightbox-img" src="file:///C:/Users/nikit/OneDrive/%D0%94%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D1%8B/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9%20%D1%81%D1%82%D0%BE%D0%BB/%D0%A1%D0%B0%D0%B9%D1%82-%D0%BF%D0%BE%D1%80%D1%82%D1%84%D0%BE%D0%BB%D0%B8%D0%BE%20%E2%80%94%20%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F/images/scuba-interior-1.jpg" alt="Full view">
     </div>
 
     <header>
@@ -2066,7 +1743,7 @@
                 <p class="hero-desc">Создаю визуальные стратегии и управляю репутацией брендов. От разработки логотипа до комплексного PR-продвижения и аналитики.</p>
             </div>
             <div class="photo-part">
-                <div class="avatar-frame" id="tilt-avatar" style="transform: rotateY(0deg) rotateX(0deg); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);">
+                <div class="avatar-frame" id="tilt-avatar" style="transform: rotateY(0deg) rotateX(0deg); transition: transform 0.8s;">
                     <div class="shine" style="background-position: 50% 50%;"></div>
                     <img src="images/me.jpg" alt="Никита Мельников" class="avatar-img">
                 </div>
@@ -2082,7 +1759,7 @@
 
     <div class="content-wrapper">
         <div id="portfolio" class="container">
-            <h2 class="section-title">Готовые кейсы</h2>
+            <h2 class="section-title"><span style="font-weight: 800;">Готовые кейсы</span></h2>
             
             <div class="bento-grid">
                 <article class="card card-scuba" onclick="openModal('modal-scuba')" style="position: relative;">
@@ -2127,7 +1804,7 @@
             </div>
 
             <div class="skills-section">
-                <h3 style="text-align: center; margin-bottom: 30px;">Инструменты</h3>
+                <h3 style="text-align: center; margin-bottom: 30px;"><span style="font-weight: 800;">Инструменты</span></h3>
                 <div class="skills-grid">
                     <div class="skill-pill" style="position: relative;"><span class="main">Adobe Photoshop</span><span class="sub">Графический дизайн</span></div>
                     <div class="skill-pill" style="position: relative;"><span class="main">Tilda Publishing</span><span class="sub">Веб-конструктор</span></div>
@@ -2151,7 +1828,7 @@
             <div class="gradient-blob blob-gal-3"></div>
             <div class="gradient-blob blob-gal-4"></div>
             
-            <h2 class="section-title" style="position:relative; z-index:5; color:#1d1d1f;">Галерея</h2>
+            <h2 class="section-title" style="position:relative; z-index:5; color:#1d1d1f;"><span style="font-weight: 800;">Галерея</span></h2>
             
             <div class="gallery-grid" style="position:relative; z-index:5;">
                 <div class="folder-card" onclick="openModal('modal-gal-digital')">
@@ -2561,7 +2238,7 @@
                         </div>
 
                         <!-- US -->
-                        <div style="position: absolute; bottom: 30%; right: 25%; width: 140px; text-align: center; animation: float 6s infinite ease-in-out;">
+                        <div style="position: absolute; bottom: 30%; right: 25%; width: 140px; text-align: center; animation: pulse-dot 3s infinite ease-in-out;">
                             <div style="width: 25px; height: 25px; background: #2563eb; border: 4px solid #bfdbfe; border-radius: 50%; margin: 0 auto; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);"></div>
                             <span style="font-size: 0.9rem; font-weight: 800; color: #2563eb; background: rgba(255,255,255,0.8); padding: 2px 8px; border-radius: 10px;">SCUBA</span>
                         </div>
@@ -2647,7 +2324,7 @@
                 <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">1. Техническое задание</h4><div class="table-wrapper"><table class="brief-table"><tbody><tr><td class="vk-brief-label">Компания</td><td class="brief-content">Кондитерская «КРАФТ»</td></tr><tr><td class="vk-brief-label">Продукт</td><td class="brief-content">Авторские шоколадные букеты и наборы подарков ручной работы.</td></tr><tr><td class="vk-brief-label">ЦА</td><td class="brief-content">Молодые пары, офисные работники, мужчины, ищущие оригинальный подарок.</td></tr><tr><td class="vk-brief-label">УТП</td><td class="brief-content">Оригинальная рецептура, индивидуальный подход, уникальная упаковка.</td></tr><tr><td class="vk-brief-label">Цель</td><td class="brief-content">Привлечение заявок и продаж через VK Реклама (поиск и тестирование сегментов).</td></tr></tbody></table></div></div>
                 <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">2. Сегмент: молодые пары (20-25)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong>&nbsp;акцент на «оригинальность» и «эмоциональность» подарка (шоколадные букеты как альтернатива цветам). Подчеркивание ценности, а не цены.</li><li><strong>Настройки:</strong>&nbsp;<div>Пол: мужской и женский.&nbsp;</div><div>Возраст: 20–25 лет.&nbsp;</div><div>Гео: Екатеринбург, радиус 5 км от точки продаж.</div></li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Подарки (часто)</li><li>Романтика и отношения</li><li>Студенческие сообщества</li><li>Конкуренты (Цветы, подарки)</li></ul><span style="font-size: 0.9em; color: var(--text-grey);">*Выставлены ставки по CPC для максимального охвата.</span></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">2.1%</div><div class="vk-stat-label">CTR (Выше среднего)</div></div><div><div class="vk-stat-val">9₽</div><div class="vk-stat-label">CPC (Отличная цена)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-1.jpg" alt="Образец объявления 1"></div></div></div>
                 <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">3. Сегмент: офисные работники (25-50)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong>&nbsp;позиционирование как «готовое, статусное решение» для корпоративных подарков и подарков коллегам. Экономия времени.</li><li><strong>Настройки:</strong>&nbsp;<div>Пол: мужской и женский.&nbsp;</div><div>Возраст: 25–50 лет (максимальная платежеспособность).&nbsp;</div><div>Гео: бизнес-центры в пределах центрального района.</div></li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Бизнес</li><li>HR/Рекрутинг</li><li>Подарки и праздники</li><li>Деловые мероприятия</li></ul><span style="font-size: 0.9em; color: var(--text-grey);">*Использован текстовый креатив с акцентом на "Коллегам и Партнерам".</span></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">1.8%</div><div class="vk-stat-label">CTR (Средний)</div></div><div><div class="vk-stat-val">20₽</div><div class="vk-stat-label">CPC (Выше, из-за конкуренции)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-2.jpg" alt="Образец объявления 2"></div></div></div>
-                <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">4. Сегмент: Парни/Мужчины (23-30)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong>&nbsp;прямое обращение. Решение мужской проблемы «что подарить, чтобы точно понравилось». Использован триггер: «Сделай ее счастливой».</li><li><strong>Настройки:</strong>&nbsp;<div>Пол: мужской.&nbsp;</div><div>Возраст: 23–30 лет.&nbsp;</div><div>Гео: Екатеринбург и города-спутники (Первоуральск, Верхняя Пышма).&nbsp;</div></li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Знакомства</li><li>Отношения</li><li>Поиск подарков</li><li>Узконаправленный таргетинг на подписчиков пабликов о знакомствах/пикапе</li></ul></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">3.5%</div><div class="vk-stat-label">CTR (Лидер)</div></div><div><div class="vk-stat-val">7₽</div><div class="vk-stat-label">CPC (Самый низкий)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-3.jpg" alt="Образец объявления 3"></div></div></div>
+                <div class="project-section" style="position: relative;"><h4 class="section-headline" style="border-left-color: #0077FF; color: var(--text-dark);">4. Сегмент: парни/мужчины (23-30)</h4><div class="vk-segment-grid"><div class="vk-info"><ul class="vk-strategy-list"><li><strong>Стратегия:</strong>&nbsp;прямое обращение. Решение мужской проблемы «что подарить, чтобы точно понравилось». Использован триггер: «Сделай ее счастливой».</li><li><strong>Настройки:</strong>&nbsp;<div>Пол: мужской.&nbsp;</div><div>Возраст: 23–30 лет.&nbsp;</div><div>Гео: Екатеринбург и города-спутники (Первоуральск, Верхняя Пышма).&nbsp;</div></li><li><strong>Интересы:</strong><ul class="vk-sub-list"><li>Знакомства</li><li>Отношения</li><li>Поиск подарков</li><li>Узконаправленный таргетинг на подписчиков пабликов о знакомствах/пикапе</li></ul></li></ul><div class="vk-stats-box"><div class="vk-stats-title">Результаты объявления</div><div class="vk-stats-row"><div><div class="vk-stat-val">3.5%</div><div class="vk-stat-label">CTR (Лидер)</div></div><div><div class="vk-stat-val">7₽</div><div class="vk-stat-label">CPC (Самый низкий)</div></div></div></div></div><div class="vk-img-container"><img src="images/vk-seg-3.jpg" alt="Образец объявления 3"></div></div></div>
             </div>
         </div>
     </div>
@@ -3124,7 +2801,7 @@
     }
 
     </script>
-    <div id="editor-toolbar" class="glass-toolbar" style="top: 423.362px; left: 656.322px;">
+    <div id="editor-toolbar" class="glass-toolbar" style="top: 92.15px; left: 180.4px;">
         <div class="tool-group">
             <span class="tool-icon" title="Размер">T</span>
             <input type="number" id="tool-size" min="10" max="150" value="16" title="Размер шрифта (px)">
