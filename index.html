@@ -1626,27 +1626,61 @@
     }
 
     /* ======================================================= */
-    /* === КНОПКИ ЗАКРЫТИЯ: WHITE GLOW (БЕЛЫЙ СВЕТ) === */
+    /* === ЛИПКИЙ КРЕСТИК (БЕЗ БЕЛОЙ ПОЛОСЫ) === */
     /* ======================================================= */
 
+    .close-btn,
+    #modal-gal-digital .close-btn,
+    #modal-gal-pos .close-btn,
+    #modal-contact .close-btn {
+        /* Липкое позиционирование */
+        position: sticky !important; 
+        top: 20px !important; 
+        
+        /* Прижимаем вправо */
+        margin-left: auto !important; 
+        margin-right: 20px !important;
+        
+        /* ФИКС ПОЛОСЫ: Отрицательный отступ снизу */
+        /* Это подтягивает контент вверх на высоту кнопки */
+        margin-bottom: -40px !important; 
+        
+        /* Визуал кнопки (белое стекло) */
+        background: rgba(255, 255, 255, 0.8) !important;
+        color: #000 !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border: 1px solid rgba(255,255,255,0.5) !important;
+        
+        /* Размеры и центровка */
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        z-index: 999 !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Ховер эффект */
     .close-btn:hover,
     #modal-gal-digital .close-btn:hover,
-    #modal-gal-pos .close-btn:hover,
-    #modal-contact .close-btn:hover {
-        /* Фон: Чистый белый */
-        background: #ffffff !important;
-        
-        /* Сам крестик: Черный (чтобы его было видно на белом) */
-        color: #000000 !important;
-        
-        /* Убираем любые цветные границы */
-        border-color: #ffffff !important;
-        
-        /* Эффект вращения */
+    #modal-gal-pos .close-btn:hover {
         transform: rotate(90deg) scale(1.1) !important;
-        
-        /* Белое свечение вокруг (Тень) */
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.5) !important;
+        background: #fff !important;
+        box-shadow: 0 0 20px rgba(255,255,255,0.6) !important;
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 900px) {
+        .close-btn,
+        #modal-gal-digital .close-btn,
+        #modal-gal-pos .close-btn {
+            top: 15px !important;
+            margin-right: 15px !important;
+            margin-bottom: -35px !important; /* Коррекция для мобильных */
+            width: 35px !important;
+            height: 35px !important;
+        }
     }
 
     /* ======================================================= */
@@ -2277,8 +2311,147 @@
                     <div class="gallery-grid-story"><div class="gallery-item" style="position: relative;"><img src="images/scuba-font.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Шрифтовая пара</div></div><div class="gallery-item" style="position: relative;"><img src="images/scuba-colors.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Цветовая палитра</div></div><div class="gallery-item" style="position: relative;"><img src="images/scuba-logo-asset.jpg" onclick="openLightbox(this.src)"><div class="gallery-caption">Логотип</div></div></div>
                 </div>
 
+                    <div class="project-section" style="position: relative;">
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">8. SMM-стратегия и контент-план</h4>
+                    
+                    <div style="background: #f0f9ff; padding: 25px; border-radius: 12px; border: 1px solid #bae6fd; margin-bottom: 30px;">
+                        <h5 style="color: #0284c7; margin-bottom: 15px; font-size: 1.1rem;">Методология: «Цикличная вовлеченность»</h5>
+                        <p style="font-size: 0.95rem; color: #334155; margin-bottom: 15px;">
+                            Синхронизация цифрового контента с этапами гастрономического мероприятия. Мы использовали модель непрерывного диалога с аудиторией, разбив коммуникацию на три фазы:
+                        </p>
+                        <ul style="padding-left: 20px; font-size: 0.95rem; color: #475569; line-height: 1.6;">
+                            <li style="margin-bottom: 8px;"><strong>Предивент (14 дней до):</strong> Создание «эффекта присутствия» и интриги через тизеры и опросы.</li>
+                            <li style="margin-bottom: 8px;"><strong>Ивент (В моменте):</strong> Генерация UGC (контента пользователей) и live-трансляции атмосферы.</li>
+                            <li><strong>Постивент (7 дней после):</strong> Закрепление эмоционального опыта и "петля лояльности" для следующего события.</li>
+                        </ul>
+                    </div>
+
+                    <h5 style="margin-bottom: 20px;">Контент-план мероприятия «Зов Азии»</h5>
+                    <div class="table-wrapper">
+                        <table class="cjm-table" style="min-width: 800px;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 15%; color: #2563eb;">Этап / Срок</th>
+                                    <th style="width: 10%;">Канал</th>
+                                    <th style="width: 45%;">Контент и Формат</th>
+                                    <th style="width: 30%;">Цель и Метрики</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: #f8fafc;">
+                                    <td colspan="4" style="font-weight: 700; color: #64748b; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Фаза 1: Предивент активность (Разогрев)</td>
+                                </tr>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb;">Т-14 дней</td>
+                                    <td style="font-weight: 600;">VK</td>
+                                    <td>
+                                        <strong>Тизер-коллаж «Тайны Глубин».</strong><br>
+                                        Атмосферный текст: "Что скрывают глубины SCUBA? Скоро узнаем!".
+                                    </td>
+                                    <td>
+                                        <span style="display:block; margin-bottom:4px;">Охват, вовлечение</span>
+                                        <span style="font-size:0.85rem; color:#64748b;">KPI: Лайки, репосты</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb;">Т-7 дней</td>
+                                    <td style="font-weight: 600;">VK / TG</td>
+                                    <td>
+                                        <strong>Видео-тизер с Шефом.</strong><br>
+                                        Backstage подготовки ключевого блюда. Личное приглашение от шеф-повара.
+                                    </td>
+                                    <td>
+                                        <span style="display:block; margin-bottom:4px;">Повышение интереса</span>
+                                        <span style="font-size:0.85rem; color:#64748b;">KPI: Просмотры, переходы по ссылке (билеты)</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb;">Т-3 дня</td>
+                                    <td style="font-weight: 600;">Stories</td>
+                                    <td>
+                                        <strong>Интерактив: «Что больше ждете?»</strong><br>
+                                        Опрос: Мастер-класс по устрицам ИЛИ историю сабража. Вовлечение в сценарий.
+                                    </td>
+                                    <td>
+                                        <span style="display:block; margin-bottom:4px;">Сбор предпочтений</span>
+                                        <span style="font-size:0.85rem; color:#64748b;">KPI: Участие в опросе</span>
+                                    </td>
+                                </tr>
+
+                                <tr style="background: #eff6ff;">
+                                    <td colspan="4" style="font-weight: 700; color: #2563eb; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Фаза 2: Ивент активность (Live)</td>
+                                </tr>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb;">Т-0 (Start)</td>
+                                    <td style="font-weight: 600;">Stories</td>
+                                    <td>
+                                        <strong>Атмосфера Welcome-зоны.</strong><br>
+                                        Видео: ароматы, музыка, первые гости. Триггер "Здесь и сейчас".
+                                    </td>
+                                    <td>
+                                        <span style="display:block; margin-bottom:4px;">Создание ажиотажа (FOMO)</span>
+                                        <span style="font-size:0.85rem; color:#64748b;">KPI: Реакции</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb;">В ходе</td>
+                                    <td style="font-weight: 600;">Stories</td>
+                                    <td>
+                                        <strong>Яркие моменты: Сабраж & Дегустация.</strong><br>
+                                        Крупные планы эмоций гостей. Репосты отметок гостей в реальном времени.
+                                    </td>
+                                    <td>
+                                        <span style="display:block; margin-bottom:4px;">Демонстрация динамики</span>
+                                        <span style="font-size:0.85rem; color:#64748b;">KPI: UGC (Отметки)</span>
+                                    </td>
+                                </tr>
+
+                                <tr style="background: #f0fdf4;">
+                                    <td colspan="4" style="font-weight: 700; color: #059669; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">Фаза 3: Постивент (Лояльность)</td>
+                                </tr>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb;">Т+1 день</td>
+                                    <td style="font-weight: 600;">VK / TG</td>
+                                    <td>
+                                        <strong>Фотоотчет «Лучшие кадры».</strong><br>
+                                        Гости, эмоции, блюда. Ссылка на полный альбом VK. Благодарность участникам.
+                                    </td>
+                                    <td>
+                                        <span style="display:block; margin-bottom:4px;">Закрепление эмоций</span>
+                                        <span style="font-size:0.85rem; color:#64748b;">KPI: Охват, поиск себя на фото</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb;">Т+3 дня</td>
+                                    <td style="font-weight: 600;">Stories</td>
+                                    <td>
+                                        <strong>Сбор обратной связи.</strong><br>
+                                        Google-форма: "Вам понравилось?". Скидка за отзыв на следующее мероприятие.
+                                    </td>
+                                    <td>
+                                        <span style="display:block; margin-bottom:4px;">Анализ качества (NPS)</span>
+                                        <span style="font-size:0.85rem; color:#64748b;">KPI: Количество заполненных анкет</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="brief-label" style="color: #2563eb;">Т+7 дней</td>
+                                    <td style="font-weight: 600;">VK</td>
+                                    <td>
+                                        <strong>Анонс следующего события.</strong><br>
+                                        "Следующая глубина [Тема] уже [Дата]! Регистрируйтесь".
+                                    </td>
+                                    <td>
+                                        <span style="display:block; margin-bottom:4px;">Конверсия в повторную покупку</span>
+                                        <span style="font-size:0.85rem; color:#64748b;">KPI: Продажа билетов (LTV)</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <div class="project-section" style="position: relative;">
-                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">8. Результаты и аналитика</h4>
+                    <h4 class="section-headline" style="border-left-color: #2563eb; color: var(--text-dark);">9. Результаты и аналитика</h4>
                     <div class="analytics-container">
                         <div class="charts-col">
                             <h5 style="margin-bottom:20px;">Рост показателей (KPI)</h5>
@@ -2364,22 +2537,32 @@
     function openModal(modalId) {
         const modal = document.getElementById(modalId);
         if (!modal) return;
+        
         modal.style.display = 'flex';
-        // Небольшая задержка для анимации opacity
         setTimeout(() => modal.classList.add('active'), 10);
         document.body.style.overflow = 'hidden';
+
+        // СКРЫВАЕМ КНОПКУ "НАВЕРХ"
+        const btnUp = document.getElementById('btn-up');
+        if(btnUp) btnUp.style.display = 'none';
     }
 
     function closeModalBtn(modalId) {
         const modal = document.getElementById(modalId);
         if (!modal) return;
+        
         modal.classList.remove('active');
         setTimeout(() => {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
-            // Сброс скролла внутри окна
+            
             const modalWindow = modal.querySelector('.modal-window');
             if (modalWindow) modalWindow.scrollTop = 0;
+
+            // ВОЗВРАЩАЕМ КНОПКУ "НАВЕРХ"
+            const btnUp = document.getElementById('btn-up');
+            if(btnUp) btnUp.style.display = 'flex';
+            
         }, 300);
     }
 
@@ -2840,5 +3023,122 @@
         <div class="close-toolbar" onclick="document.getElementById('editor-toolbar').classList.remove('active')">×</div>
     </div>
 
+<div id="btn-up" onclick="scrollToTop()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</div>
+
+<style>
+
+    /* ======================================================= */
+    /* === КНОПКА НАВЕРХ: ПРОЗРАЧНОЕ СТЕКЛО (LIQUID) === */
+    /* ======================================================= */
+    #btn-up {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        
+        /* Стиль: Прозрачное стекло (как в хедере) */
+        background: rgba(255, 255, 255, 0.3) !important; 
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        
+        /* Тонкая обводка */
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 9999;
+        pointer-events: none;
+    }
+
+    /* Цвет стрелки (темно-зеленый, чтобы видно на белом) */
+    #btn-up svg {
+        stroke: #059669 !important; 
+    }
+
+    #btn-up.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+    }
+
+    #btn-up:hover {
+        background: rgba(255, 255, 255, 0.6) !important;
+        box-shadow: 0 15px 40px rgba(5, 150, 105, 0.15);
+        transform: translateY(-5px);
+    }
+
+    /* ======================================================= */
+    /* === ЛИПКИЙ КРЕСТИК (STICKY CLOSE BTN) === */
+    /* ======================================================= */
+
+    .close-btn,
+    #modal-gal-digital .close-btn,
+    #modal-gal-pos .close-btn,
+    #modal-contact .close-btn {
+        /* Делаем кнопку липкой */
+        position: sticky !important; 
+        top: 20px !important; /* Отступ от верха экрана при скролле */
+        
+        /* Прижимаем к правому краю */
+        margin-left: auto !important; 
+        margin-right: 20px !important;
+        right: 20px !important; /* На всякий случай дублируем */
+        
+        /* Важно: добавляем фон, чтобы крестик было видно, 
+           когда он проезжает по тексту */
+        background: rgba(255, 255, 255, 0.8) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        
+        /* Порядок слоев */
+        z-index: 999 !important;
+    }
+
+    /* Коррекция для мобильных, чтобы не перекрывало контент слишком сильно */
+    @media (max-width: 900px) {
+        .close-btn,
+        #modal-gal-digital .close-btn,
+        #modal-gal-pos .close-btn {
+            top: 15px !important;
+            margin-right: 15px !important;
+            width: 35px !important;
+            height: 35px !important;
+        }
+    }
+
+</style>
+
+<script>
+    // Логика кнопки "Наверх"
+    const btnUp = document.getElementById('btn-up');
+
+    window.addEventListener('scroll', () => {
+        // Если прокрутили больше 300px, показываем кнопку
+        if (window.scrollY > 300) {
+            btnUp.classList.add('show');
+        } else {
+            btnUp.classList.remove('show');
+        }
+    });
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+</script>
 
 </body></html>
